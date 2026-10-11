@@ -1,0 +1,45 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 780' width='1200' height='780'>
+<rect width='1200' height='780' fill='#0A0A0A'/>
+<text x='48' y='72' fill='#F2F2F2' font-size='30' font-weight='700' font-family='Inter,Arial,sans-serif'>Supply Chain &amp; Inventory</text>
+<text x='48' y='100' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Breakdown · placeholder data</text>
+<rect x='48' y='130' width='540' height='290' rx='12' fill='#151515' stroke='#262626'/>
+<text x='70' y='166' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Shipments by week</text>
+<rect x='78' y='319' width='38' height='77' rx='3' fill='#3A3A3A'/>
+<rect x='126' y='283' width='38' height='113' rx='3' fill='#3A3A3A'/>
+<rect x='174' y='229' width='38' height='167' rx='3' fill='#3A3A3A'/>
+<rect x='222' y='247' width='38' height='149' rx='3' fill='#3A3A3A'/>
+<rect x='270' y='301' width='38' height='95' rx='3' fill='#3A3A3A'/>
+<rect x='318' y='225' width='38' height='171' rx='3' fill='#D4F44B'/>
+<rect x='366' y='222' width='38' height='174' rx='3' fill='#D4F44B'/>
+<rect x='414' y='349' width='38' height='47' rx='3' fill='#3A3A3A'/>
+<rect x='462' y='331' width='38' height='65' rx='3' fill='#3A3A3A'/>
+<rect x='510' y='320' width='38' height='76' rx='3' fill='#3A3A3A'/>
+<rect x='612' y='130' width='540' height='290' rx='12' fill='#151515' stroke='#262626'/>
+<text x='634' y='166' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Lead time by supplier</text>
+<rect x='634' y='188' width='478' height='25' rx='4' fill='#D4F44B'/>
+<rect x='634' y='223' width='385' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='258' width='344' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='293' width='305' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='328' width='233' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='363' width='102' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='48' y='444' width='540' height='288' rx='12' fill='#151515' stroke='#262626'/>
+<text x='70' y='480' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Stockouts by month</text>
+<rect x='78' y='637' width='38' height='71' rx='3' fill='#3A3A3A'/>
+<rect x='126' y='651' width='38' height='57' rx='3' fill='#3A3A3A'/>
+<rect x='174' y='615' width='38' height='93' rx='3' fill='#3A3A3A'/>
+<rect x='222' y='536' width='38' height='172' rx='3' fill='#D4F44B'/>
+<rect x='270' y='572' width='38' height='136' rx='3' fill='#3A3A3A'/>
+<rect x='318' y='659' width='38' height='49' rx='3' fill='#3A3A3A'/>
+<rect x='366' y='600' width='38' height='108' rx='3' fill='#3A3A3A'/>
+<rect x='414' y='661' width='38' height='47' rx='3' fill='#3A3A3A'/>
+<rect x='462' y='570' width='38' height='138' rx='3' fill='#3A3A3A'/>
+<rect x='510' y='649' width='38' height='59' rx='3' fill='#3A3A3A'/>
+<rect x='612' y='444' width='540' height='288' rx='12' fill='#151515' stroke='#262626'/>
+<text x='634' y='480' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Inventory by warehouse</text>
+<rect x='634' y='502' width='417' height='25' rx='4' fill='#D4F44B'/>
+<rect x='634' y='537' width='344' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='571' width='343' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='606' width='334' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='641' width='209' height='25' rx='4' fill='#3A3A3A'/>
+<rect x='634' y='675' width='165' height='25' rx='4' fill='#3A3A3A'/>
+</svg>

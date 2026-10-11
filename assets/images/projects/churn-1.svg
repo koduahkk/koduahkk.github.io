@@ -1,0 +1,38 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 780' width='1200' height='780'>
+<rect width='1200' height='780' fill='#0A0A0A'/>
+<text x='48' y='72' fill='#F2F2F2' font-size='30' font-weight='700' font-family='Inter,Arial,sans-serif'>Customer Churn Analysis</text>
+<text x='48' y='100' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Overview · placeholder data</text>
+<rect x='48.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='70.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Churn Rate</text>
+<text x='70.0' y='222' fill='#D4F44B' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>14.3%</text>
+<rect x='329.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='351.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Customers</text>
+<text x='351.0' y='222' fill='#F2F2F2' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>7,043</text>
+<rect x='610.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='632.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>At Risk</text>
+<text x='632.0' y='222' fill='#F2F2F2' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>1,120</text>
+<rect x='891.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='913.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Avg. Tenure</text>
+<text x='913.0' y='222' fill='#F2F2F2' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>32 mo</text>
+<rect x='48' y='274' width='700' height='458' rx='12' fill='#151515' stroke='#262626'/>
+<text x='70' y='310' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Trend by month</text>
+<line x1='70' x2='726' y1='360' y2='360' stroke='#262626'/>
+<line x1='70' x2='726' y1='445' y2='445' stroke='#262626'/>
+<line x1='70' x2='726' y1='530' y2='530' stroke='#262626'/>
+<line x1='70' x2='726' y1='615' y2='615' stroke='#262626'/>
+<line x1='70' x2='726' y1='700' y2='700' stroke='#262626'/>
+<defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#D4F44B' stop-opacity='.28'/><stop offset='1' stop-color='#D4F44B' stop-opacity='0'/></linearGradient></defs>
+<polygon points='80,700 80.0,584.0 107.7,605.2 135.3,607.6 163.0,590.5 190.6,609.9 218.3,631.2 245.9,644.4 273.6,622.3 301.2,641.2 328.9,620.2 356.5,604.5 384.2,624.2 411.8,617.0 439.5,615.7 467.1,616.7 494.8,578.6 522.4,601.1 550.1,628.6 577.7,594.2 605.4,595.9 633.0,611.4 660.7,618.0 688.3,622.3 716.0,586.9 716,700' fill='url(#g)'/><polyline points='80.0,584.0 107.7,605.2 135.3,607.6 163.0,590.5 190.6,609.9 218.3,631.2 245.9,644.4 273.6,622.3 301.2,641.2 328.9,620.2 356.5,604.5 384.2,624.2 411.8,617.0 439.5,615.7 467.1,616.7 494.8,578.6 522.4,601.1 550.1,628.6 577.7,594.2 605.4,595.9 633.0,611.4 660.7,618.0 688.3,622.3 716.0,586.9' fill='none' stroke='#D4F44B' stroke-width='3.5'/>
+<rect x='772' y='274' width='380' height='220' rx='12' fill='#151515' stroke='#262626'/>
+<text x='794' y='310' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Top categories</text>
+<rect x='794' y='332' width='310' height='20' rx='4' fill='#D4F44B'/>
+<rect x='794' y='363' width='227' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='794' y='394' width='219' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='794' y='425' width='145' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='794' y='456' width='143' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='772' y='512' width='380' height='220' rx='12' fill='#151515' stroke='#262626'/>
+<text x='794' y='548' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Share of total</text>
+<circle cx='880' cy='636' r='62' fill='none' stroke='#3A3A3A' stroke-width='22'/>
+<circle cx='880' cy='636' r='62' fill='none' stroke='#D4F44B' stroke-width='22' stroke-dasharray='279.6 389.6' transform='rotate(-90 880 636)'/>
+<text x='880' y='645' text-anchor='middle' fill='#F2F2F2' font-size='24' font-weight='800' font-family='Inter,Arial,sans-serif'>72%</text>
+</svg>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Analysis | Kingsley Koduah</title>
+    <meta name="description" content="A churn analysis for a subscription telecom business. Python handles cleaning and segmentation; Power BI turns it into a view the retention team can act on each week.">
+    <meta name="theme-color" content="#0A0A0A">
+    <link rel="icon" type="image/png" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script>
+        // Always open a case study at the top, never at a restored scroll position
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
+    </script>
+</head>
+<body class="case">
+
+<header class="cs-bar" id="top">
+    <div class="container cs-bar-inner">
+        <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
+        <span class="label">Case study 03</span>
+    </div>
+</header>
+
+<main>
+    <!--💡UPDATE: this case study uses placeholder content — replace the text and the images in assets/images/projects/churn-1/2/3 -->
+    <section class="container cs-hero">
+        <p class="section-eyebrow">Customer analytics · Python · Power BI</p>
+        <h1 class="cs-title">Customer Churn Analysis</h1>
+        <ul class="tags"><li>Python</li><li>Pandas</li><li>Power BI</li></ul>
+        <div class="cs-media">
+                <div class="stack stack-lg">
+                    <img src="../assets/images/projects/churn-1.svg" alt="Customer Churn Analysis dashboard, page 1" loading="lazy" width="1200" height="780">
+                    <img src="../assets/images/projects/churn-2.svg" alt="" loading="lazy" width="1200" height="780">
+                    <img src="../assets/images/projects/churn-3.svg" alt="" loading="lazy" width="1200" height="780">
+                </div>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Overview</p>
+        <p class="cs-lead">A churn analysis for a subscription telecom business. Python handles cleaning and segmentation; Power BI turns it into a view the retention team can act on each week.</p>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Key metrics</p>
+        <div class="cs-metrics">
+                <div class="cs-metric"><strong>14.3%</strong><span>Churn rate</span></div>
+                <div class="cs-metric"><strong>7,043</strong><span>Customers</span></div>
+                <div class="cs-metric"><strong>1,120</strong><span>At risk</span></div>
+                <div class="cs-metric"><strong>32 mo</strong><span>Avg. tenure</span></div>
+                <div class="cs-metric"><strong>3×</strong><span>Churn on monthly plans</span></div>
+                <div class="cs-metric"><strong>Year 1</strong><span>Highest-risk period</span></div>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Methodology</p>
+        <div class="cs-steps">
+                <div class="cs-step">
+                    <span class="cs-step-num">Step 01</span>
+                    <h3>Data Preparation</h3>
+                    <p>Cleaned and typed the customer table in Pandas, fixed blank charges for new accounts, and binned tenure into cohorts.</p>
+                </div>
+                <div class="cs-step">
+                    <span class="cs-step-num">Step 02</span>
+                    <h3>Analytical Approach</h3>
+                    <p>Compared churn rates across contract, tenure, payment method and support history; flagged at-risk customers with simple, explainable rules.</p>
+                </div>
+                <div class="cs-step">
+                    <span class="cs-step-num">Step 03</span>
+                    <h3>Visual Design</h3>
+                    <p>One overview, one segment table, one breakdown page — every chart answers &#x27;who is leaving and why&#x27;.</p>
+                </div>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Dashboard pages</p>
+        <div class="cs-pages">
+                <a href="../assets/images/projects/churn-1.svg" target="_blank" rel="noopener" class="cs-page">
+                    <img src="../assets/images/projects/churn-1.svg" alt="Customer Churn Analysis — page 1" loading="lazy" width="1200" height="780">
+                    <span>Page 01</span>
+                </a>
+                <a href="../assets/images/projects/churn-2.svg" target="_blank" rel="noopener" class="cs-page">
+                    <img src="../assets/images/projects/churn-2.svg" alt="Customer Churn Analysis — page 2" loading="lazy" width="1200" height="780">
+                    <span>Page 02</span>
+                </a>
+                <a href="../assets/images/projects/churn-3.svg" target="_blank" rel="noopener" class="cs-page">
+                    <img src="../assets/images/projects/churn-3.svg" alt="Customer Churn Analysis — page 3" loading="lazy" width="1200" height="780">
+                    <span>Page 03</span>
+                </a>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Key findings</p>
+        <ol class="cs-findings">
+                <li><span class="cs-n">1</span><p>Month-to-month customers churn at roughly three times the rate of annual contracts.</p></li>
+                <li><span class="cs-n">2</span><p>Churn is concentrated in the first year of tenure; customers who pass 12 months mostly stay.</p></li>
+                <li><span class="cs-n">3</span><p>Customers with multiple support tickets churn far more often than price alone would predict.</p></li>
+                <li><span class="cs-n">4</span><p>Price differences explain less churn than expected once contract type is accounted for.</p></li>
+        </ol>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Recommendations</p>
+        <ul class="cs-recs">
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Offer an incentive to move month-to-month customers onto annual contracts in their first 90 days.</p></li>
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Build a first-year onboarding check-in for new customers.</p></li>
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Route customers with repeat support tickets to a retention specialist.</p></li>
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Review the at-risk list weekly and track save rate as a KPI.</p></li>
+        </ul>
+    </section>
+
+    <section class="container cs-end">
+        <div>
+            <p class="label">Live dashboard</p>
+            <!--💡UPDATE: link to the published dashboard -->
+            <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
+        </div>
+        <nav class="cs-pager" aria-label="Case studies">
+            <a href="retail.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
+            <a href="supply.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+        </nav>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <p>© 2026 Kingsley Koduah</p>
+        <p class="label">Data tells the story.</p>
+        <a href="../index.html" class="label">Home ↑</a>
+    </div>
+</footer>
+
+</body>
+</html>

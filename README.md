@@ -1,61 +1,28 @@
-# [Your Name] - Data Analysis Portfolio
+# Kingsley Koduah — Data Analyst Portfolio
 
-Welcome! This repository contains the complete template for a professional, one-page data analysis portfolio website, hosted for free on GitHub Pages.
+Personal portfolio site, live at **https://koduahkk.github.io**.
 
-## About This Portfolio Template
+> I turn messy data into decisions people can actually act on.
 
-This portfolio is designed to demonstrate skills in:
-- Data visualization and storytelling
-- Data modeling and analysis
-- Creating interactive, professional dashboards
-- Transforming complex data into actionable insights
+Plain HTML/CSS/JS, no build step — GitHub Pages serves it as is. Styled to the personal brand guide: Void Black `#0A0A0A`, Signal Lime `#D4F44B`, Panel Gray `#131313`, Muted Gray `#9A9A9A`; Archivo for headlines, Inter for body copy.
 
-## 🚀 Projects
+## Structure
 
-This template is set up to showcase your best work. You can easily customize the project cards in the `index.html` file.
+```
+index.html              page content
+assets/css/style.css    all styles (brand colours are CSS variables at the top)
+projects/*.html         one case study page per project
+assets/js/main.js       mobile menu, scroll reveal, skill bars
+assets/images/          photo, KK logo
+assets/images/projects/ three dashboard images per project: <slug>-1, -2, -3
+```
 
-### Project Title One
-*A brief description of your project, the tools used, and the key insights derived.*
+## Updating content
 
-### Project Title Two
-*A brief description of your project, the tools used, and the key insights derived.*
+Search `index.html` for `💡UPDATE` comments. Still to fill in:
 
-### Project Title Three
-*A brief description of your project, the tools used, and the key insights derived.*
-
-
-## 🛠️ Skills
-
-Update the `index.html` file to reflect your personal technical skillset. The template is organized into key categories:
-
-- **Data Visualization**: Power BI, Tableau, Matplotlib, etc.
-- **Data Analysis**: SQL, Python (Pandas), R, Excel, etc.
-- **Data Modeling**: Power Query, DAX, Star Schema Design, etc.
-- **Tools**: List any other relevant tools like Power BI Service, specific cloud platforms, etc.
-
-## 💡 How to Use This Template
-
-Creating your own portfolio from this template is a simple, four-step process.
-
-### 1. Create a New Repository from this Template
-Click the green **"Use this template"** button at the top of this repository page, then select **"Create a new repository"**.
-
-### 2. Name Your Repository for GitHub Pages
-This is the most important step. To turn your portfolio into a live website, you **must** name your new repository in the following format:
-`your-username.github.io`
-*(Replace `your-username` with your actual GitHub username.)*
-
-### 3. Customize Your Portfolio
-Open the `index.html` file and begin personalizing it. The file contains helpful `<!--💡UPDATE: ... -->` comments to guide you on where to change:
-- Your name and title
-- Social media links
-- The "About Me" section
-- Your project titles, descriptions, and links
-- Your list of skills
-
-### 4. Add Your Files
-- Upload your profile photo and project preview images to the `assets/images/` folder.
-- Upload your CV (e.g., in PDF format) to the `assets/` folder.
-- Create your favicon and add it to the root folder.
-
-Once you commit your changes, your new portfolio website will be live at `https://your-username.github.io` within a few minutes!
+- **Projects**: each card on the home page shows three dashboard images (`assets/images/projects/<slug>-1/2/3`) and links to its case study in `projects/<slug>.html`. Projects 02–04 are placeholders, and pages 2–3 of the US Electricity project are placeholder images. Replace the image files (keep the names, or update the `src` in both the home page and the case study) and edit the case study text.
+- **Live dashboard links**: the "Open in Power BI" link at the bottom of each case study.
+- **Contact form**: messages go to kingsleykoduah3030@gmail.com via [formsubmit.co](https://formsubmit.co). The first submission sends a one-time confirmation email to that address; click the link in it to activate the form.
+- **CV**: the CV button opens `cv.html`, which shows the CV as page images with a Download PDF button. To update it, replace `assets/Kingsley_Koduah_CV.pdf` and re-render the images in `assets/images/cv/`.
+- **Skill levels**: the `data-level` value (0–100) on each skill.

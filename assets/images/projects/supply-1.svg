@@ -1,0 +1,38 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 780' width='1200' height='780'>
+<rect width='1200' height='780' fill='#0A0A0A'/>
+<text x='48' y='72' fill='#F2F2F2' font-size='30' font-weight='700' font-family='Inter,Arial,sans-serif'>Supply Chain &amp; Inventory</text>
+<text x='48' y='100' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Overview · placeholder data</text>
+<rect x='48.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='70.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>On-Time</text>
+<text x='70.0' y='222' fill='#D4F44B' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>92.4%</text>
+<rect x='329.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='351.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Stockouts</text>
+<text x='351.0' y='222' fill='#F2F2F2' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>37</text>
+<rect x='610.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='632.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>Lead Time</text>
+<text x='632.0' y='222' fill='#F2F2F2' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>6.8d</text>
+<rect x='891.0' y='130' width='261.0' height='120' rx='12' fill='#151515' stroke='#262626'/>
+<text x='913.0' y='168' fill='#8A8A8A' font-size='15' font-family='Inter,Arial,sans-serif'>SKUs</text>
+<text x='913.0' y='222' fill='#F2F2F2' font-size='40' font-weight='800' font-family='Inter,Arial,sans-serif'>2,450</text>
+<rect x='48' y='274' width='700' height='458' rx='12' fill='#151515' stroke='#262626'/>
+<text x='70' y='310' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Trend by month</text>
+<line x1='70' x2='726' y1='360' y2='360' stroke='#262626'/>
+<line x1='70' x2='726' y1='445' y2='445' stroke='#262626'/>
+<line x1='70' x2='726' y1='530' y2='530' stroke='#262626'/>
+<line x1='70' x2='726' y1='615' y2='615' stroke='#262626'/>
+<line x1='70' x2='726' y1='700' y2='700' stroke='#262626'/>
+<defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#D4F44B' stop-opacity='.28'/><stop offset='1' stop-color='#D4F44B' stop-opacity='0'/></linearGradient></defs>
+<polygon points='80,700 80.0,557.3 107.7,549.7 135.3,520.6 163.0,537.5 190.6,551.2 218.3,578.0 245.9,599.0 273.6,627.2 301.2,645.5 328.9,639.8 356.5,602.1 384.2,584.3 411.8,587.6 439.5,589.2 467.1,571.6 494.8,578.4 522.4,602.3 550.1,574.5 577.7,561.9 605.4,583.1 633.0,607.2 660.7,629.7 688.3,594.0 716.0,615.6 716,700' fill='url(#g)'/><polyline points='80.0,557.3 107.7,549.7 135.3,520.6 163.0,537.5 190.6,551.2 218.3,578.0 245.9,599.0 273.6,627.2 301.2,645.5 328.9,639.8 356.5,602.1 384.2,584.3 411.8,587.6 439.5,589.2 467.1,571.6 494.8,578.4 522.4,602.3 550.1,574.5 577.7,561.9 605.4,583.1 633.0,607.2 660.7,629.7 688.3,594.0 716.0,615.6' fill='none' stroke='#D4F44B' stroke-width='3.5'/>
+<rect x='772' y='274' width='380' height='220' rx='12' fill='#151515' stroke='#262626'/>
+<text x='794' y='310' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Top categories</text>
+<rect x='794' y='332' width='313' height='20' rx='4' fill='#D4F44B'/>
+<rect x='794' y='363' width='236' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='794' y='394' width='203' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='794' y='425' width='182' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='794' y='456' width='104' height='20' rx='4' fill='#3A3A3A'/>
+<rect x='772' y='512' width='380' height='220' rx='12' fill='#151515' stroke='#262626'/>
+<text x='794' y='548' fill='#F2F2F2' font-size='17' font-weight='600' font-family='Inter,Arial,sans-serif'>Share of total</text>
+<circle cx='880' cy='636' r='62' fill='none' stroke='#3A3A3A' stroke-width='22'/>
+<circle cx='880' cy='636' r='62' fill='none' stroke='#D4F44B' stroke-width='22' stroke-dasharray='285.7 389.6' transform='rotate(-90 880 636)'/>
+<text x='880' y='645' text-anchor='middle' fill='#F2F2F2' font-size='24' font-weight='800' font-family='Inter,Arial,sans-serif'>73%</text>
+</svg>
