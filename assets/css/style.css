@@ -124,7 +124,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 .hero-hi { margin-top: 44px; font-family: var(--display); font-size: clamp(20px, 2.4vw, 26px); color: var(--white); font-weight: 600; }
 .hero-name {
-    font-size: clamp(38px, 6.4vw, 96px); /* matches .section-title */
+    font-size: clamp(38px, 6.4vw, 96px);
     font-weight: 900;
     line-height: 1.08;
     letter-spacing: -0.045em;
@@ -186,7 +186,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .section-eyebrow { color: var(--white); display: inline-flex; align-items: center; gap: 18px; font-weight: 600; letter-spacing: 0.3em; }
 .section-eyebrow::before { content: ""; width: 48px; height: 1px; background: var(--lime); }
 .section-head { display: flex; flex-direction: column; gap: 24px; margin-bottom: clamp(48px, 7vw, 100px); }
-.section-title { font-size: clamp(38px, 6.4vw, 96px); font-weight: 900; line-height: 1; letter-spacing: -0.035em; }
+.section-title { font-size: clamp(28px, 3.3vw, 52px); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; } /* same as .statement */
 
 /* About */
 .about-grid { display: grid; grid-template-columns: 5fr 9fr; gap: 40px; align-items: start; }
