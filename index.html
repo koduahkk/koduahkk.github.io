@@ -33,12 +33,14 @@
             <span>Kingsley Koduah</span>
         </a>
         <nav class="nav-links" id="nav-links" aria-label="Main">
+            <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
             <a href="#toolkit">Toolkit</a>
             <a href="#experience">Experience</a>
-            <a href="#contact" class="btn btn-lime btn-sm">Let's talk <span aria-hidden="true">→</span></a>
+            <a href="#contact">Contact</a>
         </nav>
+        <a href="#contact" class="btn btn-lime nav-cta">Let's talk <span aria-hidden="true">↗</span></a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
             <span></span><span></span>
         </button>
@@ -48,7 +50,7 @@
 <main>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="home">
     <div class="container hero-grid">
         <div class="hero-copy">
             <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Available for new projects</p>
@@ -99,7 +101,7 @@
 <!-- ABOUT -->
 <section id="about" class="section">
     <div class="container about-grid">
-        <p class="section-eyebrow">01 — About</p>
+        <p class="section-eyebrow">About</p>
         <div>
             <h2 class="statement">I build dashboards and analysis that make complex numbers feel <span class="lime">clear</span>, useful, and ready for a decision.</h2>
             <!--💡UPDATE: Three short paragraphs — what you do, how you think, what you're looking for. -->
@@ -116,7 +118,7 @@
 <section id="projects" class="section">
     <div class="container">
         <div class="section-head">
-            <p class="section-eyebrow">02 — Projects</p>
+            <p class="section-eyebrow">Projects</p>
             <h2 class="section-title">Dashboards that earn <span class="lime">a second look.</span></h2>
         </div>
 
@@ -126,9 +128,10 @@
             <article class="project">
                 <a class="project-media" href="assets/images/US-Elec.png" target="_blank" rel="noopener">
                     <img src="assets/images/US-Elec.png" alt="US Electricity Overview Power BI dashboard" loading="lazy" width="1350" height="908">
+                    <span class="media-arrow" aria-hidden="true">↗</span>
                 </a>
                 <div class="project-body">
-                    <div class="project-meta"><span class="num">01</span><span>Case study</span></div>
+                    <div class="project-meta"><span class="idx">01</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
                     <h3>US Electricity Overview 2001–2023</h3>
                     <p>A Power BI report on two decades of US electricity generation — which states produce the most, how fast renewables are growing, and where CO₂ emissions concentrate.</p>
                     <ul class="tags"><li>Power BI</li><li>DAX</li><li>Power Query</li></ul>
@@ -145,9 +148,10 @@
             <article class="project">
                 <a class="project-media" href="assets/images/project-retail.svg" target="_blank" rel="noopener">
                     <img src="assets/images/project-retail.svg" alt="Retail sales performance dashboard preview" loading="lazy" width="1200" height="780">
+                    <span class="media-arrow" aria-hidden="true">↗</span>
                 </a>
                 <div class="project-body">
-                    <div class="project-meta"><span class="num">02</span><span>Case study</span></div>
+                    <div class="project-meta"><span class="idx">02</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
                     <h3>Retail Sales Performance</h3>
                     <p>An executive sales report tracking revenue, order volume and margin by region and category — built to show which products carry the business and which just take up shelf space.</p>
                     <ul class="tags"><li>SQL</li><li>Power BI</li><li>Data Modeling</li></ul>
@@ -163,9 +167,10 @@
             <article class="project">
                 <a class="project-media" href="assets/images/project-churn.svg" target="_blank" rel="noopener">
                     <img src="assets/images/project-churn.svg" alt="Customer churn analysis dashboard preview" loading="lazy" width="1200" height="780">
+                    <span class="media-arrow" aria-hidden="true">↗</span>
                 </a>
                 <div class="project-body">
-                    <div class="project-meta"><span class="num">03</span><span>Case study</span></div>
+                    <div class="project-meta"><span class="idx">03</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
                     <h3>Customer Churn Analysis</h3>
                     <p>Everyone assumed price drove churn. The data said contract type and support tickets did. A Python + Power BI breakdown of who leaves, when, and what to do about it.</p>
                     <ul class="tags"><li>Python</li><li>Pandas</li><li>Power BI</li></ul>
@@ -181,9 +186,10 @@
             <article class="project">
                 <a class="project-media" href="assets/images/project-supply.svg" target="_blank" rel="noopener">
                     <img src="assets/images/project-supply.svg" alt="Supply chain and inventory dashboard preview" loading="lazy" width="1200" height="780">
+                    <span class="media-arrow" aria-hidden="true">↗</span>
                 </a>
                 <div class="project-body">
-                    <div class="project-meta"><span class="num">04</span><span>Case study</span></div>
+                    <div class="project-meta"><span class="idx">04</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
                     <h3>Supply Chain &amp; Inventory</h3>
                     <p>An operations dashboard for on-time delivery, stockouts and supplier lead times — so the team spots the late shipment before the customer does.</p>
                     <ul class="tags"><li>Excel</li><li>SQL</li><li>Power BI</li></ul>
@@ -204,40 +210,40 @@
 <section id="toolkit" class="section">
     <div class="container">
         <div class="section-head">
-            <p class="section-eyebrow">03 — Capabilities</p>
+            <p class="section-eyebrow">Capabilities</p>
             <h2 class="section-title">The <span class="lime">toolkit.</span></h2>
         </div>
 
         <!--💡UPDATE: adjust each skill's level (data-level is 0–100) -->
         <div class="toolkit">
             <div class="tool-card">
-                <span class="num">01</span>
+                <div class="tool-head"><span class="idx">01</span><span class="dot" aria-hidden="true"></span></div>
                 <h3>Analysis</h3>
                 <ul class="skills">
-                    <li data-level="90"><span>SQL — joins, CTEs, window functions</span></li>
-                    <li data-level="90"><span>Excel — Power Pivot, lookups</span></li>
-                    <li data-level="75"><span>Python — Pandas, Matplotlib</span></li>
-                    <li data-level="80"><span>Exploratory analysis</span></li>
+                    <li data-level="90"><span>SQL — joins, CTEs, windows</span><span class="pct">90%</span></li>
+                    <li data-level="90"><span>Excel — Power Pivot, lookups</span><span class="pct">90%</span></li>
+                    <li data-level="75"><span>Python — Pandas, Matplotlib</span><span class="pct">75%</span></li>
+                    <li data-level="80"><span>Exploratory analysis</span><span class="pct">80%</span></li>
                 </ul>
             </div>
             <div class="tool-card">
-                <span class="num">02</span>
+                <div class="tool-head"><span class="idx">02</span><span class="dot" aria-hidden="true"></span></div>
                 <h3>BI &amp; Visualization</h3>
                 <ul class="skills">
-                    <li data-level="90"><span>Power BI</span></li>
-                    <li data-level="85"><span>DAX</span></li>
-                    <li data-level="85"><span>Power Query (M)</span></li>
-                    <li data-level="65"><span>Tableau</span></li>
+                    <li data-level="90"><span>Power BI</span><span class="pct">90%</span></li>
+                    <li data-level="85"><span>DAX</span><span class="pct">85%</span></li>
+                    <li data-level="85"><span>Power Query (M)</span><span class="pct">85%</span></li>
+                    <li data-level="65"><span>Tableau</span><span class="pct">65%</span></li>
                 </ul>
             </div>
             <div class="tool-card">
-                <span class="num">03</span>
+                <div class="tool-head"><span class="idx">03</span><span class="dot" aria-hidden="true"></span></div>
                 <h3>Craft</h3>
                 <ul class="skills">
-                    <li data-level="90"><span>Data storytelling</span></li>
-                    <li data-level="85"><span>Data modeling — star schema</span></li>
-                    <li data-level="80"><span>Data cleaning &amp; ETL</span></li>
-                    <li data-level="85"><span>Stakeholder communication</span></li>
+                    <li data-level="90"><span>Data storytelling</span><span class="pct">90%</span></li>
+                    <li data-level="85"><span>Data modeling — star schema</span><span class="pct">85%</span></li>
+                    <li data-level="80"><span>Data cleaning &amp; ETL</span><span class="pct">80%</span></li>
+                    <li data-level="85"><span>Stakeholder communication</span><span class="pct">85%</span></li>
                 </ul>
             </div>
         </div>
@@ -248,7 +254,7 @@
 <section class="section">
     <div class="container">
         <div class="section-head">
-            <p class="section-eyebrow">04 — Approach</p>
+            <p class="section-eyebrow">Approach</p>
             <h2 class="section-title">How I <span class="lime">work.</span></h2>
         </div>
         <ol class="steps">
@@ -280,7 +286,7 @@
 <section id="experience" class="section">
     <div class="container">
         <div class="section-head">
-            <p class="section-eyebrow">05 — Experience</p>
+            <p class="section-eyebrow">Experience</p>
             <h2 class="section-title">A path through <span class="lime">data.</span></h2>
         </div>
 
@@ -319,7 +325,7 @@
     <div class="container">
         <div class="contact-card">
             <div class="contact-head">
-                <p class="section-eyebrow">06 — Contact</p>
+                <p class="section-eyebrow">Contact</p>
                 <h2 class="section-title">Have a dataset that deserves <span class="lime">a clearer story?</span></h2>
             </div>
 
