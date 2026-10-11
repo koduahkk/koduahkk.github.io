@@ -3,233 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!--💡UPDATE: Change the title to your name-->
-    <title>Your Name | Data Analysis Portfolio</title>
-      
-    <!--💡UPDATE: Add your favicon here. You can generate one at realfavicongenerator.net-->
-    <link rel="icon" type="image/png" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/favicon-32x32.png">
-    
-    <!-- Google Fonts for Elegant Typography -->
+    <title>Kingsley Koduah | Data Analyst</title>
+    <meta name="description" content="Kingsley Koduah — Data Analyst. I turn messy data into decisions people can actually act on. SQL, Power BI, Excel, Python.">
+    <meta name="theme-color" content="#0A0A0A">
+
+    <!-- Social sharing -->
+    <meta property="og:title" content="Kingsley Koduah | Data Analyst">
+    <meta property="og:description" content="I turn messy data into decisions people can actually act on.">
+    <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- Your Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- HEADER SECTION -->
-<header>
-    <div class="container">
-        <!--💡UPDATE: Change to your name and title-->
-        <h1>Your Name</h1>
-        <p>Data Analyst | Power BI Developer | Your Title Here</p>
-        <div class="social-links">
-            <!--💡UPDATE: Add your social media links and CV file-->
-            <a href="[YOUR_LINKEDIN_URL]" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="[YOUR_GITHUB_URL]" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="[YOUR_YOUTUBE_URL]" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="assets/Your_Name_CV.pdf" download title="Download CV"><i class="fas fa-file-arrow-down"></i></a>
-        </div>
+<!-- NAVIGATION -->
+<header class="nav" id="top">
+    <div class="container nav-inner">
+        <a href="#top" class="brand" aria-label="Kingsley Koduah — home">
+            <img src="assets/images/kk-logo.jpg" alt="" class="brand-mark" width="36" height="36">
+            <span>Kingsley Koduah</span>
+        </a>
+        <nav class="nav-links" id="nav-links" aria-label="Main">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#toolkit">Toolkit</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact" class="btn btn-lime btn-sm">Let's talk <span aria-hidden="true">→</span></a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+            <span></span><span></span>
+        </button>
     </div>
 </header>
 
-<!-- NAVIGATION -->
-<nav>
-    <div class="container">
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+<main>
 
-<!-- ABOUT SECTION -->
+<!-- HERO -->
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Available for new projects</p>
+            <p class="hero-hi">Hi, I'm</p>
+            <h1 class="hero-name">Kingsley<br><span class="lime">Koduah</span></h1>
+            <p class="hero-tagline">I turn messy data into <em>decisions people can actually act on.</em></p>
+            <p class="hero-sub">Data Analyst — turning operational data into decisions leadership teams can act on same-day.</p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-lime">See my work <span aria-hidden="true">↓</span></a>
+                <a href="#contact" class="btn btn-ghost">Get in touch</a>
+            </div>
+        </div>
+
+        <figure class="hero-photo">
+            <img src="assets/images/kingsley-koduah.jpg" alt="Portrait of Kingsley Koduah" width="524" height="524">
+            <img src="assets/images/kk-logo.jpg" alt="" class="hero-photo-mark" width="56" height="56">
+            <figcaption class="hero-photo-tag">
+                <span class="label">Data Analyst</span>
+                <strong>Kingsley Koduah</strong>
+            </figcaption>
+        </figure>
+    </div>
+
+    <div class="container stat-strip">
+        <div class="stat">
+            <span class="stat-label">Focus</span>
+            <span class="stat-value">Data → Decisions</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Core stack</span>
+            <span class="stat-value">SQL · Power BI · Excel · Python</span>
+        </div>
+        <div class="stat">
+            <span class="stat-label">Status</span>
+            <span class="stat-value"><span class="dot" aria-hidden="true"></span> Open to roles &amp; freelance</span>
+        </div>
+    </div>
+</section>
+
+<!-- TOOLS MARQUEE -->
+<div class="marquee" aria-label="Tools I use">
+    <div class="marquee-track">
+        <span>SQL</span><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Excel</span><span>Python</span><span>Pandas</span><span>Data Modeling</span><span>Data Storytelling</span><span>Tableau</span>
+        <span aria-hidden="true">SQL</span><span aria-hidden="true">Power BI</span><span aria-hidden="true">DAX</span><span aria-hidden="true">Power Query</span><span aria-hidden="true">Excel</span><span aria-hidden="true">Python</span><span aria-hidden="true">Pandas</span><span aria-hidden="true">Data Modeling</span><span aria-hidden="true">Data Storytelling</span><span aria-hidden="true">Tableau</span>
+    </div>
+</div>
+
+<!-- ABOUT -->
 <section id="about" class="section">
-    <div class="container">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <!--💡UPDATE: Change the image to your own profile photo in assets/images/-->
-            <img src="assets/images/profile-placeholder.jpg" alt="Your Name" class="profile-photo">
+    <div class="container about-grid">
+        <p class="section-eyebrow">01 — About</p>
+        <div>
+            <h2 class="statement">I build dashboards and analysis that make complex numbers feel <span class="lime">clear</span>, useful, and ready for a decision.</h2>
+            <!--💡UPDATE: Three short paragraphs — what you do, how you think, what you're looking for. -->
             <div class="about-text">
-                <!--💡UPDATE: Write your own 'About Me' text here-->
-                <p> I'm a data professional with expertise in transforming complex datasets into actionable insights. My work focuses on creating interactive visualizations and data-driven stories that help organizations make informed decisions.</p>
-                <p>With experience in Power BI, SQL, and data modeling, I specialize in developing comprehensive reports that reveal hidden patterns and trends in data. This portfolio showcases my projects across various sectors.</p>
+                <p>I'm a data analyst who works across the whole path — pulling data with SQL, cleaning and modeling it in Power Query and Python, and shipping Power BI reports people open every morning.</p>
+                <p>I lead with the finding, not the method. Every chart has to earn its place by answering a real question, and when the data is thin I say so.</p>
+                <p>I'm looking for teams that want analysis they can act on — full-time roles, contracts, or a single stubborn dataset that needs a clearer story.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PROJECTS SECTION -->
+<!-- PROJECTS -->
 <section id="projects" class="section">
     <div class="container">
-        <h2>My Projects</h2>
-        <div class="projects-grid">
+        <div class="section-head">
+            <p class="section-eyebrow">02 — Projects</p>
+            <h2 class="section-title">Dashboards that earn <span class="lime">a second look.</span></h2>
+        </div>
 
-            <!--💡UPDATE: Replace this with your own project. Add as many as you like!-->
-            <!-- Project 1 -->
-             <div class="project-card">
-                <!--💡UPDATE: Add a preview image of your project to assets/images/ -->
-                <img src="assets/images/project-placeholder-1.jpg" alt="Project One Preview">
-                <div class="project-card-content">
-                    <h3>Project Title One</h3>
-                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
-                    <div class="project-buttons">
-                        <!--💡UPDATE: Add link to your project's code/documentation on GitHub-->
-                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
-                        <!--💡UPDATE: Add link to your live dashboard (e.g., Power BI, Tableau Public)-->
-                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
-                    </div>
-                </div>
-            </div>
+        <!--💡UPDATE: Projects 02–04 are placeholders. Swap the image, title, copy, tags, metrics and links for your own work. -->
+        <div class="projects">
 
-            <!-- Project 2 -->
-            <div class="project-card">
-                <img src="assets/images/project-placeholder-2.jpg" alt="Project Two Preview">
-                <div class="project-card-content">
-                    <h3>Project Title Two</h3>
-                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
-                    <div class="project-buttons">
-                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
-                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
-                    </div>
+            <article class="project">
+                <a class="project-media" href="assets/images/US-Elec.png" target="_blank" rel="noopener">
+                    <img src="assets/images/US-Elec.png" alt="US Electricity Overview Power BI dashboard" loading="lazy" width="1350" height="908">
+                </a>
+                <div class="project-body">
+                    <div class="project-meta"><span class="num">01</span><span>Case study</span></div>
+                    <h3>US Electricity Overview 2001–2023</h3>
+                    <p>A Power BI report on two decades of US electricity generation — which states produce the most, how fast renewables are growing, and where CO₂ emissions concentrate.</p>
+                    <ul class="tags"><li>Power BI</li><li>DAX</li><li>Power Query</li></ul>
+                    <dl class="metrics">
+                        <div><dt>Generated</dt><dd>240M <small>GWh</small></dd></div>
+                        <div><dt>Renewable share</dt><dd class="lime">16%</dd></div>
+                        <div><dt>CO₂</dt><dd>101.6M <small>kt</small></dd></div>
+                    </dl>
+                    <!--💡UPDATE: link to the live dashboard / repo -->
+                    <a href="#" class="project-link">View project <span aria-hidden="true">↗</span></a>
                 </div>
-            </div>
+            </article>
 
-            <!-- Project 3 -->
-            <div class="project-card">
-                <img src="assets/images/project-placeholder-3.jpg" alt="Project Three Preview">
-                <div class="project-card-content">
-                    <h3>Project Title Three</h3>
-                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
-                    <div class="project-buttons">
-                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
-                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
-                    </div>
+            <article class="project">
+                <a class="project-media" href="assets/images/project-retail.svg" target="_blank" rel="noopener">
+                    <img src="assets/images/project-retail.svg" alt="Retail sales performance dashboard preview" loading="lazy" width="1200" height="780">
+                </a>
+                <div class="project-body">
+                    <div class="project-meta"><span class="num">02</span><span>Case study</span></div>
+                    <h3>Retail Sales Performance</h3>
+                    <p>An executive sales report tracking revenue, order volume and margin by region and category — built to show which products carry the business and which just take up shelf space.</p>
+                    <ul class="tags"><li>SQL</li><li>Power BI</li><li>Data Modeling</li></ul>
+                    <dl class="metrics">
+                        <div><dt>Revenue</dt><dd class="lime">$4.2M</dd></div>
+                        <div><dt>Orders</dt><dd>18.6K</dd></div>
+                        <div><dt>Margin</dt><dd>31%</dd></div>
+                    </dl>
+                    <a href="#" class="project-link">View project <span aria-hidden="true">↗</span></a>
                 </div>
-            </div>
+            </article>
 
-            <!-- Project 4 -->
-            <div class="project-card">
-                <img src="assets/images/project-placeholder-4.jpg" alt="Project Four Preview">
-                <div class="project-card-content">
-                    <h3>Project Title Four</h3>
-                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
-                    <div class="project-buttons">
-                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
-                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
-                    </div>
+            <article class="project">
+                <a class="project-media" href="assets/images/project-churn.svg" target="_blank" rel="noopener">
+                    <img src="assets/images/project-churn.svg" alt="Customer churn analysis dashboard preview" loading="lazy" width="1200" height="780">
+                </a>
+                <div class="project-body">
+                    <div class="project-meta"><span class="num">03</span><span>Case study</span></div>
+                    <h3>Customer Churn Analysis</h3>
+                    <p>Everyone assumed price drove churn. The data said contract type and support tickets did. A Python + Power BI breakdown of who leaves, when, and what to do about it.</p>
+                    <ul class="tags"><li>Python</li><li>Pandas</li><li>Power BI</li></ul>
+                    <dl class="metrics">
+                        <div><dt>Churn rate</dt><dd class="lime">14.3%</dd></div>
+                        <div><dt>Customers</dt><dd>7,043</dd></div>
+                        <div><dt>At risk</dt><dd>1,120</dd></div>
+                    </dl>
+                    <a href="#" class="project-link">View project <span aria-hidden="true">↗</span></a>
                 </div>
-            </div>
+            </article>
+
+            <article class="project">
+                <a class="project-media" href="assets/images/project-supply.svg" target="_blank" rel="noopener">
+                    <img src="assets/images/project-supply.svg" alt="Supply chain and inventory dashboard preview" loading="lazy" width="1200" height="780">
+                </a>
+                <div class="project-body">
+                    <div class="project-meta"><span class="num">04</span><span>Case study</span></div>
+                    <h3>Supply Chain &amp; Inventory</h3>
+                    <p>An operations dashboard for on-time delivery, stockouts and supplier lead times — so the team spots the late shipment before the customer does.</p>
+                    <ul class="tags"><li>Excel</li><li>SQL</li><li>Power BI</li></ul>
+                    <dl class="metrics">
+                        <div><dt>On-time</dt><dd class="lime">92.4%</dd></div>
+                        <div><dt>Lead time</dt><dd>6.8d</dd></div>
+                        <div><dt>SKUs</dt><dd>2,450</dd></div>
+                    </dl>
+                    <a href="#" class="project-link">View project <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
 
         </div>
     </div>
 </section>
 
-<!-- SKILLS SECTION -->
-<section id="skills" class="section">
+<!-- TOOLKIT -->
+<section id="toolkit" class="section">
     <div class="container">
-        <h2>Technical Skillset</h2>
-        <div class="skills-table">
-            
-            <!--💡UPDATE: Customize your skills in each category-->
-            <!-- Column 1: Data Visualization -->
-            <div class="skill-column">
-                <div class="skill-header">
-                    <i class="fas fa-chart-pie"></i>
-                    <h3>Data Visualization</h3>
-                </div>
-                <ul class="skill-list">
-                    <li>Power BI</li>
-                    <li>Tableau</li>
-                    <li>Looker Studio</li>
-                    <li>Excel Dashboards</li>
+        <div class="section-head">
+            <p class="section-eyebrow">03 — Capabilities</p>
+            <h2 class="section-title">The <span class="lime">toolkit.</span></h2>
+        </div>
+
+        <!--💡UPDATE: adjust each skill's level (data-level is 0–100) -->
+        <div class="toolkit">
+            <div class="tool-card">
+                <span class="num">01</span>
+                <h3>Analysis</h3>
+                <ul class="skills">
+                    <li data-level="90"><span>SQL — joins, CTEs, window functions</span></li>
+                    <li data-level="90"><span>Excel — Power Pivot, lookups</span></li>
+                    <li data-level="75"><span>Python — Pandas, Matplotlib</span></li>
+                    <li data-level="80"><span>Exploratory analysis</span></li>
                 </ul>
             </div>
-
-            <!-- Column 2: Data Analysis -->
-            <div class="skill-column">
-                <div class="skill-header">
-                    <i class="fas fa-search-plus"></i>
-                    <h3>Data Analysis</h3>
-                </div>
-                <ul class="skill-list">
-                    <li>SQL</li>
-                    <li>Advanced Excel</li>
-                    <li>Python (Pandas)</li>
-                    <li>Google Sheets</li>
+            <div class="tool-card">
+                <span class="num">02</span>
+                <h3>BI &amp; Visualization</h3>
+                <ul class="skills">
+                    <li data-level="90"><span>Power BI</span></li>
+                    <li data-level="85"><span>DAX</span></li>
+                    <li data-level="85"><span>Power Query (M)</span></li>
+                    <li data-level="65"><span>Tableau</span></li>
                 </ul>
             </div>
-
-            <!-- Column 3: Data Modeling & ETL -->
-            <div class="skill-column">
-                <div class="skill-header">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Data Modeling & ETL</h3>
-                </div>
-                <ul class="skill-list">
-                    <li>Power Query (M)</li>
-                    <li>DAX</li>
-                    <li>Star Schema Design</li>
-                    <li>ETL Processes</li>
+            <div class="tool-card">
+                <span class="num">03</span>
+                <h3>Craft</h3>
+                <ul class="skills">
+                    <li data-level="90"><span>Data storytelling</span></li>
+                    <li data-level="85"><span>Data modeling — star schema</span></li>
+                    <li data-level="80"><span>Data cleaning &amp; ETL</span></li>
+                    <li data-level="85"><span>Stakeholder communication</span></li>
                 </ul>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- CONTACT FORM SECTION -->
-<section id="contact" class="section">
+<!-- APPROACH -->
+<section class="section">
     <div class="container">
-        <h2>Send me a message</h2>
-        
-        <!--💡UPDATE: Go to formsubmit.co and replace the email with your own-->
-        <form action="https://formsubmit.co/your-email@example.com" method="POST" class="contact-form">
-            <p> Interested in collaborating or have questions about my work? I'd love to hear from you!</p>
-
-            <!-- Form Fields -->
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="Your name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Your email" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" name="subject" id="subject" placeholder="Subject" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea name="message" id="message" rows="6" placeholder="Your message" required></textarea>
-            </div>
-            
-            <!-- Submit Button -->
-            <button type="submit" class="btn">Send Message</button>
-
-        </form>
+        <div class="section-head">
+            <p class="section-eyebrow">04 — Approach</p>
+            <h2 class="section-title">How I <span class="lime">work.</span></h2>
+        </div>
+        <ol class="steps">
+            <li>
+                <span class="step-num" aria-hidden="true">01</span>
+                <h3>Find the real question</h3>
+                <p>Before any query runs, pin down the decision the analysis has to support.</p>
+            </li>
+            <li>
+                <span class="step-num" aria-hidden="true">02</span>
+                <h3>Clean &amp; model</h3>
+                <p>Turn messy sources into one trustworthy model — documented, so it holds up next quarter.</p>
+            </li>
+            <li>
+                <span class="step-num" aria-hidden="true">03</span>
+                <h3>Build the view</h3>
+                <p>One chart, one takeaway. Dashboards designed for the person reading them, not the person building them.</p>
+            </li>
+            <li>
+                <span class="step-num" aria-hidden="true">04</span>
+                <h3>Lead with the finding</h3>
+                <p>What the data showed, why it matters, what to do about it — in plain sentences.</p>
+            </li>
+        </ol>
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
     <div class="container">
-        <!--💡UPDATE: Change the year and your name-->
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <div class="section-head">
+            <p class="section-eyebrow">05 — Experience</p>
+            <h2 class="section-title">A path through <span class="lime">data.</span></h2>
+        </div>
+
+        <!--💡UPDATE: replace these placeholder roles with your real experience -->
+        <ol class="timeline">
+            <li>
+                <span class="when">2024 — Now</span>
+                <div>
+                    <h3>Data Analyst</h3>
+                    <p class="where">Company Name · City</p>
+                    <p>Own the reporting layer for operations — SQL pipelines into Power BI dashboards that leadership uses for same-day decisions.</p>
+                </div>
+            </li>
+            <li>
+                <span class="when">2022 — 2024</span>
+                <div>
+                    <h3>Junior Data Analyst</h3>
+                    <p class="where">Company Name · City</p>
+                    <p>Automated recurring Excel reports, built the first self-serve sales dashboard, and cleaned years of inconsistent source data.</p>
+                </div>
+            </li>
+            <li>
+                <span class="when">2020 — 2022</span>
+                <div>
+                    <h3>Degree / Certification</h3>
+                    <p class="where">Institution Name</p>
+                    <p>Statistics, databases and data visualization foundations. Add certifications such as Microsoft PL-300 here.</p>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact">
+    <div class="container">
+        <div class="contact-card">
+            <div class="contact-head">
+                <p class="section-eyebrow">06 — Contact</p>
+                <h2 class="section-title">Have a dataset that deserves <span class="lime">a clearer story?</span></h2>
+            </div>
+
+            <div class="contact-grid">
+                <!--💡UPDATE: replace YOUR_EMAIL with your email (formsubmit.co will ask you to confirm it on first use) -->
+                <form action="https://formsubmit.co/YOUR_EMAIL" method="POST" class="contact-form">
+                    <input type="hidden" name="_subject" value="New message from your portfolio">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <label>
+                        <span>Name</span>
+                        <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <input type="email" name="email" placeholder="you@company.com" required autocomplete="email">
+                    </label>
+                    <label>
+                        <span>Message</span>
+                        <textarea name="message" rows="5" placeholder="Tell me about the data and the decision it needs to support…" required></textarea>
+                    </label>
+                    <button type="submit" class="btn btn-lime">Send message <span aria-hidden="true">→</span></button>
+                </form>
+
+                <div class="direct">
+                    <p class="label">Direct contact</p>
+                    <!--💡UPDATE: fill in your email and LinkedIn URL -->
+                    <a href="mailto:YOUR_EMAIL" class="direct-link"><span>Email</span><span aria-hidden="true">↗</span></a>
+                    <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener" class="direct-link"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
+                    <a href="https://github.com/koduahkk" target="_blank" rel="noopener" class="direct-link"><span>GitHub</span><span aria-hidden="true">↗</span></a>
+                    <!--💡UPDATE: put your CV in assets/ and update the file name -->
+                    <a href="assets/Sample%20CV.pdf" download class="direct-link"><span>Download CV</span><span aria-hidden="true">↓</span></a>
+                    <p class="available"><span class="dot" aria-hidden="true"></span> Available now</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <p>© <span id="year">2026</span> Kingsley Koduah</p>
+        <p class="label">Data tells the story.</p>
+        <a href="#top" class="label">Back to top ↑</a>
     </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-
 </body>
 </html>
