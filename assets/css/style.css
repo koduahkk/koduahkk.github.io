@@ -166,6 +166,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
     border-top: 1px solid var(--line);
 }
 .stat { display: flex; flex-direction: column; gap: 6px; }
+.stat:last-child { align-items: flex-end; text-align: right; }
 .stat-label { font-size: 11px; }
 .stat-value { font-family: var(--display); color: var(--white); font-weight: 700; font-size: 17px; display: inline-flex; align-items: center; gap: 8px; }
 
@@ -409,6 +410,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 
 @media (max-width: 760px) {
     .stat-strip { grid-template-columns: 1fr; gap: 18px; }
+    .stat:last-child { align-items: flex-start; text-align: left; }
     .toolkit, .steps { grid-template-columns: 1fr; }
     .cs-metrics { grid-template-columns: 1fr 1fr; }
     .cs-bar .label { display: none; }
