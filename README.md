@@ -23,6 +23,6 @@ Search `index.html` for `💡UPDATE` comments. Still to fill in:
 
 - **Projects**: each card on the home page shows three dashboard images (`assets/images/projects/<slug>-1/2/3`) and links to its case study in `projects/<slug>.html`. Projects 02–04 are placeholders, and pages 2–3 of the US Electricity project are placeholder images. Replace the image files (keep the names, or update the `src` in both the home page and the case study) and edit the case study text.
 - **Live dashboard links**: the "Open in Power BI" link at the bottom of each case study.
-- **Contact form**: replace `YOUR_EMAIL` in the form's `action`. The form uses [formsubmit.co](https://formsubmit.co) and sends a confirmation email the first time.
-- **CV**: `assets/Kingsley_Koduah_CV.pdf` opens in a new tab from the contact section; replace the file to update it.
+- **Contact form**: messages go to kingsleykoduah3030@gmail.com via [formsubmit.co](https://formsubmit.co). The first submission sends a one-time confirmation email to that address; click the link in it to activate the form.
+- **CV**: the CV button opens `cv.html`, which shows the CV as page images with a Download PDF button. To update it, replace `assets/Kingsley_Koduah_CV.pdf` and re-render the images in `assets/images/cv/`.
 - **Skill levels**: the `data-level` value (0–100) on each skill.
