@@ -291,7 +291,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 5vw, 64px); }
 .contact-form { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
 .contact-form label { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.contact-form label span { font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.contact-form label span { font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); }
 .contact-form input, .contact-form textarea {
     width: 100%; background: var(--black); border: 1px solid var(--line); border-radius: 12px;
     padding: 14px 16px; color: var(--white); font: inherit; font-size: 15px; resize: vertical;
