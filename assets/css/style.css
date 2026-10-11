@@ -201,10 +201,8 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .project:nth-child(even) .project-media { order: 2; }
 .project-media {
     display: block; border-radius: 28px; overflow: hidden;
-    background:
-        radial-gradient(ellipse 90% 80% at 100% 100%, rgba(212, 244, 75, 0.22), transparent 60%),
-        linear-gradient(135deg, #1c1c1c, #0f0f0f);
-    border: 1px solid var(--line);
+    background: var(--muted); /* same Muted Gray as the project descriptions */
+    border: 1px solid var(--muted);
     padding: clamp(28px, 5vw, 72px) clamp(20px, 4vw, 56px);
     position: relative;
     transition: border-color .3s ease, transform .4s ease;
@@ -332,10 +330,8 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .cs-hero .tags { margin: 0 0 clamp(40px, 5vw, 64px); }
 .cs-media {
     border-radius: 32px; overflow: hidden;
-    background:
-        radial-gradient(ellipse 80% 90% at 100% 100%, rgba(212, 244, 75, 0.22), transparent 60%),
-        linear-gradient(135deg, #1c1c1c, #0f0f0f);
-    border: 1px solid var(--line);
+    background: var(--muted); /* same Muted Gray as the project descriptions */
+    border: 1px solid var(--muted);
     padding: clamp(28px, 5vw, 72px) clamp(20px, 6vw, 96px);
 }
 .stack-lg img { width: 74%; }
