@@ -240,7 +240,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
     font-family: var(--display); font-weight: 900; font-size: 44px; letter-spacing: -0.02em; line-height: 1;
     color: transparent; -webkit-text-stroke: 1px #555;
 }
-.project h3 { font-size: clamp(26px, 2.8vw, 44px); font-weight: 800; margin: 28px 0 20px; line-height: 1.12; }
+.project h3 { font-size: clamp(24px, 2.3vw, 36px); font-weight: 800; margin: 28px 0 20px; line-height: 1.12; }
 .project-body > p { font-size: clamp(16px, 1.25vw, 19px); line-height: 1.75; }
 .tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 40px; }
 .tags li { padding: 7px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; color: var(--white); }
@@ -327,7 +327,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .cs-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
 .cs-bar .label { color: var(--white); letter-spacing: 0.3em; }
 .cs-hero { padding-top: clamp(56px, 7vw, 100px); }
-.cs-title { font-size: clamp(40px, 6.4vw, 96px); font-weight: 900; line-height: 1.02; letter-spacing: -0.035em; margin: 28px 0 32px; }
+.cs-title { font-size: clamp(34px, 4.8vw, 72px); font-weight: 900; line-height: 1.02; letter-spacing: -0.035em; margin: 28px 0 32px; }
 .cs-hero .tags { margin: 0 0 clamp(40px, 5vw, 64px); }
 .cs-media {
     border-radius: 32px; overflow: hidden;

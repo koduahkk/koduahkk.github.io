@@ -12,10 +12,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script>
+        // Always open a case study at the top, never at a restored scroll position
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
+    </script>
 </head>
 <body class="case">
 
-<header class="cs-bar">
+<header class="cs-bar" id="top">
     <div class="container cs-bar-inner">
         <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
         <span class="label">Case study 04</span>
@@ -118,8 +123,8 @@
             <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
         </div>
         <nav class="cs-pager" aria-label="Case studies">
-            <a href="churn.html" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
-            <a href="electricity.html" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+            <a href="churn.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
+            <a href="electricity.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
         </nav>
     </section>
 </main>
