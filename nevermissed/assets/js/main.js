@@ -473,8 +473,19 @@
 
       const api = { pause: () => playing && stop() };
       players.push(api);
+
+      // Stop playback once the listener moves on:
+      // mouse users when the pointer leaves the card (touch screens fire a
+      // leave event on every tap, so they're excluded), everyone when the
+      // card scrolls mostly out of view.
+      el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') api.pause(); });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { if (!e.isIntersecting) api.pause(); }, { threshold: 0.3 }).observe(el);
+      }
       render();
     });
+    // ...and when the visitor switches to another tab or app.
+    document.addEventListener('visibilitychange', () => { if (document.hidden) players.forEach((p) => p.pause()); });
   }
 
   /* ---------- Feature art: 24-hour strip --------------------------- */
