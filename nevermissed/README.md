@@ -31,7 +31,7 @@ Generated pages are committed, so GitHub Pages serves them as is. Don't hand-edi
 ### Pages
 - `/` homepage with all 15 sections
 - `/book-demo/` two-step booking (qualify, then pick a time)
-- `/industries/<slug>/` 8 generated landing pages: dental, medical, hvac, home-services, legal, salons-spas, real-estate, auto
+- `/industries/<slug>/` 9 generated landing pages: dental, medical, hvac, home-services, legal, salons-spas, gyms, real-estate, auto
 - `/privacy/`, `/terms/` outlines for counsel to finish
 
 Pricing, FAQ and contact live as homepage sections (`#pricing`, `#faq`, `#book`) rather than separate pages.
@@ -86,7 +86,7 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | Supported languages | `site.languages`, plus the cycle list in `assets/js/main.js` (`initLang`) |
 | Problem stats **62%** and **80%** (commonly cited, unsourced here) | `src/pages/index.html` problem section. Verify, cite, or replace. (128 hrs = 168 − 40 is arithmetic.) |
 | Audio recordings for the 4 sample calls (currently scripted, timer-driven) | add files to `assets/audio/`, set `src` + line timings in `demos` |
-| Industry sample calls for Medical, Plumbing & Electrical, Real Estate, Auto | add to `demos`, set `demo:` on the industry |
+| Industry sample calls for Medical, Plumbing & Electrical, Gyms & Fitness, Real Estate, Auto | add to `demos`, set `demo:` on the industry |
 | All pricing: tiers, prices, minutes, setup fee, annual discount | `pricing` in `src/config.mjs` |
 | "No contracts. Cancel anytime." | pricing section + last FAQ |
 | Integrations list | marquee in `src/pages/index.html` (section 09) |

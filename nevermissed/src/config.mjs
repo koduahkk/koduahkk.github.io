@@ -54,7 +54,7 @@ export const pricing = {
       setup: '$[X] one-time setup',
       features: [
         '24/7 call answering',
-        'Appointment booking (1 calendar)',
+        'Booking and rescheduling (1 calendar)',
         'FAQ answers in your voice',
         'Call summaries by text and email',
         'Monthly performance report',
@@ -287,6 +287,23 @@ export const industries = [
     ],
   },
   {
+    slug: 'gyms',
+    inSentence: 'gyms & fitness studios',
+    name: 'Gyms & Fitness',
+    headline: 'Turn every \u201chow much is a membership?\u201d call into a tour.',
+    sub: 'People decide to join at 9 PM, not 9 AM. Your AI receptionist answers, books the tour or trial class, and moves members\u2019 sessions, so your front desk can focus on the people in the building.',
+    useCases: [
+      ['Tours and trial passes', 'Answers membership and pricing questions, then books a tour or free trial class.'],
+      ['Class and PT scheduling', 'Books, reschedules and waitlists classes and personal-training sessions by coach.'],
+      ['Member questions', 'Handles hours, guest passes, freezes and billing questions, and routes cancellations to your team.'],
+    ],
+    demo: null,
+    snippet: [
+      ['caller', 'Can I move my 6 AM spin class to tomorrow?'],
+      ['ai', 'Done. You\u2019re in Thursday\u2019s 6 AM with Coach Ray. I\u2019ve texted you the confirmation.'],
+    ],
+  },
+  {
     slug: 'real-estate',
     inSentence: 'real estate',
     name: 'Real Estate',
@@ -332,6 +349,10 @@ export const faqs = [
   {
     q: 'What if the AI can’t answer a question?',
     a: 'It says so, honestly, and then does what you’d want: takes a detailed message, books a callback, or transfers the call live to you or your team. You set the rules. It never makes up prices or policies you haven’t given it.',
+  },
+  {
+    q: 'Can callers reschedule or cancel by phone?',
+    a: 'Yes. Callers can move or cancel an appointment any time, day or night. NeverMissed finds them a new slot, updates your calendar and texts a confirmation. You set the rules, like how much notice you need and which cancellations come to you first.',
   },
   {
     q: 'How long does setup take?',

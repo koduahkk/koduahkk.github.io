@@ -180,7 +180,7 @@ const orgSchema = {
   slogan: site.tagline,
   email: site.email,
   telephone: site.phone.tel,
-  description: 'NeverMissed builds AI receptionists that answer every call 24/7, book appointments and capture every lead for service businesses.',
+  description: 'NeverMissed builds AI receptionists that answer every call 24/7, book and reschedule appointments and capture every lead for service businesses.',
   contactPoint: [{ '@type': 'ContactPoint', telephone: site.phone.tel, contactType: 'sales', availableLanguage: ['English'] }],
 };
 const faqSchema = {
@@ -227,7 +227,7 @@ page({
   depth: 0,
   path: '',
   title: 'NeverMissed | AI Receptionists That Answer Every Call, 24/7',
-  description: 'NeverMissed builds AI receptionists that pick up 24/7, book appointments and capture every lead, so your business never loses a customer to voicemail again.',
+  description: 'NeverMissed builds AI receptionists that pick up 24/7, book and reschedule appointments and capture every lead, so your business never loses a customer to voicemail again.',
   schema: ld(orgSchema, faqSchema),
 });
 page({
