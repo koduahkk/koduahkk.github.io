@@ -489,15 +489,15 @@
 
   /* ---------- Feature art: language cycle -------------------------- */
   function initLang() {
-    const el = $('[data-lang-cycle]');
-    if (!el || RM) return;
-    // Keep this list to languages you actually support (see config.mjs).
-    const words = ['Hello.', 'Hola.', 'How can I help?', '¿En qué le ayudo?'];
+    // Phrases are listed in the markup (features tile); keep them to languages you support.
+    const words = $$('[data-lang-word]');
+    if (words.length < 2 || RM) return;
     let i = 0;
     setInterval(() => {
       if (document.hidden) return;
-      el.classList.add('is-out');
-      setTimeout(() => { i = (i + 1) % words.length; el.textContent = words[i]; el.classList.remove('is-out'); }, 350);
+      words[i].classList.remove('is-active');
+      i = (i + 1) % words.length;
+      words[i].classList.add('is-active');
     }, 2200);
   }
 

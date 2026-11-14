@@ -521,9 +521,11 @@ input[type=range]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--
 .art-lines .hold { justify-content: flex-end; border: 0; background: none; padding: 2px 0 0; color: var(--green-ink); font-weight: 500; }
 
 /* languages */
-.art-lang { font: 700 clamp(3rem, 2rem + 4vw, 6rem)/1 var(--font-display); letter-spacing: var(--tracking-display); min-height: 1.1em; }
-.art-lang span { display: inline-block; transition: opacity .35s, transform .45s var(--ease-out); }
-.art-lang span.is-out { opacity: 0; transform: translateY(-.25em); }
+/* Every phrase sits in the same grid cell: the cell takes the size of the
+   longest phrase, so the tile never changes height while they cycle. */
+.art-lang { display: grid; align-items: center; font: 700 clamp(3rem, 2rem + 4vw, 6rem)/1.02 var(--font-display); letter-spacing: var(--tracking-display); }
+.art-lang span { grid-area: 1 / 1; visibility: hidden; opacity: 0; transform: translateY(.25em); transition: opacity .35s, transform .45s var(--ease-out), visibility 0s .45s; }
+.art-lang span.is-active { visibility: visible; opacity: 1; transform: none; transition: opacity .35s .1s, transform .45s .1s var(--ease-out), visibility 0s; }
 
 /* =========================================================
    HOW IT WORKS (timeline)
