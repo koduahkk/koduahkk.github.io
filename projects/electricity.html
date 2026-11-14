@@ -3,142 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Electricity Overview | Kingsley Koduah</title>
-    <meta name="description" content="An interactive Power BI report covering 23 years of US electricity generation by state and energy source. One page answers three questions leadership and policy readers actually ask: where the power comes from, how much of it is renewable, and where the emissions sit.">
-    <meta name="theme-color" content="#0A0A0A">
+    <title>US Electricity Overview 2001–2023 | Kingsley Koduah</title>
+    <meta name="description" content="Twenty-three years of US electricity generation by state and source, reduced to the three questions policy and leadership readers actually ask: where the power comes from, how much of it is renewable, and where the emissions sit.">
+    <meta name="theme-color" content="#F7F5F0">
+    <meta property="og:title" content="US Electricity Overview 2001–2023 | Kingsley Koduah">
+    <meta property="og:description" content="Twenty-three years of US electricity generation by state and source, reduced to the three questions policy and leadership readers actually ask: where the power comes from, how much of it is renewable, and where the emissions sit.">
+    <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
+    <meta property="og:url" content="https://koduahkk.github.io/projects/electricity.html">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <script>try{var t=localStorage.getItem('kk-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script>
-        // Always open a case study at the top, never at a restored scroll position
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
-    </script>
 </head>
-<body class="case">
-
-<header class="cs-bar" id="top">
-    <div class="container cs-bar-inner">
-        <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <span class="label">Case study 01</span>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+    <div class="wrap nav-inner">
+        <a href="../index.html" class="brand" aria-label="Kingsley Koduah, home">
+            <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true">
+                <line class="tick" x1="0" y1="17" x2="34" y2="17"/><line class="tick" x1="17" y1="0" x2="17" y2="34"/>
+                <circle class="ring" cx="17" cy="17" r="15.5"/>
+                <circle class="pt" cx="25.5" cy="8.5" r="2.6"/>
+                <text x="17" y="20.2" text-anchor="middle">KK</text>
+            </svg>
+            <span class="brand-name">Kingsley Koduah</span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+                <a href="../index.html#work"><span class="num">01</span>Work</a>
+                <a href="../index.html#about"><span class="num">02</span>About</a>
+                <a href="../index.html#skills"><span class="num">03</span>Skills</a>
+                <a href="../index.html#experience"><span class="num">04</span>Experience</a>
+                <a href="../index.html#contact"><span class="num">05</span>Contact</a>
+        </nav>
+        <div class="nav-actions">
+            <a class="btn btn-line btn-sm resume" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+                    <svg class="moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+                </button>
+            <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+        </div>
     </div>
 </header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-top">
+        <span class="mono">Menu</span>
+        <button class="menu-btn menu-close" type="button" aria-label="Close menu" style="display:grid">✕</button>
+    </div>
+    <nav aria-label="Mobile">
+            <a href="../index.html#work"><span class="mono">01</span>Work</a>
+            <a href="../index.html#about"><span class="mono">02</span>About</a>
+            <a href="../index.html#skills"><span class="mono">03</span>Skills</a>
+            <a href="../index.html#experience"><span class="mono">04</span>Experience</a>
+            <a href="../index.html#contact"><span class="mono">05</span>Contact</a>
+    </nav>
+    <a class="btn btn-solid" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+</div>
 
-<main>
-    <!--💡UPDATE: this case study uses placeholder content — replace the text and the images in assets/images/projects/electricity-1/2/3 -->
-    <section class="container cs-hero">
-        <p class="section-eyebrow">Energy analytics · Power BI · DAX</p>
-        <h1 class="cs-title">US Electricity Overview 2001–2023</h1>
-        <ul class="tags"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Data Modeling</li></ul>
-        <div class="cs-media">
-                <div class="stack stack-lg">
-                    <img src="../assets/images/projects/electricity-1.png" alt="US Electricity Overview dashboard, page 1" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/electricity-2.svg" alt="" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/electricity-3.svg" alt="" loading="lazy" width="1200" height="780">
-                </div>
+<main id="main">
+    <!--💡UPDATE: Fig. 01.1 is an indicative series shaped from the dashboard; paste exact yearly values into its JSON block. -->
+    <section class="cs-hero">
+        <div class="wrap grid12">
+            <p class="crumbs mono"><a href="../index.html#work">← Work</a><span class="sep">/</span><span>Case study 01</span><span class="sep">/</span><span>Energy analytics</span></p>
+            <h1 class="cs-title">US Electricity Overview, <em>2001–2023</em></h1>
+            <p class="cs-dek">Twenty-three years of US electricity generation by state and source, reduced to the three questions policy and leadership readers actually ask: where the power comes from, how much of it is renewable, and where the emissions sit.</p>
+            <dl class="cs-facts">
+            <div><dt class="mono">Role</dt><dd>Solo analyst: data prep, modelling, design</dd></div>
+            <div><dt class="mono">Type</dt><dd>Self-directed project</dd></div>
+            <div><dt class="mono">Tools</dt><dd>Power BI · DAX · Power Query</dd></div>
+            <div><dt class="mono">Dataset</dt><dd>23 years · 50 states + DC · by source</dd></div>
+            </dl>
+            <figure class="cs-cover"><img src="../assets/images/projects/electricity-1.png" alt="US Electricity Overview 2001–2023 dashboard overview" width="1200" height="780"></figure>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Overview</p>
-        <p class="cs-lead">An interactive Power BI report covering 23 years of US electricity generation by state and energy source. One page answers three questions leadership and policy readers actually ask: where the power comes from, how much of it is renewable, and where the emissions sit.</p>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key metrics</p>
-        <div class="cs-metrics">
-                <div class="cs-metric"><strong>240M</strong><span>GWh generated</span></div>
-                <div class="cs-metric"><strong>38.0M</strong><span>GWh renewable</span></div>
-                <div class="cs-metric"><strong>16%</strong><span>Renewable share</span></div>
-                <div class="cs-metric"><strong>101.6M</strong><span>kt CO₂</span></div>
-                <div class="cs-metric"><strong>+40%</strong><span>Annual output 2001→23</span></div>
-                <div class="cs-metric"><strong>Texas</strong><span>Top generator</span></div>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">01 —</span><span>The question</span><span class="axis"></span></div>
+            <h2 class="rv">What did the business need to know?</h2>
+            <div class="body rv">
+                <p class="pull">Is the US grid getting cleaner, and where is the progress actually happening?</p>
+                <p>National electricity figures get quoted constantly, but a single national number hides very different stories underneath. The question: <strong>which states drive US generation and emissions, and how much real progress has renewable energy made?</strong></p>
+            </div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Methodology</p>
-        <div class="cs-steps">
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 01</span>
-                    <h3>Data Preparation</h3>
-                    <p>Combined yearly generation and emissions tables by state and source, standardised state names and energy-source categories, and removed duplicate and incomplete rows in Power Query.</p>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">02 —</span><span>The data</span><span class="axis"></span></div>
+            <h2 class="rv">What I had to work with.</h2>
+            <div class="body rv">
+                <p>Yearly generation and emissions tables by state and energy source from the US Energy Information Administration (EIA), combined into one model.</p>
+                <div class="dsize">
+                    <div><strong>240M</strong><span class="mono">GWh generated</span></div>
+                    <div><strong>23</strong><span class="mono">years covered</span></div>
+                    <div><strong>51</strong><span class="mono">states + DC</span></div>
                 </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 02</span>
-                    <h3>Analytical Approach</h3>
-                    <p>Built a star schema with Date, State and Energy Source dimensions. DAX measures calculate renewable share, year-over-year change and state rankings that respond to every slicer.</p>
-                </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 03</span>
-                    <h3>Visual Design</h3>
-                    <p>KPI cards up top, ranked bars for state comparisons, a donut for the energy mix, a trend line for growth and a filled map for emissions — slicers for year, state and source.</p>
-                </div>
+                <table class="profile">
+                    <caption class="mono">Data profile: issues found → fix applied</caption>
+                    <thead><tr><th>Field</th><th>Type</th><th>Issue</th><th>Fix</th></tr></thead>
+                    <tbody>
+                    <tr><td>state</td><td class="type">text</td><td><span class="flag">Inconsistent names and abbreviations</span></td><td>Mapped to one standard list</td></tr>
+                    <tr><td>energy_source</td><td class="type">text</td><td><span class="flag">Overlapping source categories</span></td><td>Grouped into renewable / non-renewable</td></tr>
+                    <tr><td>year</td><td class="type">int</td><td><span class="flag ok">No issues</span></td><td>–</td></tr>
+                    <tr><td>generation_mwh</td><td class="type">decimal</td><td><span class="flag">Duplicate and incomplete rows</span></td><td>Removed in Power Query</td></tr>
+                    <tr><td>co2_kt</td><td class="type">decimal</td><td><span class="flag">Lived in a separate table</span></td><td>Joined on state + year</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Dashboard pages</p>
-        <div class="cs-pages">
-                <a href="../assets/images/projects/electricity-1.png" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/electricity-1.png" alt="US Electricity Overview — page 1" loading="lazy" width="1200" height="780">
-                    <span>Page 01</span>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">03 —</span><span>The approach</span><span class="axis"></span></div>
+            <h2 class="rv">From raw tables to one trusted model.</h2>
+            <div class="body rv">
+                <ol class="steps">
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 01</span><h3>Combine & clean</h3></div>
+                        <p>Appended the yearly generation and emissions tables in Power Query, standardised state names and energy-source categories, and removed duplicate and incomplete rows.</p>
+                        <details class="code">
+                            <summary><span>Power Query: standardise sources</span><span class="plus" aria-hidden="true">+</span></summary>
+                            <pre><code data-lang="dax">// Power Query (M): normalise source names, flag renewables
+let
+    Source  = Table.Combine({Gen2001_2012, Gen2013_2023}),
+    Trimmed = Table.TransformColumns(Source, {{"energy_source", Text.Trim}}),
+    Deduped = Table.Distinct(Trimmed, {"year", "state", "energy_source"}),
+    Flagged = Table.AddColumn(Deduped, "is_renewable", each
+        List.Contains({"Hydroelectric", "Wind", "Solar", "Geothermal", "Wood", "Other Biomass"}, [energy_source]))
+in
+    Flagged</code></pre>
+                        </details>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 02</span><h3>Model as a star schema</h3></div>
+                        <p>Date, State and Energy Source dimensions around one fact table, so every measure responds correctly to every slicer.</p>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 03</span><h3>Write the measures</h3></div>
+                        <p>DAX for renewable share, year-over-year change and state rankings.</p>
+                        <details class="code">
+                            <summary><span>DAX: renewable share & YoY</span><span class="plus" aria-hidden="true">+</span></summary>
+                            <pre><code data-lang="dax">Renewable Share =
+DIVIDE (
+    CALCULATE ( SUM ( Generation[generation_gwh] ), Source[is_renewable] = TRUE () ),
+    SUM ( Generation[generation_gwh] )
+)
+
+YoY Change % =
+VAR Curr = SUM ( Generation[generation_gwh] )
+VAR Prev = CALCULATE ( SUM ( Generation[generation_gwh] ), DATEADD ( 'Date'[Date], -1, YEAR ) )
+RETURN DIVIDE ( Curr - Prev, Prev )</code></pre>
+                        </details>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 04</span><h3>Design for the reader</h3></div>
+                        <p>KPI cards first, ranked bars for state comparisons, a trend line for growth and a filled map for emissions, with slicers for year, state and source.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">04 —</span><span>The insights</span><span class="axis"></span></div>
+            <div class="insights">
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 01</span>
+                    <h3>Output grew about 40%, with one visible break in 2009.</h3>
+                    <p>Annual generation rose from roughly 8.8M to 12.3M GWh. The only real interruption is the 2009 recession dip, after which growth resumed.</p>
+                </div>
+                <figure>
+                    
+                    <div class="chart" data-spec="spec-electricity-0"></div>
+                    <script type="application/json" id="spec-electricity-0">{"type": "line", "alt": "Line chart of US annual electricity generation, rising from about 8.8 million GWh in 2001 to 12.3 million in 2023, with a dip in 2009.", "yMin": 8, "yFmt": {"decimals": 1, "suffix": "M"}, "series": [{"name": "Generation", "values": [[2001, 8.8], [2002, 9.0], [2003, 9.1], [2004, 9.3], [2005, 9.6], [2006, 9.6], [2007, 9.9], [2008, 9.8], [2009, 9.3], [2010, 9.9], [2011, 9.9], [2012, 9.8], [2013, 10.0], [2014, 10.1], [2015, 10.2], [2016, 10.3], [2017, 10.3], [2018, 10.8], [2019, 10.9], [2020, 10.7], [2021, 11.3], [2022, 11.8], [2023, 12.3]]}], "xTicks": [2001, 2005, 2009, 2013, 2017, 2023], "annotations": [{"x": 2009, "y": 9.3, "text": "2009 recession dip\nonly break in the trend", "dx": 50, "dy": 34}]}</script>
+                    <figcaption class="mono"><span>Annual generation, M GWh · indicative series from the dashboard</span><span>Fig. 01.1</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>2001</td><td>8.8</td></tr><tr><td>2002</td><td>9.0</td></tr><tr><td>2003</td><td>9.1</td></tr><tr><td>2004</td><td>9.3</td></tr><tr><td>2005</td><td>9.6</td></tr><tr><td>2006</td><td>9.6</td></tr><tr><td>2007</td><td>9.9</td></tr><tr><td>2008</td><td>9.8</td></tr><tr><td>2009</td><td>9.3</td></tr><tr><td>2010</td><td>9.9</td></tr><tr><td>2011</td><td>9.9</td></tr><tr><td>2012</td><td>9.8</td></tr><tr><td>2013</td><td>10.0</td></tr><tr><td>2014</td><td>10.1</td></tr><tr><td>2015</td><td>10.2</td></tr><tr><td>2016</td><td>10.3</td></tr><tr><td>2017</td><td>10.3</td></tr><tr><td>2018</td><td>10.8</td></tr><tr><td>2019</td><td>10.9</td></tr><tr><td>2020</td><td>10.7</td></tr><tr><td>2021</td><td>11.3</td></tr><tr><td>2022</td><td>11.8</td></tr><tr><td>2023</td><td>12.3</td></tr></table></details>
+                </figure>
+            </article>
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 02</span>
+                    <h3>Only 16% of the power came from renewables.</h3>
+                    <p>38.0M of 240M GWh. Non-renewable sources still supplied roughly 84%, so a national “progress” headline hides how far there is to go.</p>
+                </div>
+                <figure>
+                    <ul class="legend"><li><i class="hl sq"></i>Highlighted</li><li><i class="ctx sq"></i>Comparison</li></ul>
+                    <div class="chart" data-spec="spec-electricity-1"></div>
+                    <script type="application/json" id="spec-electricity-1">{"type": "bar", "alt": "Bar chart: non-renewable 202 million GWh versus renewable 38 million GWh.", "labelWidth": 130, "fmt": {"decimals": 1, "suffix": "M"}, "data": [{"label": "Non-renewable", "value": 202.0, "ctx": true, "note": "84% of total"}, {"label": "Renewable", "value": 38.0, "hl": true, "note": "16% of total"}], "annotation": "16% renewable across 23 years"}</script>
+                    <figcaption class="mono"><span>Total generation 2001–2023, M GWh</span><span>Fig. 01.2</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>Non-renewable</td><td>202.0</td></tr><tr><td>Renewable</td><td>38.0</td></tr></table></details>
+                </figure>
+            </article>
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 03</span>
+                    <h3>A handful of grids set the national trend.</h3>
+                    <p>Texas generates the most electricity by a wide margin and carries the heaviest CO₂ footprint. Washington leads renewables, ahead of California and Texas, largely on hydropower.</p>
+                </div>
+            </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">05 —</span><span>The impact</span><span class="axis"></span></div>
+            <h2 class="rv">What changed, and what I recommended.</h2>
+            <div class="body rv">
+                <div class="impact">
+                    <div><strong>16%</strong><span>renewable share, the headline number</span></div>
+                    <div><strong>+40%</strong><span>annual output, 2001 → 2023</span></div>
+                    <div><strong>Texas</strong><span>top generator and top emitter</span></div>
+                </div>
+                <ol class="recs">
+                    <li>Track renewable share by state, not just nationally: the national 16% hides very different state-level progress.</li>
+                    <li>Pair generation with emissions intensity (CO₂ per GWh) to separate high-output states from high-polluting ones.</li>
+                    <li>Use Washington and California as benchmarks when modelling transition paths for high-output states like Texas.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">06 —</span><span>The dashboard</span><span class="axis"></span></div>
+            <!--💡UPDATE: when the report is published, replace the gallery below with
+                <div class="embed"><iframe title="US Electricity Overview 2001–2023 live dashboard" src="YOUR_POWER_BI_OR_TABLEAU_PUBLIC_EMBED_URL" loading="lazy" allowfullscreen></iframe></div> -->
+            <div class="gallery">
+                <a href="../assets/images/projects/electricity-1.png" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/electricity-1.png" alt="US Electricity Overview 2001–2023 dashboard, page 1" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 01</span>
                 </a>
-                <a href="../assets/images/projects/electricity-2.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/electricity-2.svg" alt="US Electricity Overview — page 2" loading="lazy" width="1200" height="780">
-                    <span>Page 02</span>
+                <a href="../assets/images/projects/electricity-2.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/electricity-2.svg" alt="US Electricity Overview 2001–2023 dashboard, page 2" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 02</span>
                 </a>
-                <a href="../assets/images/projects/electricity-3.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/electricity-3.svg" alt="US Electricity Overview — page 3" loading="lazy" width="1200" height="780">
-                    <span>Page 03</span>
+                <a href="../assets/images/projects/electricity-3.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/electricity-3.svg" alt="US Electricity Overview 2001–2023 dashboard, page 3" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 03</span>
                 </a>
+            </div>
+            <div class="embed-note mono"><span>Static pages of the report</span><ul class="tags" style="margin:0"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Data Modeling</li></ul></div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key findings</p>
-        <ol class="cs-findings">
-                <li><span class="cs-n">1</span><p>Texas generates the most electricity of any state by a wide margin — and carries the heaviest CO₂ footprint on the map.</p></li>
-                <li><span class="cs-n">2</span><p>Renewables make up about 16% of total generation (38.0M of 240M GWh); non-renewable sources still supply roughly 84%.</p></li>
-                <li><span class="cs-n">3</span><p>Washington leads renewable generation, ahead of California and Texas — largely on the back of hydropower.</p></li>
-                <li><span class="cs-n">4</span><p>Annual generation grew from about 8.8M to 12.3M GWh between 2001 and 2023, with a visible dip around 2009.</p></li>
-                <li><span class="cs-n">5</span><p>The top 10 states account for a large share of national output, so national trends are driven by a handful of grids.</p></li>
-        </ol>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Recommendations</p>
-        <ul class="cs-recs">
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Track renewable share by state, not just nationally — the national 16% hides very different state-level progress.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Pair generation with emissions intensity (CO₂ per GWh) to separate high-output states from high-polluting ones.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Use Washington and California as benchmarks when modelling renewable transition paths for high-output states like Texas.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Refresh the report annually so the 2001–2023 trend extends as new EIA data is published.</p></li>
-        </ul>
-    </section>
-
-    <section class="container cs-end">
-        <div>
-            <p class="label">Live dashboard</p>
-            <!--💡UPDATE: link to the published dashboard -->
-            <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">07 —</span><span>What I’d do next</span><span class="axis"></span></div>
+            <div class="body rv" style="grid-column:1 / span 8">
+                <p class="note" style="font-size:19px;color:var(--ink)"><span class="mono">Next iteration</span>Add emissions intensity per state as its own page, and extend the series automatically each year as EIA publishes new data.</p>
+            </div>
         </div>
-        <nav class="cs-pager" aria-label="Case studies">
-            <a href="supply.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
-            <a href="retail.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+    </section>
+
+    <div class="wrap">
+        <nav class="pager" aria-label="More case studies">
+            <a href="supply.html"><span class="mono">← Previous · 04</span><strong>Supply Chain &amp; Inventory</strong></a>
+            <a href="retail.html"><span class="mono">Next · 02 →</span><strong>Retail Sales Performance</strong></a>
         </nav>
-    </section>
+    </div>
 </main>
 
+<a class="talk" href="../index.html#contact"><i aria-hidden="true"></i>Let's talk</a>
+
 <footer class="footer">
-    <div class="container footer-inner">
-        <p>© 2026 Kingsley Koduah</p>
-        <p class="label">Data tells the story.</p>
-        <a href="../index.html" class="label">Home ↑</a>
+    <div class="wrap">
+        <span class="mono">© <span id="year">2026</span> Kingsley Koduah</span>
+        <span class="mono">Set in Fraunces, Inter &amp; JetBrains Mono · Hand-built, no template</span>
+        <a class="mono" href="../index.html">Home ↑</a>
     </div>
 </footer>
 
+<script src="../assets/js/main.js"></script>
 </body>
 </html>

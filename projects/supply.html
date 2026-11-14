@@ -3,139 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supply Chain &amp; Inventory | Kingsley Koduah</title>
-    <meta name="description" content="An operations dashboard covering shipments, suppliers and inventory across warehouses. It replaces three Excel trackers with a single view the operations team checks every morning.">
-    <meta name="theme-color" content="#0A0A0A">
+    <title>Supply Chain & Inventory | Kingsley Koduah</title>
+    <meta name="description" content="An operations dashboard covering shipments, suppliers and inventory across four warehouses. It replaces three Excel trackers with a single view the team checks every morning.">
+    <meta name="theme-color" content="#F7F5F0">
+    <meta property="og:title" content="Supply Chain & Inventory | Kingsley Koduah">
+    <meta property="og:description" content="An operations dashboard covering shipments, suppliers and inventory across four warehouses. It replaces three Excel trackers with a single view the team checks every morning.">
+    <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
+    <meta property="og:url" content="https://koduahkk.github.io/projects/supply.html">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <script>try{var t=localStorage.getItem('kk-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script>
-        // Always open a case study at the top, never at a restored scroll position
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
-    </script>
 </head>
-<body class="case">
-
-<header class="cs-bar" id="top">
-    <div class="container cs-bar-inner">
-        <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <span class="label">Case study 04</span>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+    <div class="wrap nav-inner">
+        <a href="../index.html" class="brand" aria-label="Kingsley Koduah, home">
+            <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true">
+                <line class="tick" x1="0" y1="17" x2="34" y2="17"/><line class="tick" x1="17" y1="0" x2="17" y2="34"/>
+                <circle class="ring" cx="17" cy="17" r="15.5"/>
+                <circle class="pt" cx="25.5" cy="8.5" r="2.6"/>
+                <text x="17" y="20.2" text-anchor="middle">KK</text>
+            </svg>
+            <span class="brand-name">Kingsley Koduah</span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+                <a href="../index.html#work"><span class="num">01</span>Work</a>
+                <a href="../index.html#about"><span class="num">02</span>About</a>
+                <a href="../index.html#skills"><span class="num">03</span>Skills</a>
+                <a href="../index.html#experience"><span class="num">04</span>Experience</a>
+                <a href="../index.html#contact"><span class="num">05</span>Contact</a>
+        </nav>
+        <div class="nav-actions">
+            <a class="btn btn-line btn-sm resume" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+                    <svg class="moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+                </button>
+            <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+        </div>
     </div>
 </header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-top">
+        <span class="mono">Menu</span>
+        <button class="menu-btn menu-close" type="button" aria-label="Close menu" style="display:grid">✕</button>
+    </div>
+    <nav aria-label="Mobile">
+            <a href="../index.html#work"><span class="mono">01</span>Work</a>
+            <a href="../index.html#about"><span class="mono">02</span>About</a>
+            <a href="../index.html#skills"><span class="mono">03</span>Skills</a>
+            <a href="../index.html#experience"><span class="mono">04</span>Experience</a>
+            <a href="../index.html#contact"><span class="mono">05</span>Contact</a>
+    </nav>
+    <a class="btn btn-solid" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+</div>
 
-<main>
-    <!--💡UPDATE: this case study uses placeholder content — replace the text and the images in assets/images/projects/supply-1/2/3 -->
-    <section class="container cs-hero">
-        <p class="section-eyebrow">Operations analytics · Excel · SQL · Power BI</p>
-        <h1 class="cs-title">Supply Chain &amp; Inventory</h1>
-        <ul class="tags"><li>Excel</li><li>SQL</li><li>Power BI</li></ul>
-        <div class="cs-media">
-                <div class="stack stack-lg">
-                    <img src="../assets/images/projects/supply-1.svg" alt="Supply Chain & Inventory dashboard, page 1" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/supply-2.svg" alt="" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/supply-3.svg" alt="" loading="lazy" width="1200" height="780">
-                </div>
+<main id="main">
+    <!--💡UPDATE: placeholder project. Replace the text, chart data (the JSON blocks next to each chart) and the images assets/images/projects/supply-1/2/3 with your real work. -->
+    <section class="cs-hero">
+        <div class="wrap grid12">
+            <p class="crumbs mono"><a href="../index.html#work">← Work</a><span class="sep">/</span><span>Case study 04</span><span class="sep">/</span><span>Operations analytics</span></p>
+            <h1 class="cs-title">Supply Chain &amp; <em>Inventory</em></h1>
+            <p class="cs-dek">An operations dashboard covering shipments, suppliers and inventory across four warehouses. It replaces three Excel trackers with a single view the team checks every morning.</p>
+            <dl class="cs-facts">
+            <div><dt class="mono">Role</dt><dd>Solo analyst: SQL, Excel, design</dd></div>
+            <div><dt class="mono">Type</dt><dd>Portfolio project</dd></div>
+            <div><dt class="mono">Tools</dt><dd>Excel · SQL · Power BI</dd></div>
+            <div><dt class="mono">Dataset</dt><dd>2,450 SKUs · 8 suppliers</dd></div>
+            </dl>
+            <figure class="cs-cover"><img src="../assets/images/projects/supply-1.svg" alt="Supply Chain &amp; Inventory dashboard overview" width="1200" height="780"></figure>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Overview</p>
-        <p class="cs-lead">An operations dashboard covering shipments, suppliers and inventory across warehouses. It replaces three Excel trackers with a single view the operations team checks every morning.</p>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key metrics</p>
-        <div class="cs-metrics">
-                <div class="cs-metric"><strong>92.4%</strong><span>On-time delivery</span></div>
-                <div class="cs-metric"><strong>37</strong><span>Stockouts</span></div>
-                <div class="cs-metric"><strong>6.8d</strong><span>Avg. lead time</span></div>
-                <div class="cs-metric"><strong>2,450</strong><span>Active SKUs</span></div>
-                <div class="cs-metric"><strong>8</strong><span>Suppliers</span></div>
-                <div class="cs-metric"><strong>4</strong><span>Warehouses</span></div>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">01 —</span><span>The question</span><span class="axis"></span></div>
+            <h2 class="rv">What did the business need to know?</h2>
+            <div class="body rv">
+                <p class="pull">Why do we keep running out, and who should we call about it?</p>
+                <p>Stockouts kept surprising the operations team, and nobody could say whether demand or suppliers were to blame. The goal: <strong>spot the late shipment before the customer does</strong>.</p>
+            </div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Methodology</p>
-        <div class="cs-steps">
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 01</span>
-                    <h3>Data Preparation</h3>
-                    <p>Consolidated shipment, purchase order and stock-level trackers from Excel into SQL tables with consistent supplier and SKU keys.</p>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">02 —</span><span>The data</span><span class="axis"></span></div>
+            <h2 class="rv">What I had to work with.</h2>
+            <div class="body rv">
+                <p>Shipment, purchase-order and stock-level trackers maintained separately in Excel, consolidated into SQL tables.</p>
+                <div class="dsize">
+                    <div><strong>2,450</strong><span class="mono">active SKUs</span></div>
+                    <div><strong>8</strong><span class="mono">suppliers</span></div>
+                    <div><strong>4</strong><span class="mono">warehouses</span></div>
                 </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 02</span>
-                    <h3>Analytical Approach</h3>
-                    <p>Measured on-time rate and lead time per supplier, and flagged SKUs below reorder point against their average daily demand.</p>
-                </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 03</span>
-                    <h3>Visual Design</h3>
-                    <p>Exceptions first: late shipments and low-stock SKUs are highlighted, with drill-through to supplier and warehouse detail.</p>
-                </div>
+                <table class="profile">
+                    <caption class="mono">Data profile: issues found → fix applied</caption>
+                    <thead><tr><th>Field</th><th>Type</th><th>Issue</th><th>Fix</th></tr></thead>
+                    <tbody>
+                    <tr><td>supplier</td><td class="type">text</td><td><span class="flag">Same supplier spelled 3 ways across trackers</span></td><td>One supplier key</td></tr>
+                    <tr><td>sku</td><td class="type">text</td><td><span class="flag">Leading zeros dropped by Excel</span></td><td>Re-padded to a fixed-width key</td></tr>
+                    <tr><td>promised_date</td><td class="type">date</td><td><span class="flag">Mixed date formats</span></td><td>Parsed to ISO dates</td></tr>
+                    <tr><td>on_hand</td><td class="type">int</td><td><span class="flag ok">No issues</span></td><td>–</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Dashboard pages</p>
-        <div class="cs-pages">
-                <a href="../assets/images/projects/supply-1.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/supply-1.svg" alt="Supply Chain &amp; Inventory — page 1" loading="lazy" width="1200" height="780">
-                    <span>Page 01</span>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">03 —</span><span>The approach</span><span class="axis"></span></div>
+            <h2 class="rv">From raw tables to one trusted model.</h2>
+            <div class="body rv">
+                <ol class="steps">
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 01</span><h3>Consolidate the trackers</h3></div>
+                        <p>Moved three Excel trackers into SQL tables with consistent supplier and SKU keys.</p>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 02</span><h3>Measure suppliers, then stock</h3></div>
+                        <p>On-time rate and lead time per supplier; SKUs below their reorder point flagged against average daily demand.</p>
+                        <details class="code">
+                            <summary><span>SQL: reorder-point flag</span><span class="plus" aria-hidden="true">+</span></summary>
+                            <pre><code data-lang="sql">-- Reorder point from each supplier's actual lead time
+with demand as (
+    select sku, avg(units_shipped) as avg_daily_demand
+    from shipments_daily
+    group by sku
+),
+lead as (
+    select supplier_id, avg(received_date - order_date) as avg_lead_days
+    from purchase_orders
+    group by supplier_id
+)
+select s.sku, s.warehouse, s.on_hand,
+       round(d.avg_daily_demand * l.avg_lead_days * 1.2) as reorder_point,
+       s.on_hand &lt; d.avg_daily_demand * l.avg_lead_days * 1.2 as below_reorder
+from stock s
+join demand d on d.sku = s.sku
+join lead   l on l.supplier_id = s.supplier_id;</code></pre>
+                        </details>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 03</span><h3>Exceptions first</h3></div>
+                        <p>Late shipments and low-stock SKUs are highlighted, with drill-through to supplier and warehouse detail.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">04 —</span><span>The insights</span><span class="axis"></span></div>
+            <div class="insights">
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 01</span>
+                    <h3>Two suppliers account for most late deliveries.</h3>
+                    <p>The other six deliver on time consistently. The problem is concentrated, so the fix can be too.</p>
+                </div>
+                <figure>
+                    <ul class="legend"><li><i class="hl sq"></i>Highlighted</li><li><i class="ctx sq"></i>Comparison</li></ul>
+                    <div class="chart" data-spec="spec-supply-0"></div>
+                    <script type="application/json" id="spec-supply-0">{"type": "bar", "alt": "Bar chart of on-time delivery by supplier; suppliers S-04 at 78 percent and S-07 at 81 percent fall well below the 92.4 percent average.", "fmt": {"suffix": "%"}, "max": 100, "ref": {"value": 92.4, "label": "avg 92.4%"}, "labelWidth": 70, "data": [{"label": "S-01", "value": 98, "ctx": true}, {"label": "S-02", "value": 97, "ctx": true}, {"label": "S-03", "value": 96, "ctx": true}, {"label": "S-05", "value": 96, "ctx": true}, {"label": "S-06", "value": 95, "ctx": true}, {"label": "S-08", "value": 94, "ctx": true}, {"label": "S-07", "value": 81, "hl": true}, {"label": "S-04", "value": 78, "hl": true}]}</script>
+                    <figcaption class="mono"><span>On-time delivery by supplier · placeholder data</span><span>Fig. 04.1</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>S-01</td><td>98</td></tr><tr><td>S-02</td><td>97</td></tr><tr><td>S-03</td><td>96</td></tr><tr><td>S-05</td><td>96</td></tr><tr><td>S-06</td><td>95</td></tr><tr><td>S-08</td><td>94</td></tr><tr><td>S-07</td><td>81</td></tr><tr><td>S-04</td><td>78</td></tr></table></details>
+                </figure>
+            </article>
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 02</span>
+                    <h3>Stockouts follow long lead times, not demand spikes.</h3>
+                    <p>They cluster in the weeks after slow supplier deliveries. Meanwhile one warehouse holds excess slow-movers that another is short of.</p>
+                </div>
+            </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">05 —</span><span>The impact</span><span class="axis"></span></div>
+            <h2 class="rv">What changed, and what I recommended.</h2>
+            <div class="body rv">
+                <div class="impact">
+                    <div><strong>92.4%</strong><span>on-time delivery, now tracked daily</span></div>
+                    <div><strong>37</strong><span>stockouts traced to root cause</span></div>
+                    <div><strong>3 → 1</strong><span>Excel trackers replaced</span></div>
+                </div>
+                <ol class="recs">
+                    <li>Renegotiate SLAs, or add backup suppliers, for the two least reliable suppliers.</li>
+                    <li>Set reorder points from actual lead time per supplier instead of a single default.</li>
+                    <li>Rebalance stock between warehouses weekly using the excess/shortage view.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">06 —</span><span>The dashboard</span><span class="axis"></span></div>
+            <!--💡UPDATE: when the report is published, replace the gallery below with
+                <div class="embed"><iframe title="Supply Chain &amp; Inventory live dashboard" src="YOUR_POWER_BI_OR_TABLEAU_PUBLIC_EMBED_URL" loading="lazy" allowfullscreen></iframe></div> -->
+            <div class="gallery">
+                <a href="../assets/images/projects/supply-1.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/supply-1.svg" alt="Supply Chain &amp; Inventory dashboard, page 1" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 01</span>
                 </a>
-                <a href="../assets/images/projects/supply-2.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/supply-2.svg" alt="Supply Chain &amp; Inventory — page 2" loading="lazy" width="1200" height="780">
-                    <span>Page 02</span>
+                <a href="../assets/images/projects/supply-2.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/supply-2.svg" alt="Supply Chain &amp; Inventory dashboard, page 2" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 02</span>
                 </a>
-                <a href="../assets/images/projects/supply-3.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/supply-3.svg" alt="Supply Chain &amp; Inventory — page 3" loading="lazy" width="1200" height="780">
-                    <span>Page 03</span>
+                <a href="../assets/images/projects/supply-3.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/supply-3.svg" alt="Supply Chain &amp; Inventory dashboard, page 3" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 03</span>
                 </a>
+            </div>
+            <div class="embed-note mono"><span>Static pages of the report</span><ul class="tags" style="margin:0"><li>Excel</li><li>SQL</li><li>Power BI</li></ul></div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key findings</p>
-        <ol class="cs-findings">
-                <li><span class="cs-n">1</span><p>Two suppliers account for most late deliveries; the rest consistently deliver on time.</p></li>
-                <li><span class="cs-n">2</span><p>Stockouts cluster in the weeks after long supplier lead times, not after demand spikes.</p></li>
-                <li><span class="cs-n">3</span><p>One warehouse holds excess stock of slow movers while another runs short on the same SKUs.</p></li>
-        </ol>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Recommendations</p>
-        <ul class="cs-recs">
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Renegotiate SLAs — or add backup suppliers — for the two least reliable suppliers.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Set reorder points from actual lead time per supplier instead of a single default.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Rebalance stock between warehouses weekly using the excess/shortage view.</p></li>
-        </ul>
-    </section>
-
-    <section class="container cs-end">
-        <div>
-            <p class="label">Live dashboard</p>
-            <!--💡UPDATE: link to the published dashboard -->
-            <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">07 —</span><span>What I’d do next</span><span class="axis"></span></div>
+            <div class="body rv" style="grid-column:1 / span 8">
+                <p class="note" style="font-size:19px;color:var(--ink)"><span class="mono">Next iteration</span>Add a simple demand forecast per SKU so reorder points adapt to seasonality, and automate the morning refresh.</p>
+            </div>
         </div>
-        <nav class="cs-pager" aria-label="Case studies">
-            <a href="churn.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
-            <a href="electricity.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+    </section>
+
+    <div class="wrap">
+        <nav class="pager" aria-label="More case studies">
+            <a href="churn.html"><span class="mono">← Previous · 03</span><strong>Customer Churn Analysis</strong></a>
+            <a href="electricity.html"><span class="mono">Next · 01 →</span><strong>US Electricity Overview 2001–2023</strong></a>
         </nav>
-    </section>
+    </div>
 </main>
 
+<a class="talk" href="../index.html#contact"><i aria-hidden="true"></i>Let's talk</a>
+
 <footer class="footer">
-    <div class="container footer-inner">
-        <p>© 2026 Kingsley Koduah</p>
-        <p class="label">Data tells the story.</p>
-        <a href="../index.html" class="label">Home ↑</a>
+    <div class="wrap">
+        <span class="mono">© <span id="year">2026</span> Kingsley Koduah</span>
+        <span class="mono">Set in Fraunces, Inter &amp; JetBrains Mono · Hand-built, no template</span>
+        <a class="mono" href="../index.html">Home ↑</a>
     </div>
 </footer>
 
+<script src="../assets/js/main.js"></script>
 </body>
 </html>

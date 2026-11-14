@@ -4,140 +4,263 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Churn Analysis | Kingsley Koduah</title>
-    <meta name="description" content="A churn analysis for a subscription telecom business. Python handles cleaning and segmentation; Power BI turns it into a view the retention team can act on each week.">
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="description" content="Everyone assumed price drove churn. The data said contract type and support tickets did. A Python and Power BI breakdown of who leaves, when, and what to do about it.">
+    <meta name="theme-color" content="#F7F5F0">
+    <meta property="og:title" content="Customer Churn Analysis | Kingsley Koduah">
+    <meta property="og:description" content="Everyone assumed price drove churn. The data said contract type and support tickets did. A Python and Power BI breakdown of who leaves, when, and what to do about it.">
+    <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
+    <meta property="og:url" content="https://koduahkk.github.io/projects/churn.html">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <script>try{var t=localStorage.getItem('kk-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script>
-        // Always open a case study at the top, never at a restored scroll position
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
-    </script>
 </head>
-<body class="case">
-
-<header class="cs-bar" id="top">
-    <div class="container cs-bar-inner">
-        <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <span class="label">Case study 03</span>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+    <div class="wrap nav-inner">
+        <a href="../index.html" class="brand" aria-label="Kingsley Koduah, home">
+            <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true">
+                <line class="tick" x1="0" y1="17" x2="34" y2="17"/><line class="tick" x1="17" y1="0" x2="17" y2="34"/>
+                <circle class="ring" cx="17" cy="17" r="15.5"/>
+                <circle class="pt" cx="25.5" cy="8.5" r="2.6"/>
+                <text x="17" y="20.2" text-anchor="middle">KK</text>
+            </svg>
+            <span class="brand-name">Kingsley Koduah</span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+                <a href="../index.html#work"><span class="num">01</span>Work</a>
+                <a href="../index.html#about"><span class="num">02</span>About</a>
+                <a href="../index.html#skills"><span class="num">03</span>Skills</a>
+                <a href="../index.html#experience"><span class="num">04</span>Experience</a>
+                <a href="../index.html#contact"><span class="num">05</span>Contact</a>
+        </nav>
+        <div class="nav-actions">
+            <a class="btn btn-line btn-sm resume" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+                    <svg class="moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+                </button>
+            <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+        </div>
     </div>
 </header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-top">
+        <span class="mono">Menu</span>
+        <button class="menu-btn menu-close" type="button" aria-label="Close menu" style="display:grid">✕</button>
+    </div>
+    <nav aria-label="Mobile">
+            <a href="../index.html#work"><span class="mono">01</span>Work</a>
+            <a href="../index.html#about"><span class="mono">02</span>About</a>
+            <a href="../index.html#skills"><span class="mono">03</span>Skills</a>
+            <a href="../index.html#experience"><span class="mono">04</span>Experience</a>
+            <a href="../index.html#contact"><span class="mono">05</span>Contact</a>
+    </nav>
+    <a class="btn btn-solid" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+</div>
 
-<main>
-    <!--💡UPDATE: this case study uses placeholder content — replace the text and the images in assets/images/projects/churn-1/2/3 -->
-    <section class="container cs-hero">
-        <p class="section-eyebrow">Customer analytics · Python · Power BI</p>
-        <h1 class="cs-title">Customer Churn Analysis</h1>
-        <ul class="tags"><li>Python</li><li>Pandas</li><li>Power BI</li></ul>
-        <div class="cs-media">
-                <div class="stack stack-lg">
+<main id="main">
+    <!--💡UPDATE: placeholder project. Replace the text, chart data (the JSON blocks next to each chart) and the images assets/images/projects/churn-1/2/3 with your real work. -->
+    <section class="cs-hero">
+        <div class="wrap grid12">
+            <p class="crumbs mono"><a href="../index.html#work">← Work</a><span class="sep">/</span><span>Case study 03</span><span class="sep">/</span><span>Customer analytics</span></p>
+            <h1 class="cs-title">Customer <em>Churn</em> Analysis</h1>
+            <p class="cs-dek">Everyone assumed price drove churn. The data said contract type and support tickets did. A Python and Power BI breakdown of who leaves, when, and what to do about it.</p>
+            <dl class="cs-facts">
+            <div><dt class="mono">Role</dt><dd>Solo analyst: Python, analysis, design</dd></div>
+            <div><dt class="mono">Type</dt><dd>Portfolio project</dd></div>
+            <div><dt class="mono">Tools</dt><dd>Python · pandas · Power BI</dd></div>
+            <div><dt class="mono">Dataset</dt><dd>7,043 customers</dd></div>
+            </dl>
+            <figure class="cs-cover"><img src="../assets/images/projects/churn-1.svg" alt="Customer Churn Analysis dashboard overview" width="1200" height="780"></figure>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">01 —</span><span>The question</span><span class="axis"></span></div>
+            <h2 class="rv">What did the business need to know?</h2>
+            <div class="body rv">
+                <p class="pull">If we cut prices, will fewer people leave?</p>
+                <p>A subscription telecom business was losing customers and the working theory was price. Before cutting prices, the retention team needed to know <strong>who actually leaves, when, and why</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">02 —</span><span>The data</span><span class="axis"></span></div>
+            <h2 class="rv">What I had to work with.</h2>
+            <div class="body rv">
+                <p>One customer-level table covering contract, tenure, charges, payment method, services and support history.</p>
+                <div class="dsize">
+                    <div><strong>7,043</strong><span class="mono">customers</span></div>
+                    <div><strong>21</strong><span class="mono">attributes</span></div>
+                    <div><strong>14.3%</strong><span class="mono">churned</span></div>
+                </div>
+                <table class="profile">
+                    <caption class="mono">Data profile: issues found → fix applied</caption>
+                    <thead><tr><th>Field</th><th>Type</th><th>Issue</th><th>Fix</th></tr></thead>
+                    <tbody>
+                    <tr><td>total_charges</td><td class="type">text</td><td><span class="flag">Stored as text; blank for brand-new accounts</span></td><td>Cast to numeric, blanks set to 0</td></tr>
+                    <tr><td>tenure</td><td class="type">int</td><td><span class="flag">Too granular to compare</span></td><td>Binned into tenure cohorts</td></tr>
+                    <tr><td>contract</td><td class="type">category</td><td><span class="flag ok">No issues</span></td><td>–</td></tr>
+                    <tr><td>support_tickets</td><td class="type">int</td><td><span class="flag ok">No issues</span></td><td>–</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">03 —</span><span>The approach</span><span class="axis"></span></div>
+            <h2 class="rv">From raw tables to one trusted model.</h2>
+            <div class="body rv">
+                <ol class="steps">
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 01</span><h3>Clean and type in pandas</h3></div>
+                        <p>Fixed blank charges for new accounts, cast types and binned tenure into cohorts.</p>
+                        <details class="code">
+                            <summary><span>Python: clean & segment</span><span class="plus" aria-hidden="true">+</span></summary>
+                            <pre><code data-lang="python">import pandas as pd
+
+df = pd.read_csv("customers.csv")
+
+# Blank total_charges = brand-new accounts with no bill yet
+df["total_charges"] = pd.to_numeric(df["total_charges"], errors="coerce").fillna(0)
+df["churned"] = df["churn"].eq("Yes")
+
+df["tenure_cohort"] = pd.cut(df["tenure"], bins=[0, 12, 24, 48, 72],
+                             labels=["0-12m", "13-24m", "25-48m", "49-72m"], include_lowest=True)
+
+churn_by_contract = (df.groupby("contract")["churned"]
+                       .mean().mul(100).round(1).sort_values(ascending=False))</code></pre>
+                        </details>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 02</span><h3>Compare, then control</h3></div>
+                        <p>Compared churn across contract, tenure, payment method and support history, then checked whether price still mattered once contract type was held constant.</p>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 03</span><h3>Flag who’s at risk</h3></div>
+                        <p>Simple, explainable rules the retention team can act on weekly, with no black box.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">04 —</span><span>The insights</span><span class="axis"></span></div>
+            <div class="insights">
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 01</span>
+                    <h3>Month-to-month customers churn at about 3× the rate.</h3>
+                    <p>Contract type explains more churn than any price band. Once contract is held constant, price differences matter far less than expected.</p>
+                </div>
+                <figure>
+                    <ul class="legend"><li><i class="hl sq"></i>Highlighted</li><li><i class="ctx sq"></i>Comparison</li></ul>
+                    <div class="chart" data-spec="spec-churn-0"></div>
+                    <script type="application/json" id="spec-churn-0">{"type": "bar", "alt": "Bar chart of churn rate by contract: month-to-month 24 percent, one-year 8 percent, two-year 3 percent; overall 14.3 percent.", "fmt": {"decimals": 0, "suffix": "%"}, "max": 30, "ref": {"value": 14.3, "label": "overall 14.3%"}, "data": [{"label": "Month-to-month", "value": 24, "hl": true}, {"label": "One year", "value": 8, "ctx": true}, {"label": "Two year", "value": 3, "ctx": true}]}</script>
+                    <figcaption class="mono"><span>Churn rate by contract type · placeholder data</span><span>Fig. 03.1</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>Month-to-month</td><td>24</td></tr><tr><td>One year</td><td>8</td></tr><tr><td>Two year</td><td>3</td></tr></table></details>
+                </figure>
+            </article>
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 02</span>
+                    <h3>The first year is the danger zone.</h3>
+                    <p>Churn concentrates in the first 12 months of tenure. Customers who pass a year mostly stay.</p>
+                </div>
+                <figure>
+                    <ul class="legend"><li><i class="hl sq"></i>Highlighted</li><li><i class="ctx sq"></i>Comparison</li></ul>
+                    <div class="chart" data-spec="spec-churn-1"></div>
+                    <script type="application/json" id="spec-churn-1">{"type": "bar", "alt": "Bar chart of churn rate by tenure: 0 to 12 months 28 percent, falling to 4 percent for 49 to 72 months.", "fmt": {"suffix": "%"}, "max": 32, "data": [{"label": "0\u201312 months", "value": 28, "hl": true}, {"label": "13\u201324 months", "value": 14, "ctx": true}, {"label": "25\u201348 months", "value": 8, "ctx": true}, {"label": "49\u201372 months", "value": 4, "ctx": true}], "annotation": "most churn happens before month 12"}</script>
+                    <figcaption class="mono"><span>Churn rate by tenure cohort · placeholder data</span><span>Fig. 03.2</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>0–12 months</td><td>28</td></tr><tr><td>13–24 months</td><td>14</td></tr><tr><td>25–48 months</td><td>8</td></tr><tr><td>49–72 months</td><td>4</td></tr></table></details>
+                </figure>
+            </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">05 —</span><span>The impact</span><span class="axis"></span></div>
+            <h2 class="rv">What changed, and what I recommended.</h2>
+            <div class="body rv">
+                <div class="impact">
+                    <div><strong>1,120</strong><span>at-risk customers flagged for outreach</span></div>
+                    <div><strong>3×</strong><span>churn on monthly plans</span></div>
+                    <div><strong>Year 1</strong><span>highest-risk period</span></div>
+                </div>
+                <ol class="recs">
+                    <li>Offer an incentive to move month-to-month customers onto annual contracts in their first 90 days.</li>
+                    <li>Build a first-year onboarding check-in, and route repeat support-ticket customers to a retention specialist.</li>
+                    <li>Review the at-risk list weekly and track save rate as a KPI.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">06 —</span><span>The dashboard</span><span class="axis"></span></div>
+            <!--💡UPDATE: when the report is published, replace the gallery below with
+                <div class="embed"><iframe title="Customer Churn Analysis live dashboard" src="YOUR_POWER_BI_OR_TABLEAU_PUBLIC_EMBED_URL" loading="lazy" allowfullscreen></iframe></div> -->
+            <div class="gallery">
+                <a href="../assets/images/projects/churn-1.svg" target="_blank" rel="noopener">
                     <img src="../assets/images/projects/churn-1.svg" alt="Customer Churn Analysis dashboard, page 1" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/churn-2.svg" alt="" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/churn-3.svg" alt="" loading="lazy" width="1200" height="780">
-                </div>
-        </div>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Overview</p>
-        <p class="cs-lead">A churn analysis for a subscription telecom business. Python handles cleaning and segmentation; Power BI turns it into a view the retention team can act on each week.</p>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key metrics</p>
-        <div class="cs-metrics">
-                <div class="cs-metric"><strong>14.3%</strong><span>Churn rate</span></div>
-                <div class="cs-metric"><strong>7,043</strong><span>Customers</span></div>
-                <div class="cs-metric"><strong>1,120</strong><span>At risk</span></div>
-                <div class="cs-metric"><strong>32 mo</strong><span>Avg. tenure</span></div>
-                <div class="cs-metric"><strong>3×</strong><span>Churn on monthly plans</span></div>
-                <div class="cs-metric"><strong>Year 1</strong><span>Highest-risk period</span></div>
-        </div>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Methodology</p>
-        <div class="cs-steps">
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 01</span>
-                    <h3>Data Preparation</h3>
-                    <p>Cleaned and typed the customer table in Pandas, fixed blank charges for new accounts, and binned tenure into cohorts.</p>
-                </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 02</span>
-                    <h3>Analytical Approach</h3>
-                    <p>Compared churn rates across contract, tenure, payment method and support history; flagged at-risk customers with simple, explainable rules.</p>
-                </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 03</span>
-                    <h3>Visual Design</h3>
-                    <p>One overview, one segment table, one breakdown page — every chart answers &#x27;who is leaving and why&#x27;.</p>
-                </div>
-        </div>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Dashboard pages</p>
-        <div class="cs-pages">
-                <a href="../assets/images/projects/churn-1.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/churn-1.svg" alt="Customer Churn Analysis — page 1" loading="lazy" width="1200" height="780">
-                    <span>Page 01</span>
+                    <span class="mono">Page 01</span>
                 </a>
-                <a href="../assets/images/projects/churn-2.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/churn-2.svg" alt="Customer Churn Analysis — page 2" loading="lazy" width="1200" height="780">
-                    <span>Page 02</span>
+                <a href="../assets/images/projects/churn-2.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/churn-2.svg" alt="Customer Churn Analysis dashboard, page 2" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 02</span>
                 </a>
-                <a href="../assets/images/projects/churn-3.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/churn-3.svg" alt="Customer Churn Analysis — page 3" loading="lazy" width="1200" height="780">
-                    <span>Page 03</span>
+                <a href="../assets/images/projects/churn-3.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/churn-3.svg" alt="Customer Churn Analysis dashboard, page 3" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 03</span>
                 </a>
+            </div>
+            <div class="embed-note mono"><span>Static pages of the report</span><ul class="tags" style="margin:0"><li>Python</li><li>Pandas</li><li>Power BI</li></ul></div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key findings</p>
-        <ol class="cs-findings">
-                <li><span class="cs-n">1</span><p>Month-to-month customers churn at roughly three times the rate of annual contracts.</p></li>
-                <li><span class="cs-n">2</span><p>Churn is concentrated in the first year of tenure; customers who pass 12 months mostly stay.</p></li>
-                <li><span class="cs-n">3</span><p>Customers with multiple support tickets churn far more often than price alone would predict.</p></li>
-                <li><span class="cs-n">4</span><p>Price differences explain less churn than expected once contract type is accounted for.</p></li>
-        </ol>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Recommendations</p>
-        <ul class="cs-recs">
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Offer an incentive to move month-to-month customers onto annual contracts in their first 90 days.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Build a first-year onboarding check-in for new customers.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Route customers with repeat support tickets to a retention specialist.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Review the at-risk list weekly and track save rate as a KPI.</p></li>
-        </ul>
-    </section>
-
-    <section class="container cs-end">
-        <div>
-            <p class="label">Live dashboard</p>
-            <!--💡UPDATE: link to the published dashboard -->
-            <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">07 —</span><span>What I’d do next</span><span class="axis"></span></div>
+            <div class="body rv" style="grid-column:1 / span 8">
+                <p class="note" style="font-size:19px;color:var(--ink)"><span class="mono">Next iteration</span>Replace the rules with a calibrated churn model (logistic regression first, for explainability) and A/B test the contract incentive.</p>
+            </div>
         </div>
-        <nav class="cs-pager" aria-label="Case studies">
-            <a href="retail.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
-            <a href="supply.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+    </section>
+
+    <div class="wrap">
+        <nav class="pager" aria-label="More case studies">
+            <a href="retail.html"><span class="mono">← Previous · 02</span><strong>Retail Sales Performance</strong></a>
+            <a href="supply.html"><span class="mono">Next · 04 →</span><strong>Supply Chain &amp; Inventory</strong></a>
         </nav>
-    </section>
+    </div>
 </main>
 
+<a class="talk" href="../index.html#contact"><i aria-hidden="true"></i>Let's talk</a>
+
 <footer class="footer">
-    <div class="container footer-inner">
-        <p>© 2026 Kingsley Koduah</p>
-        <p class="label">Data tells the story.</p>
-        <a href="../index.html" class="label">Home ↑</a>
+    <div class="wrap">
+        <span class="mono">© <span id="year">2026</span> Kingsley Koduah</span>
+        <span class="mono">Set in Fraunces, Inter &amp; JetBrains Mono · Hand-built, no template</span>
+        <a class="mono" href="../index.html">Home ↑</a>
     </div>
 </footer>
 
+<script src="../assets/js/main.js"></script>
 </body>
 </html>

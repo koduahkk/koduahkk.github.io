@@ -3,51 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV | Kingsley Koduah</title>
-    <meta name="description" content="CV of Kingsley Koduah, Data Analyst.">
-    <meta name="theme-color" content="#0A0A0A">
+    <title>Résumé | Kingsley Koduah</title>
+    <meta name="description" content="Résumé of Kingsley Koduah, Data Analyst.">
+    <meta name="theme-color" content="#F7F5F0">
+    <meta property="og:title" content="Résumé | Kingsley Koduah">
+    <meta property="og:description" content="Résumé of Kingsley Koduah, Data Analyst.">
+    <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
+    <meta property="og:url" content="https://koduahkk.github.io/cv.html">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="favicon-32x32.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <script>try{var t=localStorage.getItem('kk-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="case">
-
-<header class="cs-bar">
-    <div class="container cs-bar-inner">
-        <a href="index.html#contact" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <a href="assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf" class="btn btn-lime btn-sm">Download PDF <span aria-hidden="true">↓</span></a>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+    <div class="wrap nav-inner">
+        <a href="index.html" class="brand" aria-label="Kingsley Koduah, home">
+            <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true">
+                <line class="tick" x1="0" y1="17" x2="34" y2="17"/><line class="tick" x1="17" y1="0" x2="17" y2="34"/>
+                <circle class="ring" cx="17" cy="17" r="15.5"/>
+                <circle class="pt" cx="25.5" cy="8.5" r="2.6"/>
+                <text x="17" y="20.2" text-anchor="middle">KK</text>
+            </svg>
+            <span class="brand-name">Kingsley Koduah</span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+                <a href="index.html#work"><span class="num">01</span>Work</a>
+                <a href="index.html#about"><span class="num">02</span>About</a>
+                <a href="index.html#skills"><span class="num">03</span>Skills</a>
+                <a href="index.html#experience"><span class="num">04</span>Experience</a>
+                <a href="index.html#contact"><span class="num">05</span>Contact</a>
+        </nav>
+        <div class="nav-actions">
+            <a class="btn btn-line btn-sm resume" href="assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+                    <svg class="moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+                </button>
+            <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+        </div>
     </div>
 </header>
-
-<main class="container cv">
-    <div class="cv-head">
-        <p class="section-eyebrow">Curriculum vitae</p>
-        <h1 class="section-title">Kingsley <span class="lime">Koduah</span></h1>
-        <p class="cv-links">
-            <a href="assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download PDF</a>
-            <span aria-hidden="true">·</span>
-            <a href="assets/Kingsley_Koduah_CV.pdf" target="_blank" rel="noopener">Open PDF in a new tab</a>
-        </p>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-top">
+        <span class="mono">Menu</span>
+        <button class="menu-btn menu-close" type="button" aria-label="Close menu" style="display:grid">✕</button>
     </div>
+    <nav aria-label="Mobile">
+            <a href="index.html#work"><span class="mono">01</span>Work</a>
+            <a href="index.html#about"><span class="mono">02</span>About</a>
+            <a href="index.html#skills"><span class="mono">03</span>Skills</a>
+            <a href="index.html#experience"><span class="mono">04</span>Experience</a>
+            <a href="index.html#contact"><span class="mono">05</span>Contact</a>
+    </nav>
+    <a class="btn btn-solid" href="assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+</div>
 
+<main id="main" class="cs-hero">
     <!--💡UPDATE: when the CV changes, replace assets/Kingsley_Koduah_CV.pdf and these page images -->
-    <div class="cv-pages">
-        <img src="assets/images/cv/page-1.png" alt="Kingsley Koduah CV, page 1" width="1444" height="1867">
-        <img src="assets/images/cv/page-2.png" alt="Kingsley Koduah CV, page 2" width="1444" height="1867" loading="lazy">
-        <img src="assets/images/cv/page-3.png" alt="Kingsley Koduah CV, page 3" width="1444" height="1867" loading="lazy">
+    <div class="wrap grid12">
+        <p class="crumbs mono"><a href="index.html">← Home</a><span class="sep">/</span><span>Résumé</span></p>
+        <h1 class="cs-title">Kingsley <em>Koduah</em></h1>
+        <p class="cs-dek">Data Analyst · Business Intelligence · Tableau, Power BI &amp; SQL</p>
+        <div style="grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+            <a class="btn btn-solid" href="assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download PDF <span class="arr arr-down" aria-hidden="true">↓</span></a>
+            <a class="btn btn-line" href="assets/Kingsley_Koduah_CV.pdf" target="_blank" rel="noopener">Open in new tab <span class="arr" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="cv-pages">
+            <img src="assets/images/cv/page-1.png" alt="Kingsley Koduah résumé, page 1" width="1444" height="1867">
+            <img src="assets/images/cv/page-2.png" alt="Kingsley Koduah résumé, page 2" width="1444" height="1867" loading="lazy">
+            <img src="assets/images/cv/page-3.png" alt="Kingsley Koduah résumé, page 3" width="1444" height="1867" loading="lazy">
+        </div>
     </div>
 </main>
 
+<a class="talk" href="index.html#contact"><i aria-hidden="true"></i>Let's talk</a>
+
 <footer class="footer">
-    <div class="container footer-inner">
-        <p>© 2026 Kingsley Koduah</p>
-        <p class="label">Data tells the story.</p>
-        <a href="index.html" class="label">Home ↑</a>
+    <div class="wrap">
+        <span class="mono">© <span id="year">2026</span> Kingsley Koduah</span>
+        <span class="mono">Set in Fraunces, Inter &amp; JetBrains Mono · Hand-built, no template</span>
+        <a class="mono" href="index.html">Home ↑</a>
     </div>
 </footer>
 
+<script src="assets/js/main.js"></script>
 </body>
 </html>

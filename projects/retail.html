@@ -4,140 +4,266 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retail Sales Performance | Kingsley Koduah</title>
-    <meta name="description" content="A three-page sales report for a multi-region retailer. It replaces a weekly spreadsheet pack with one place to see revenue, orders and margin — and drill from region to category to product.">
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="description" content="A three-page sales report for a multi-region retailer. It replaces a weekly spreadsheet pack with one place to see revenue, orders and margin, and to drill from region to category to product.">
+    <meta name="theme-color" content="#F7F5F0">
+    <meta property="og:title" content="Retail Sales Performance | Kingsley Koduah">
+    <meta property="og:description" content="A three-page sales report for a multi-region retailer. It replaces a weekly spreadsheet pack with one place to see revenue, orders and margin, and to drill from region to category to product.">
+    <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
+    <meta property="og:url" content="https://koduahkk.github.io/projects/retail.html">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <script>try{var t=localStorage.getItem('kk-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script>
-        // Always open a case study at the top, never at a restored scroll position
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
-    </script>
 </head>
-<body class="case">
-
-<header class="cs-bar" id="top">
-    <div class="container cs-bar-inner">
-        <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <span class="label">Case study 02</span>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+    <div class="wrap nav-inner">
+        <a href="../index.html" class="brand" aria-label="Kingsley Koduah, home">
+            <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true">
+                <line class="tick" x1="0" y1="17" x2="34" y2="17"/><line class="tick" x1="17" y1="0" x2="17" y2="34"/>
+                <circle class="ring" cx="17" cy="17" r="15.5"/>
+                <circle class="pt" cx="25.5" cy="8.5" r="2.6"/>
+                <text x="17" y="20.2" text-anchor="middle">KK</text>
+            </svg>
+            <span class="brand-name">Kingsley Koduah</span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+                <a href="../index.html#work"><span class="num">01</span>Work</a>
+                <a href="../index.html#about"><span class="num">02</span>About</a>
+                <a href="../index.html#skills"><span class="num">03</span>Skills</a>
+                <a href="../index.html#experience"><span class="num">04</span>Experience</a>
+                <a href="../index.html#contact"><span class="num">05</span>Contact</a>
+        </nav>
+        <div class="nav-actions">
+            <a class="btn btn-line btn-sm resume" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <svg class="sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+                    <svg class="moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+                </button>
+            <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+        </div>
     </div>
 </header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-top">
+        <span class="mono">Menu</span>
+        <button class="menu-btn menu-close" type="button" aria-label="Close menu" style="display:grid">✕</button>
+    </div>
+    <nav aria-label="Mobile">
+            <a href="../index.html#work"><span class="mono">01</span>Work</a>
+            <a href="../index.html#about"><span class="mono">02</span>About</a>
+            <a href="../index.html#skills"><span class="mono">03</span>Skills</a>
+            <a href="../index.html#experience"><span class="mono">04</span>Experience</a>
+            <a href="../index.html#contact"><span class="mono">05</span>Contact</a>
+    </nav>
+    <a class="btn btn-solid" href="../assets/Kingsley_Koduah_CV.pdf" download="Kingsley_Koduah_CV.pdf">Download résumé <span class="arr arr-down" aria-hidden="true">↓</span></a>
+</div>
 
-<main>
-    <!--💡UPDATE: this case study uses placeholder content — replace the text and the images in assets/images/projects/retail-1/2/3 -->
-    <section class="container cs-hero">
-        <p class="section-eyebrow">Retail analytics · SQL · Power BI</p>
-        <h1 class="cs-title">Retail Sales Performance</h1>
-        <ul class="tags"><li>SQL</li><li>Power BI</li><li>Data Modeling</li></ul>
-        <div class="cs-media">
-                <div class="stack stack-lg">
+<main id="main">
+    <!--💡UPDATE: placeholder project. Replace the text, chart data (the JSON blocks next to each chart) and the images assets/images/projects/retail-1/2/3 with your real work. -->
+    <section class="cs-hero">
+        <div class="wrap grid12">
+            <p class="crumbs mono"><a href="../index.html#work">← Work</a><span class="sep">/</span><span>Case study 02</span><span class="sep">/</span><span>Retail analytics</span></p>
+            <h1 class="cs-title">Retail Sales <em>Performance</em></h1>
+            <p class="cs-dek">A three-page sales report for a multi-region retailer. It replaces a weekly spreadsheet pack with one place to see revenue, orders and margin, and to drill from region to category to product.</p>
+            <dl class="cs-facts">
+            <div><dt class="mono">Role</dt><dd>Solo analyst: SQL, modelling, design</dd></div>
+            <div><dt class="mono">Type</dt><dd>Portfolio project</dd></div>
+            <div><dt class="mono">Tools</dt><dd>SQL · Power BI · DAX</dd></div>
+            <div><dt class="mono">Dataset</dt><dd>18.6K orders</dd></div>
+            </dl>
+            <figure class="cs-cover"><img src="../assets/images/projects/retail-1.svg" alt="Retail Sales Performance dashboard overview" width="1200" height="780"></figure>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">01 —</span><span>The question</span><span class="axis"></span></div>
+            <h2 class="rv">What did the business need to know?</h2>
+            <div class="body rv">
+                <p class="pull">We’re growing, but are we growing the right things?</p>
+                <p>Leadership could see revenue going up, but not <strong>where the growth came from or whether it was profitable</strong>. The weekly spreadsheet pack took hours to build and couldn’t answer either question.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">02 —</span><span>The data</span><span class="axis"></span></div>
+            <h2 class="rv">What I had to work with.</h2>
+            <div class="body rv">
+                <p>Order, product, customer and region tables, joined in SQL views so revenue and margin reconcile with finance.</p>
+                <div class="dsize">
+                    <div><strong>18.6K</strong><span class="mono">orders</span></div>
+                    <div><strong>$4.2M</strong><span class="mono">revenue</span></div>
+                    <div><strong>4</strong><span class="mono">source tables</span></div>
+                </div>
+                <table class="profile">
+                    <caption class="mono">Data profile: issues found → fix applied</caption>
+                    <thead><tr><th>Field</th><th>Type</th><th>Issue</th><th>Fix</th></tr></thead>
+                    <tbody>
+                    <tr><td>orders</td><td class="type">table</td><td><span class="flag">Returns and refunds mixed in with sales</span></td><td>Netted out so revenue matches finance</td></tr>
+                    <tr><td>products</td><td class="type">table</td><td><span class="flag">Category names drifted over time</span></td><td>Mapped to a current category list</td></tr>
+                    <tr><td>customers</td><td class="type">table</td><td><span class="flag ok">No issues</span></td><td>–</td></tr>
+                    <tr><td>regions</td><td class="type">table</td><td><span class="flag">Region codes vs. names</span></td><td>Joined to one dimension</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">03 —</span><span>The approach</span><span class="axis"></span></div>
+            <h2 class="rv">From raw tables to one trusted model.</h2>
+            <div class="body rv">
+                <ol class="steps">
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 01</span><h3>Build reconciled SQL views</h3></div>
+                        <p>Joined orders, products, customers and regions; handled returns so revenue and margin tie out with finance.</p>
+                        <details class="code">
+                            <summary><span>SQL: net sales view</span><span class="plus" aria-hidden="true">+</span></summary>
+                            <pre><code data-lang="sql">-- Net revenue and margin per order line, returns netted out
+create or replace view v_sales as
+select
+    o.order_id,
+    o.order_date,
+    r.region_name,
+    p.category,
+    o.quantity * o.unit_price                    as gross_revenue,
+    coalesce(rt.refund_amount, 0)                as refunds,
+    o.quantity * o.unit_price
+        - coalesce(rt.refund_amount, 0)          as net_revenue,
+    o.quantity * (o.unit_price - p.unit_cost)    as gross_margin
+from orders o
+join products p      on p.product_id = o.product_id
+join regions  r      on r.region_id  = o.region_id
+left join returns rt on rt.order_line_id = o.order_line_id;</code></pre>
+                        </details>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 02</span><h3>Measure contribution, not just totals</h3></div>
+                        <p>DAX for revenue, margin, AOV and YoY; category and region contribution to separate volume from value.</p>
+                    </li>
+                    <li class="step">
+                        <div class="step-head"><span class="mono">Step 03</span><h3>One filter set, three audiences</h3></div>
+                        <p>An overview for leadership, a detail table for category managers and a breakdown for regional teams.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">04 —</span><span>The insights</span><span class="axis"></span></div>
+            <div class="insights">
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 01</span>
+                    <h3>Electronics sells the most, and earns the least on each sale.</h3>
+                    <p>The top revenue category runs well below the business’s 31% average margin. Growth there is costing profit.</p>
+                </div>
+                <figure>
+                    <ul class="legend"><li><i class="hl sq"></i>Highlighted</li><li><i class="ctx sq"></i>Comparison</li></ul>
+                    <div class="chart" data-spec="spec-retail-0"></div>
+                    <script type="application/json" id="spec-retail-0">{"type": "bar", "alt": "Bar chart of gross margin by category; Electronics is lowest at 22 percent, below the 31 percent average.", "fmt": {"suffix": "%"}, "max": 45, "ref": {"value": 31, "label": "avg 31%"}, "data": [{"label": "Furniture", "value": 38, "ctx": true}, {"label": "Office", "value": 36, "ctx": true}, {"label": "Apparel", "value": 34, "ctx": true}, {"label": "Electronics", "value": 22, "hl": true, "note": "largest revenue category"}]}</script>
+                    <figcaption class="mono"><span>Gross margin by category · placeholder data</span><span>Fig. 02.1</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>Furniture</td><td>38</td></tr><tr><td>Office</td><td>36</td></tr><tr><td>Apparel</td><td>34</td></tr><tr><td>Electronics</td><td>22</td></tr></table></details>
+                </figure>
+            </article>
+            <article class="insight rv">
+                <div class="insight-text">
+                    <span class="mono">Finding 02</span>
+                    <h3>Growth came from more orders, not bigger baskets.</h3>
+                    <p>Average order value stayed flat around $226 while order volume climbed, so basket-building is an untapped lever.</p>
+                </div>
+                <figure>
+                    
+                    <div class="chart" data-spec="spec-retail-1"></div>
+                    <script type="application/json" id="spec-retail-1">{"type": "line", "alt": "Line chart of average order value holding flat around 226 dollars across eight quarters.", "yMin": 0, "yFmt": {"prefix": "$"}, "series": [{"name": "AOV", "values": [[1, 224], [2, 228], [3, 225], [4, 227], [5, 223], [6, 229], [7, 226], [8, 227]]}], "xTicks": [1, 2, 3, 4, 5, 6, 7, 8], "annotations": [{"x": 6, "y": 229, "text": "flat for 8 quarters", "dx": -30, "dy": -60}]}</script>
+                    <figcaption class="mono"><span>Average order value by quarter, $ · placeholder data</span><span>Fig. 02.2</span></figcaption>
+                    <details class="table-view"><summary>View as table</summary><table><tr><td>1</td><td>224</td></tr><tr><td>2</td><td>228</td></tr><tr><td>3</td><td>225</td></tr><tr><td>4</td><td>227</td></tr><tr><td>5</td><td>223</td></tr><tr><td>6</td><td>229</td></tr><tr><td>7</td><td>226</td></tr><tr><td>8</td><td>227</td></tr></table></details>
+                </figure>
+            </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">05 —</span><span>The impact</span><span class="axis"></span></div>
+            <h2 class="rv">What changed, and what I recommended.</h2>
+            <div class="body rv">
+                <div class="impact">
+                    <div><strong>31%</strong><span>gross margin, now visible by line</span></div>
+                    <div><strong>+12%</strong><span>YoY growth, traced to order volume</span></div>
+                    <div><strong>3 → 1</strong><span>reports replaced by one model</span></div>
+                </div>
+                <ol class="recs">
+                    <li>Review pricing and supplier terms on high-volume, low-margin Electronics lines.</li>
+                    <li>Test basket-building promotions to lift AOV rather than discounting for volume.</li>
+                    <li>Set region-level targets from the contribution analysis, not last year plus a flat percentage.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">06 —</span><span>The dashboard</span><span class="axis"></span></div>
+            <!--💡UPDATE: when the report is published, replace the gallery below with
+                <div class="embed"><iframe title="Retail Sales Performance live dashboard" src="YOUR_POWER_BI_OR_TABLEAU_PUBLIC_EMBED_URL" loading="lazy" allowfullscreen></iframe></div> -->
+            <div class="gallery">
+                <a href="../assets/images/projects/retail-1.svg" target="_blank" rel="noopener">
                     <img src="../assets/images/projects/retail-1.svg" alt="Retail Sales Performance dashboard, page 1" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/retail-2.svg" alt="" loading="lazy" width="1200" height="780">
-                    <img src="../assets/images/projects/retail-3.svg" alt="" loading="lazy" width="1200" height="780">
-                </div>
-        </div>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Overview</p>
-        <p class="cs-lead">A three-page sales report for a multi-region retailer. It replaces a weekly spreadsheet pack with one place to see revenue, orders and margin — and drill from region to category to product.</p>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key metrics</p>
-        <div class="cs-metrics">
-                <div class="cs-metric"><strong>$4.2M</strong><span>Revenue</span></div>
-                <div class="cs-metric"><strong>18.6K</strong><span>Orders</span></div>
-                <div class="cs-metric"><strong>$226</strong><span>Avg. order value</span></div>
-                <div class="cs-metric"><strong>31%</strong><span>Gross margin</span></div>
-                <div class="cs-metric"><strong>+12%</strong><span>YoY growth</span></div>
-                <div class="cs-metric"><strong>Electronics</strong><span>Top category</span></div>
-        </div>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Methodology</p>
-        <div class="cs-steps">
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 01</span>
-                    <h3>Data Preparation</h3>
-                    <p>Wrote SQL views joining orders, products, customers and regions; handled returns and refunds so revenue and margin reconcile with finance.</p>
-                </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 02</span>
-                    <h3>Analytical Approach</h3>
-                    <p>DAX measures for revenue, margin, AOV and year-over-year change. Category and region contribution analysis to separate volume from value.</p>
-                </div>
-                <div class="cs-step">
-                    <span class="cs-step-num">Step 03</span>
-                    <h3>Visual Design</h3>
-                    <p>Overview page for leadership, a detail table for category managers, and a breakdown page for regional teams — one consistent filter set across all three.</p>
-                </div>
-        </div>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Dashboard pages</p>
-        <div class="cs-pages">
-                <a href="../assets/images/projects/retail-1.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/retail-1.svg" alt="Retail Sales Performance — page 1" loading="lazy" width="1200" height="780">
-                    <span>Page 01</span>
+                    <span class="mono">Page 01</span>
                 </a>
-                <a href="../assets/images/projects/retail-2.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/retail-2.svg" alt="Retail Sales Performance — page 2" loading="lazy" width="1200" height="780">
-                    <span>Page 02</span>
+                <a href="../assets/images/projects/retail-2.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/retail-2.svg" alt="Retail Sales Performance dashboard, page 2" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 02</span>
                 </a>
-                <a href="../assets/images/projects/retail-3.svg" target="_blank" rel="noopener" class="cs-page">
-                    <img src="../assets/images/projects/retail-3.svg" alt="Retail Sales Performance — page 3" loading="lazy" width="1200" height="780">
-                    <span>Page 03</span>
+                <a href="../assets/images/projects/retail-3.svg" target="_blank" rel="noopener">
+                    <img src="../assets/images/projects/retail-3.svg" alt="Retail Sales Performance dashboard, page 3" loading="lazy" width="1200" height="780">
+                    <span class="mono">Page 03</span>
                 </a>
+            </div>
+            <div class="embed-note mono"><span>Static pages of the report</span><ul class="tags" style="margin:0"><li>SQL</li><li>Power BI</li><li>Data Modeling</li></ul></div>
         </div>
     </section>
 
-    <section class="container cs-block">
-        <p class="section-eyebrow">Key findings</p>
-        <ol class="cs-findings">
-                <li><span class="cs-n">1</span><p>Electronics drives the most revenue but runs below-average margin — growth there is costing profit.</p></li>
-                <li><span class="cs-n">2</span><p>Two regions account for over half of revenue; the rest are flat year over year.</p></li>
-                <li><span class="cs-n">3</span><p>Average order value is stable, so growth is coming from more orders, not bigger baskets.</p></li>
-                <li><span class="cs-n">4</span><p>A small group of slow-moving SKUs ties up inventory with almost no revenue contribution.</p></li>
-        </ol>
-    </section>
-
-    <section class="container cs-block">
-        <p class="section-eyebrow">Recommendations</p>
-        <ul class="cs-recs">
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Review pricing and supplier terms on high-volume, low-margin Electronics lines.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Test basket-building promotions to lift AOV rather than discounting for volume.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Rationalise the bottom-performing SKUs and redirect shelf space to proven sellers.</p></li>
-                <li><span class="cs-chev" aria-hidden="true">›</span><p>Set region-level targets based on the contribution analysis, not last year plus a flat percentage.</p></li>
-        </ul>
-    </section>
-
-    <section class="container cs-end">
-        <div>
-            <p class="label">Live dashboard</p>
-            <!--💡UPDATE: link to the published dashboard -->
-            <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
+    <section class="chapter">
+        <div class="wrap grid12">
+            <div class="marker mono"><span class="n">07 —</span><span>What I’d do next</span><span class="axis"></span></div>
+            <div class="body rv" style="grid-column:1 / span 8">
+                <p class="note" style="font-size:19px;color:var(--ink)"><span class="mono">Next iteration</span>Add a price-elasticity test on the Electronics lines and a SKU-rationalisation view for the slow movers.</p>
+            </div>
         </div>
-        <nav class="cs-pager" aria-label="Case studies">
-            <a href="electricity.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
-            <a href="churn.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+    </section>
+
+    <div class="wrap">
+        <nav class="pager" aria-label="More case studies">
+            <a href="electricity.html"><span class="mono">← Previous · 01</span><strong>US Electricity Overview 2001–2023</strong></a>
+            <a href="churn.html"><span class="mono">Next · 03 →</span><strong>Customer Churn Analysis</strong></a>
         </nav>
-    </section>
+    </div>
 </main>
 
+<a class="talk" href="../index.html#contact"><i aria-hidden="true"></i>Let's talk</a>
+
 <footer class="footer">
-    <div class="container footer-inner">
-        <p>© 2026 Kingsley Koduah</p>
-        <p class="label">Data tells the story.</p>
-        <a href="../index.html" class="label">Home ↑</a>
+    <div class="wrap">
+        <span class="mono">© <span id="year">2026</span> Kingsley Koduah</span>
+        <span class="mono">Set in Fraunces, Inter &amp; JetBrains Mono · Hand-built, no template</span>
+        <a class="mono" href="../index.html">Home ↑</a>
     </div>
 </footer>
 
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
