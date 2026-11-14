@@ -498,6 +498,80 @@
     onVisible(el, () => cells.forEach((c, i) => setTimeout(() => c.classList.add('on'), 200 + i * 55)), { threshold: 0.5 });
   }
 
+  /* ---------- Feature art: calendar booking + reschedule story ----
+     Loops: a new patient is booked into an open slot, then a caller
+     moves an appointment and the old slot goes back on the schedule.
+     The static markup is the end state, used as-is for reduced motion. */
+  function initCalendar() {
+    const art = $('[data-cal]');
+    if (!art || RM) return;
+    const slot = (n) => $(`[data-slot="${n}"]`, art);
+    const S = { new: slot('new'), from: slot('from'), to: slot('to') };
+    const chip = $('[data-cal-chip]', art);
+    const status = $('[data-cal-status]', art);
+    const set = (el, states = '', text = '') => {
+      el.className = states.split(' ').filter(Boolean).map((s) => 'is-' + s).join(' ');
+      el.textContent = text;
+    };
+    const say = (text, ok = false) => { status.textContent = text; status.classList.toggle('is-ok', ok); };
+
+    // Pause while off-screen or in a background tab.
+    let visible = false;
+    let waiters = [];
+    const setVisible = (v) => { visible = v; if (v) { waiters.forEach((r) => r()); waiters = []; } };
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => setVisible(e.isIntersecting && !document.hidden)).observe(art);
+    else visible = true;
+    document.addEventListener('visibilitychange', () => setVisible(!document.hidden && art.getBoundingClientRect().bottom > 0 && art.getBoundingClientRect().top < window.innerHeight));
+    const ready = () => (visible ? Promise.resolve() : new Promise((r) => waiters.push(r)));
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms)).then(ready);
+
+    const placeChip = (el) => {
+      chip.style.transition = 'none';
+      chip.style.transform = 'none';
+      chip.style.left = el.offsetLeft + 'px';
+      chip.style.top = el.offsetTop + 'px';
+      chip.style.width = el.offsetWidth + 'px';
+      chip.style.height = el.offsetHeight + 'px';
+      void chip.offsetWidth; // commit position before re-enabling the transition
+      chip.style.transition = '';
+    };
+
+    async function run() {
+      await ready();
+      for (;;) {
+        art.classList.add('is-fading');
+        await sleep(320);
+        set(S.new); set(S.from, 'filled', '9:00 · Dana R.'); set(S.to);
+        chip.classList.remove('is-on');
+        say('Incoming call · new patient');
+        art.classList.remove('is-fading');
+        await sleep(1000);
+
+        set(S.new, 'target'); say('Checking Tuesday availability…');
+        await sleep(1200);
+        set(S.new, 'filled pop', '10:30 · New patient'); say('✓ Booked: Tue 10:30 · confirmation texted', true);
+        await sleep(2200);
+
+        set(S.from, 'filled target', '9:00 · Dana R.'); say('Incoming call · Dana needs a different day');
+        await sleep(1300);
+        set(S.to, 'target'); say('Moving Dana to Wed 9:00…');
+        await sleep(700);
+        placeChip(S.from);
+        chip.classList.add('is-on');
+        set(S.from, 'moved', '9:00 · Moved');
+        await sleep(120);
+        chip.style.transform = `translate(${S.to.offsetLeft - S.from.offsetLeft}px, ${S.to.offsetTop - S.from.offsetTop}px)`;
+        await sleep(900);
+        set(S.to, 'filled pop', '9:00 · Dana R.');
+        chip.classList.remove('is-on');
+        await sleep(700);
+        set(S.from, 'open pop', '9:00 · Reopened'); say('✓ Rescheduled · Mon 9:00 back on your schedule', true);
+        await sleep(3400);
+      }
+    }
+    run();
+  }
+
   /* ---------- Feature art: language cycle -------------------------- */
   function initLang() {
     // Phrases are listed in the markup (features tile); keep them to languages you support.
@@ -751,7 +825,7 @@
   /* ---------- Boot -------------------------------------------------- */
   const boot = () => {
     [initNav, initMenu, initMobileBar, initClock, initReveal, initCounters, initCallCard, initFlipStack,
-      initCalculator, initPlayers, initHours, initLang, initTimeline, initTabs, initBilling, initFaq,
+      initCalculator, initPlayers, initHours, initCalendar, initLang, initTimeline, initTabs, initBilling, initFaq,
       initBooking, initNudge, initAmbient].forEach((fn) => {
       try { fn(); } catch (err) { console.error('[NeverMissed]', fn.name, err); }
     });

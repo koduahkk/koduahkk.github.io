@@ -471,14 +471,23 @@ input[type=range]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--
 .tile--tall .art-cal__grid { flex: 1; grid-auto-rows: minmax(38px, 1fr); }
 .art-cal { border: var(--hair-strong); border-radius: var(--r-md); background: var(--paper); padding: 12px; }
 .art-cal__head { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; font-size: .65rem; color: var(--gray-600); text-transform: uppercase; margin-bottom: 8px; }
-.art-cal__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.art-cal__grid i { min-height: 38px; border-radius: 6px; border: 1px dashed var(--gray-400); font-style: normal; }
+/* Calendar story (driven by initCalendar): book a slot, then move an appointment */
+.art-cal__grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.art-cal__grid i { min-height: 38px; border-radius: 6px; border: 1px dashed var(--gray-400); font: 500 .62rem/1.15 var(--font-mono); font-style: normal; display: grid; place-items: center; text-align: center; padding: 2px; transition: background .3s, border-color .3s, color .3s; }
 .art-cal__grid i.busy { background: var(--gray-200); border: 0; }
-.art-cal__grid i.book { display: grid; place-items: center; text-align: center; padding: 2px; font: 500 .62rem/1.15 var(--font-mono); background: var(--green); border: 0; color: var(--ink); transform-origin: center; }
-.art-cal__grid i.moved { display: grid; place-items: center; padding: 2px; font: 500 .62rem/1.15 var(--font-mono); color: var(--gray-600); text-decoration: line-through; border: 1px dashed var(--gray-400); }
-.js .tile.reveal.is-in .art-cal__grid i.book--late { transition-delay: 1.1s, 1.1s; }
-.js .tile.reveal .art-cal__grid i.book { transform: scale(.4); opacity: 0; transition: transform .7s .5s var(--ease-out), opacity .4s .5s; }
-.js .tile.reveal.is-in .art-cal__grid i.book { transform: none; opacity: 1; }
+.art-cal__grid i.is-target { border: 1.5px dashed var(--green-ink); background: var(--green-soft); animation: slot-pulse 1s ease-in-out infinite; }
+.art-cal__grid i.is-filled { background: var(--green); border: 0; color: var(--ink); }
+.art-cal__grid i.is-filled.is-target { border: 1.5px solid var(--ink); }
+.art-cal__grid i.is-moved { color: var(--gray-600); text-decoration: line-through; }
+.art-cal__grid i.is-open { border: 1.5px dashed var(--green-ink); color: var(--green-ink); }
+.art-cal__grid i.is-pop { animation: slot-pop .55s var(--ease-out); }
+@keyframes slot-pulse { 50% { box-shadow: 0 0 0 4px rgba(43,214,123,.18); } }
+@keyframes slot-pop { from { transform: scale(.55); opacity: 0; } }
+.art-cal__chip { position: absolute; left: 0; top: 0; z-index: 1; display: grid; place-items: center; border-radius: 6px; background: var(--green); color: var(--ink); font: 500 .62rem/1.15 var(--font-mono); text-align: center; padding: 2px; box-shadow: 0 10px 20px -8px rgba(14,14,12,.45); opacity: 0; pointer-events: none; transition: transform .85s var(--ease-in-out), opacity .2s; }
+.art-cal__chip.is-on { opacity: 1; }
+.art-cal__status { margin-top: 10px; padding-top: 10px; border-top: var(--hair); min-height: calc(2 * 1.35em + 10px); font-size: .68rem; line-height: 1.35; color: var(--gray-600); transition: opacity .25s; }
+.art-cal__status.is-ok { color: var(--green-ink); }
+.art-cal.is-fading .art-cal__grid i[data-slot], .art-cal.is-fading .art-cal__status { opacity: 0; transition: opacity .3s; }
 
 /* lead form */
 .art-form { display: grid; gap: 6px; font-size: .72rem; }

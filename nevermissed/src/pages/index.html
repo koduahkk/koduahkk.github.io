@@ -280,16 +280,18 @@
       </article>
 
       <article class="tile tile--tall reveal">
-        <div class="tile__art art-cal" aria-hidden="true">
+        <div class="tile__art art-cal" aria-hidden="true" data-cal>
           <div class="art-cal__head mono"><span>Mon</span><span>Tue</span><span>Wed</span></div>
           <div class="art-cal__grid">
             <i></i><i class="busy"></i><i></i>
-            <i class="busy"></i><i class="book">10:30 · New patient</i><i class="busy"></i>
+            <i class="busy"></i><i class="is-filled" data-slot="new">10:30 · New patient</i><i class="busy"></i>
             <i></i><i></i><i class="busy"></i>
-            <i class="moved">9:00 · Moved</i><i></i><i class="book book--late">9:00 · Rescheduled</i>
+            <i class="is-open" data-slot="from">9:00 · Reopened</i><i></i><i class="is-filled" data-slot="to">9:00 · Dana R.</i>
             <i></i><i class="busy"></i><i></i>
             <i class="busy"></i><i></i><i class="busy"></i>
+            <span class="art-cal__chip" data-cal-chip>9:00 · Dana R.</span>
           </div>
+          <p class="art-cal__status mono is-ok" data-cal-status>✓ Rescheduled · Mon 9:00 back on your schedule</p>
         </div>
         <h3>Books and reschedules, right in your calendar</h3>
         <p>Real-time availability, the right staff member, the right length of visit. Callers can move appointments without the phone tag, and the open slot goes back on your schedule.</p>
