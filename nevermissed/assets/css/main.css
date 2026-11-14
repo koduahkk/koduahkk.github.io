@@ -207,6 +207,12 @@ body.menu-open { overflow: hidden; }
 .hero__status a { text-decoration: underline; text-underline-offset: .2em; }
 .hero__title { font: 700 var(--fs-hero)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); }
 .hero__title .line { display: block; }
+/* Homepage hero: one sentence per line at every width. The longest line
+   ("Every single time.") is ~7.9em wide, so the size is capped at 12.4% of
+   the text column (cqi) and never breaks mid-sentence. */
+.hero__copy { container-type: inline-size; min-width: 0; }
+.hero__title:not(.hero__title--md) { font-size: min(var(--fs-hero), 12.4cqi); }
+.hero__title:not(.hero__title--md) .line { white-space: nowrap; }
 .hero__title--md { font-size: clamp(2.5rem, 1.5rem + 4.2vw, 5.5rem); line-height: 1; text-wrap: balance; }
 .line--mark { position: relative; width: fit-content; }
 .scribble { position: absolute; left: 0; right: 0; bottom: -0.12em; width: 100%; height: .22em; overflow: visible; }
