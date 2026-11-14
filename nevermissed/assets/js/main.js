@@ -567,12 +567,18 @@
   }
 
   /* ---------- FAQ accordion ---------------------------------------- */
+  // One answer open at a time: opening a question closes the one that was open.
   function initFaq() {
-    $$('[data-faq-toggle]').forEach((btn) => {
+    const btns = $$('[data-faq-toggle]');
+    const set = (btn, open) => {
+      btn.setAttribute('aria-expanded', open);
+      btn.closest('.faq__item').classList.toggle('is-open', open);
+    };
+    btns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const open = btn.getAttribute('aria-expanded') !== 'true';
-        btn.setAttribute('aria-expanded', open);
-        btn.closest('.faq__item').classList.toggle('is-open', open);
+        if (open) btns.forEach((other) => { if (other !== btn) set(other, false); });
+        set(btn, open);
         if (open) track('faq_open', { label: btn.textContent.trim().slice(0, 60) });
       });
     });
