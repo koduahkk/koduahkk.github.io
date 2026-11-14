@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> nav}}
+<main id="main" class="legal">
+  <div class="wrap legal__wrap">
+    <p class="eyebrow">Legal</p>
+    <h1 class="h2">Privacy Policy</h1>
+    <p class="legal__note ph" title="Placeholder: have counsel review">[PLACEHOLDER] This is a starting outline, not legal advice. Have a lawyer review and complete it before launch.</p>
+    <p class="mono muted-text">Last updated: [DATE]</p>
+
+    <h2>What we collect</h2>
+    <p>When you fill in our demo form we collect your name, business name, industry, phone number, email and approximate call volume. When we answer calls for your business, we process caller phone numbers, call audio, transcripts and the details callers share.</p>
+    <h2>How we use it</h2>
+    <p>We use your information to schedule and prepare your demo, provide the service, send call summaries, and improve how your receptionist handles calls. We don’t sell personal information.</p>
+    <h2>Call recordings and transcripts</h2>
+    <p>[CONFIRM: retention period, who can access recordings, how callers are notified of recording in your jurisdictions.]</p>
+    <h2>Health information</h2>
+    <p>[CONFIRM: HIPAA status, Business Associate Agreement availability and safeguards.]</p>
+    <h2>Service providers</h2>
+    <p>[LIST the telephony, AI and hosting providers that process data on your behalf.]</p>
+    <h2>Your choices</h2>
+    <p>You can ask us to access, correct or delete your information at any time by emailing <a class="link" href="mailto:{{site.email}}">{{site.email}}</a>.</p>
+    <h2>Contact</h2>
+    <p>NeverMissed · {{site.address}} · <a class="link" href="mailto:{{site.email}}">{{site.email}}</a></p>
+  </div>
+</main>
+{{> footer}}
+</body>
+</html>

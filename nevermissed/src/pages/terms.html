@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> nav}}
+<main id="main" class="legal">
+  <div class="wrap legal__wrap">
+    <p class="eyebrow">Legal</p>
+    <h1 class="h2">Terms of Service</h1>
+    <p class="legal__note ph" title="Placeholder: have counsel review">[PLACEHOLDER] This is a starting outline, not legal advice. Have a lawyer review and complete it before launch.</p>
+    <p class="mono muted-text">Last updated: [DATE]</p>
+
+    <h2>The service</h2>
+    <p>NeverMissed provides AI receptionist services that answer, route and summarize phone calls for your business, on the plan you choose.</p>
+    <h2>Billing and cancellation</h2>
+    <p>[CONFIRM: billing cycle, setup fees, included minutes, overage rates, and cancellation terms.]</p>
+    <h2>Your responsibilities</h2>
+    <p>You’re responsible for the accuracy of the business information you give us, and for complying with call-recording and consent laws where you operate. [CONFIRM]</p>
+    <h2>Availability</h2>
+    <p>[CONFIRM: uptime commitments, failover behavior and support hours.]</p>
+    <h2>Limitation of liability</h2>
+    <p>[TO BE DRAFTED BY COUNSEL]</p>
+    <h2>Contact</h2>
+    <p>Questions? <a class="link" href="mailto:{{site.email}}">{{site.email}}</a> · <a class="link" href="tel:{{site.phone.tel}}">{{site.phone.display}}</a></p>
+  </div>
+</main>
+{{> footer}}
+</body>
+</html>

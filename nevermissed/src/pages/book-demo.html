@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> nav}}
+<main id="main">
+  <section class="section section--ink final final--page" id="book" aria-labelledby="final-title">
+    <canvas class="final__wave" data-ambient aria-hidden="true"></canvas>
+    <div class="wrap final__grid">
+      <div class="final__copy">
+        <p class="eyebrow eyebrow--light"><span class="live-dot" aria-hidden="true"></span>Free 20-minute demo</p>
+        <h1 class="final__title" id="final-title">Book your<br>free demo.</h1>
+        <p class="lead">Two quick steps. Tell us about your business, then pick a time. We’ll come prepared with a receptionist that already knows your services.</p>
+        <ol class="final__steps mono">
+          <li><span>01</span>We listen to how your calls go today</li>
+          <li><span>02</span>You hear your AI receptionist, live</li>
+          <li><span>03</span>You get a clear plan and quote</li>
+        </ol>
+        <p class="final__alt mono">Rather just hear it? <a href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="book_page">Call {{site.demoPhone.display}}</a></p>
+      </div>
+      {{> booking}}
+    </div>
+  </section>
+</main>
+{{> footer}}
+</body>
+</html>

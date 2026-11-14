@@ -1,0 +1,76 @@
+<!-- Demo booking: step 1 qualifies (short form), step 2 picks a time -->
+<div class="booking" data-booking data-endpoint="{{site.formEndpoint}}" data-embed="{{site.bookingEmbedUrl}}">
+  <form class="form" data-form novalidate aria-labelledby="book-form-title">
+    <p class="form__step mono"><span>Step 1 of 2</span><span>Takes 30 seconds</span></p>
+    <h2 class="form__title" id="book-form-title">Tell us about your business</h2>
+    <div class="form__grid">
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err">
+        <p class="field__err" id="f-name-err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="f-biz">Business name</label>
+        <input id="f-biz" name="business" type="text" autocomplete="organization" required aria-describedby="f-biz-err">
+        <p class="field__err" id="f-biz-err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="f-ind">Industry</label>
+        <div class="select">
+          <select id="f-ind" name="industry" required aria-describedby="f-ind-err">
+            <option value="">Choose one</option>
+            {{blocks.industryOptions}}
+          </select>
+        </div>
+        <p class="field__err" id="f-ind-err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="f-vol">Calls per month</label>
+        <div class="select">
+          <select id="f-vol" name="volume" required aria-describedby="f-vol-err">
+            <option value="">Roughly</option>
+            <option>Under 200</option>
+            <option>200 – 500</option>
+            <option>500 – 1,500</option>
+            <option>1,500+</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+        <p class="field__err" id="f-vol-err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="f-phone">Phone</label>
+        <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-phone-err">
+        <p class="field__err" id="f-phone-err" aria-live="polite"></p>
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-err">
+        <p class="field__err" id="f-email-err" aria-live="polite"></p>
+      </div>
+    </div>
+    <button class="btn btn--primary btn--lg btn--block" type="submit" data-track="form_submit_demo">
+      <span data-submit-label>Continue: pick a time</span>
+    </button>
+    <p class="form__fine">No spam, no pressure. We’ll only use this to prepare your demo.</p>
+  </form>
+
+  <div class="booking__done" data-booking-done hidden tabindex="-1">
+    <p class="form__step mono"><span>Step 2 of 2</span><span class="ok-text">✓ Details received</span></p>
+    <h2 class="form__title">Thanks, <span data-booking-name>there</span>. Now grab a time.</h2>
+    <p class="booking__sub">Pick any 20-minute slot. We’ll show you a receptionist trained on your business, live.</p>
+    <div class="booking__embed" data-booking-embed>
+      <!-- [PLACEHOLDER] Set bookingEmbedUrl in src/config.mjs to load Cal.com / Calendly here -->
+      <div class="cal-ph" aria-label="Booking calendar placeholder">
+        <p class="mono ph" title="Placeholder: connect Cal.com or Calendly">Cal.com / Calendly embed</p>
+        <div class="cal-ph__grid" aria-hidden="true">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
+          <i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+          <i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
+          <i></i><i class="on"></i><i></i><i></i><i class="on"></i>
+        </div>
+        <p class="cal-ph__note">Prefer a call? <a href="tel:{{site.phone.tel}}">{{site.phone.display}}</a></p>
+      </div>
+    </div>
+  </div>
+</div>

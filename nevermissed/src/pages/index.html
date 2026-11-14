@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> nav}}
+
+<main id="main">
+
+<!-- =========================================================
+     02 · HERO
+     ========================================================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__ghost mono" aria-hidden="true">02:47</div>
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="hero__status mono">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>Line open</span><span class="sep" aria-hidden="true">/</span>
+        <span>24·7·365</span><span class="sep sep--wrap" aria-hidden="true">/</span>
+        <span class="hero__time">Your time <time data-clock>--:--</time></span>
+      </p>
+      <h1 class="hero__title" id="hero-title">
+        <span class="line">Your phone rings.</span>
+        <span class="line">We answer.</span>
+        <span class="line line--mark">Every single time.<svg class="scribble" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 16 C 120 6, 260 6, 360 12 S 520 20, 596 8"/></svg></span>
+      </h1>
+      <p class="hero__sub">NeverMissed builds AI receptionists that pick up 24/7, book appointments, and capture every lead, so you never lose business to voicemail again.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary btn--lg" href="#book" data-track="cta_book_demo" data-track-location="hero">Book a Free Demo</a>
+        <a class="btn btn--ghost btn--lg" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="hero">
+          <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Hear It Live
+        </a>
+      </div>
+      <p class="hero__fine mono">Or call <a href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="hero_fine">{{site.demoPhone.display}}</a> and talk to it yourself.</p>
+    </div>
+
+    <!-- Animated live call card. Decorative motion; a static transcript is provided for assistive tech. -->
+    <figure class="callcard" data-callcard aria-labelledby="callcard-cap">
+      <figcaption id="callcard-cap" class="sr-only">Example call at 2:47 AM: a caller asks to book a dental appointment, the AI receptionist checks availability and books Tuesday at 10:30 AM.</figcaption>
+      <div class="callcard__top" aria-hidden="true">
+        <span class="callcard__ring" data-cc-ring><span></span></span>
+        <div class="callcard__who">
+          <p class="callcard__num mono">(555) 010-0142</p>
+          <p class="callcard__line">Brightside Dental · Main line</p>
+        </div>
+        <p class="callcard__clock mono">2:47 AM</p>
+      </div>
+      <div class="callcard__status" aria-hidden="true">
+        <span class="chip chip--missed" data-cc-missed><svg viewBox="0 0 16 16"><path d="M2 5l5 5 3-3 4 4"/></svg>Missed call</span>
+        <span class="chip chip--live" data-cc-live><span class="live-dot"></span><span data-cc-state>Ringing</span> <span class="mono" data-cc-timer></span></span>
+      </div>
+      <div class="callcard__wave" data-cc-wave aria-hidden="true"></div>
+      <ol class="callcard__log" data-cc-log aria-hidden="true"></ol>
+      <div class="callcard__booked" data-cc-booked aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg>
+        <span>Appointment booked: <strong>Tue 10:30 AM</strong></span>
+      </div>
+      <ol class="sr-only">
+        <li>AI: Thanks for calling Brightside Dental, this is Ava. How can I help?</li>
+        <li>Caller: Hi, I chipped a tooth. Can I get in this week?</li>
+        <li>AI: I'm sorry, that sounds painful. I have Tuesday at 10:30 AM or Wednesday at 2:15 PM.</li>
+        <li>Caller: Tuesday works.</li>
+        <li>AI: You're booked for Tuesday at 10:30 AM. I'll text you a confirmation now.</li>
+      </ol>
+    </figure>
+  </div>
+
+  <div class="wrap trust">
+    <p class="trust__label mono">Trusted by {{site.clientCount}}+ businesses</p>
+    <ul class="trust__logos" aria-label="Client logos (placeholders)">
+      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
+      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
+      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
+      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
+      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     03 · THE PROBLEM
+     ========================================================= -->
+<section class="section section--ink problem" id="problem" aria-labelledby="problem-title">
+  <div class="wrap">
+    <div class="section-head section-head--split">
+      <p class="eyebrow eyebrow--alert"><span class="alert-dot" aria-hidden="true"></span>The problem</p>
+      <h2 class="h2" id="problem-title">The cost of a<br>missed call.</h2>
+      <p class="lead">Every unanswered ring is a customer calling the next business on the list. They don’t leave voicemails. They don’t call back. They book with whoever picks up.</p>
+    </div>
+
+    <div class="problem__grid">
+      <div>
+      <dl class="stats">
+        <div class="stat reveal">
+          <dt class="stat__num mono"><span data-count="62">0</span>%<sup class="fn" aria-label="Placeholder statistic, see note">*</sup></dt>
+          <dd class="stat__label">of calls to small businesses go unanswered.</dd>
+        </div>
+        <div class="stat reveal">
+          <dt class="stat__num mono"><span data-count="80">0</span>%<sup class="fn" aria-label="Placeholder statistic, see note">*</sup></dt>
+          <dd class="stat__label">of callers sent to voicemail hang up without leaving a message.</dd>
+        </div>
+        <div class="stat reveal">
+          <dt class="stat__num mono"><span data-count="128">0</span><span class="stat__unit">hrs</span></dt>
+          <dd class="stat__label">a week your phone can ring with nobody at the desk. A 40-hour front desk covers 40 of 168.</dd>
+        </div>
+      </dl>
+      <p class="footnote mono">* <span class="ph" title="Placeholder: replace with sourced figures">Placeholder figures. Replace with your sourced statistics and cite them before launch.</span></p>
+      </div>
+
+      <!-- Missed calls flip into answered calls as you scroll -->
+      <div class="flipstack" data-flipstack aria-label="Missed calls turning into answered calls">
+        <div class="flip" data-flip>
+          <div class="flip__face flip__face--missed">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2 5l5 5 3-3 4 4"/></svg></span>
+            <div><p class="flip__t">Missed call · (555) 010-0187</p><p class="flip__d">“Burst pipe, need someone tonight”</p></div>
+            <time class="mono">7:12 PM</time>
+          </div>
+          <div class="flip__face flip__face--answered">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
+            <div><p class="flip__t">Answered by NeverMissed</p><p class="flip__d">Emergency dispatched · tech en route</p></div>
+            <time class="mono">7:12 PM</time>
+          </div>
+        </div>
+        <div class="flip" data-flip>
+          <div class="flip__face flip__face--missed">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2 5l5 5 3-3 4 4"/></svg></span>
+            <div><p class="flip__t">Missed call · (555) 010-0163</p><p class="flip__d">New patient, no message left</p></div>
+            <time class="mono">9:48 PM</time>
+          </div>
+          <div class="flip__face flip__face--answered">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
+            <div><p class="flip__t">Answered by NeverMissed</p><p class="flip__d">New patient booked · Thu 9:00 AM</p></div>
+            <time class="mono">9:48 PM</time>
+          </div>
+        </div>
+        <div class="flip" data-flip>
+          <div class="flip__face flip__face--missed">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2 5l5 5 3-3 4 4"/></svg></span>
+            <div><p class="flip__t">Missed call · (555) 010-0121</p><p class="flip__d">Called during lunch rush, hung up</p></div>
+            <time class="mono">Sat 12:20 PM</time>
+          </div>
+          <div class="flip__face flip__face--answered">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
+            <div><p class="flip__t">Answered by NeverMissed</p><p class="flip__d">Consult scheduled · Mon 2:30 PM</p></div>
+            <time class="mono">Sat 12:20 PM</time>
+          </div>
+        </div>
+        <div class="flip" data-flip>
+          <div class="flip__face flip__face--missed">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2 5l5 5 3-3 4 4"/></svg></span>
+            <div><p class="flip__t">Missed call · (555) 010-0108</p><p class="flip__d">Went to voicemail, called a competitor</p></div>
+            <time class="mono">Sun 6:03 AM</time>
+          </div>
+          <div class="flip__face flip__face--answered">
+            <span class="flip__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7"/></svg></span>
+            <div><p class="flip__t">Answered by NeverMissed</p><p class="flip__d">Lead captured · summary texted to you</p></div>
+            <time class="mono">Sun 6:03 AM</time>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-cta">
+      <a class="link-arrow link-arrow--light" href="#calculator" data-track="cta_calculator" data-track-location="problem">See what missed calls cost you <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     04 · MISSED-REVENUE CALCULATOR
+     ========================================================= -->
+<section class="section calc" id="calculator" aria-labelledby="calc-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Missed-revenue calculator</p>
+      <h2 class="h2" id="calc-title">How much is voicemail<br>costing you?</h2>
+      <p class="lead">Move the sliders to match your business. The math is right there, no magic.</p>
+    </div>
+
+    <div class="calc__grid" data-calc>
+      <div class="calc__controls">
+        <div class="range">
+          <div class="range__top">
+            <label for="c-calls">Calls per day</label>
+            <output class="range__val mono" for="c-calls" data-out="calls">30</output>
+          </div>
+          <input id="c-calls" type="range" min="5" max="200" step="1" value="30" data-calc-input="calls">
+          <div class="range__scale mono" aria-hidden="true"><span>5</span><span>200</span></div>
+        </div>
+        <div class="range">
+          <div class="range__top">
+            <label for="c-missed">Calls you miss</label>
+            <output class="range__val mono" for="c-missed" data-out="missed">25%</output>
+          </div>
+          <input id="c-missed" type="range" min="0" max="80" step="1" value="25" data-calc-input="missed">
+          <div class="range__scale mono" aria-hidden="true"><span>0%</span><span>80%</span></div>
+        </div>
+        <div class="range">
+          <div class="range__top">
+            <label for="c-value">Average customer value</label>
+            <output class="range__val mono" for="c-value" data-out="value">$350</output>
+          </div>
+          <input id="c-value" type="range" min="50" max="5000" step="25" value="350" data-calc-input="value">
+          <div class="range__scale mono" aria-hidden="true"><span>$50</span><span>$5,000</span></div>
+        </div>
+        <fieldset class="seg">
+          <legend>Of those missed callers, how many would have booked?</legend>
+          <div class="seg__opts">
+            <label><input type="radio" name="c-rate" value="0.25" data-calc-input="rate"><span>1 in 4</span></label>
+            <label><input type="radio" name="c-rate" value="0.333" data-calc-input="rate" checked><span>1 in 3</span></label>
+            <label><input type="radio" name="c-rate" value="0.5" data-calc-input="rate"><span>1 in 2</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="calc__out">
+        <p class="calc__eyebrow mono"><span class="alert-dot" aria-hidden="true"></span>Revenue leaking per month</p>
+        <p class="calc__big"><span class="sr-only">You're losing about </span><span class="calc__tilde" aria-hidden="true">~</span><span class="mono" data-calc-total>$26,250</span></p>
+        <p class="calc__year mono">≈ <span data-calc-year>$315,000</span> a year walking to competitors</p>
+        <ol class="calc__chain mono" aria-label="How it adds up">
+          <li><span data-calc-missed-month>225</span><small>missed calls / mo</small></li>
+          <li aria-hidden="true" class="calc__arrow">→</li>
+          <li><span data-calc-lost>75</span><small>lost customers</small></li>
+          <li aria-hidden="true" class="calc__arrow">→</li>
+          <li><span data-calc-total-2>$26,250</span><small>gone</small></li>
+        </ol>
+        <p class="calc__formula mono" data-calc-formula>30 calls × 25% missed × 30 days × 1-in-3 book × $350</p>
+        <a class="btn btn--primary btn--lg btn--block" href="#book" data-track="cta_book_demo" data-track-location="calculator">Stop the leak: Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     05 · HEAR IT FOR YOURSELF
+     ========================================================= -->
+<section class="section section--warm demos" id="demos" aria-labelledby="demos-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Hear it for yourself</p>
+        <h2 class="h2" id="demos-title">Sounds like your best<br>front-desk hire.</h2>
+      </div>
+      <p class="lead">No robotic menus. No “press 1.” Just a calm, helpful voice that knows your business. Press play.</p>
+    </div>
+    <div class="demos__grid">
+      {{blocks.demoCards}}
+    </div>
+
+    <div class="liveline">
+      <div class="liveline__copy">
+        <p class="eyebrow eyebrow--light"><span class="live-dot" aria-hidden="true"></span>Live demo line · open now</p>
+        <p class="liveline__title">Don’t take our word for it. Call it.</p>
+        <p class="liveline__sub">Ask about pricing, book a fake appointment, try to trip it up. It picks up on the first ring.</p>
+      </div>
+      <a class="liveline__num mono" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="demos_block">
+        <span class="liveline__ring" aria-hidden="true"></span>{{site.demoPhone.display}}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     06 · FEATURES (bento)
+     ========================================================= -->
+<section class="section features" id="features" aria-labelledby="features-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What your AI receptionist does</p>
+      <h2 class="h2" id="features-title">Everything a great front desk does.<br><span class="muted">Without the day off.</span></h2>
+    </div>
+
+    <div class="bento">
+      <article class="tile tile--ink tile--wide reveal">
+        <div class="tile__art art-hours" aria-hidden="true" data-hours></div>
+        <h3>Answers 24/7/365</h3>
+        <p>Nights, weekends, holidays, lunch breaks. Every hour of every day is business hours now.</p>
+      </article>
+
+      <article class="tile tile--tall reveal">
+        <div class="tile__art art-cal" aria-hidden="true">
+          <div class="art-cal__head mono"><span>Mon</span><span>Tue</span><span>Wed</span></div>
+          <div class="art-cal__grid">
+            <i></i><i class="busy"></i><i></i>
+            <i class="busy"></i><i class="book">10:30 · New patient</i><i class="busy"></i>
+            <i></i><i></i><i class="busy"></i>
+            <i class="busy"></i><i></i><i></i>
+            <i></i><i class="busy"></i><i></i>
+            <i class="busy"></i><i></i><i class="busy"></i>
+          </div>
+        </div>
+        <h3>Books straight into your calendar</h3>
+        <p>Real-time availability, the right staff member, the right length of visit. No double bookings.</p>
+      </article>
+
+      <article class="tile reveal">
+        <div class="tile__art art-form mono" aria-hidden="true">
+          <p><span>Name</span><b>Dana Ruiz</b></p>
+          <p><span>Job</span><b>AC not cooling</b></p>
+          <p><span>Zip</span><b>43215</b></p>
+          <p><span>Urgency</span><b class="hot">Today</b></p>
+        </div>
+        <h3>Qualifies every lead</h3>
+        <p>Asks your questions, captures the details, and tells you who’s worth calling first.</p>
+      </article>
+
+      <article class="tile reveal">
+        <div class="tile__art art-faq" aria-hidden="true">
+          <p class="q">Do you offer financing?</p>
+          <p class="a">Yes, 0% for 12 months on jobs over $1,000. Want me to send details?</p>
+        </div>
+        <h3>Answers FAQs in your voice</h3>
+        <p>Hours, prices, insurance, parking. Trained on your business, worded the way you’d say it.</p>
+      </article>
+
+      <article class="tile reveal">
+        <div class="tile__art art-transfer" aria-hidden="true">
+          <span class="node">AI</span><span class="wire"><i></i></span><span class="node node--you">You</span>
+          <p class="mono">Urgent · transferring now</p>
+        </div>
+        <h3>Hands off to a human, instantly</h3>
+        <p>Emergencies and VIPs go straight to you or your team, with the context already passed along.</p>
+      </article>
+
+      <article class="tile reveal">
+        <div class="tile__art art-sms" aria-hidden="true">
+          <p class="mono">NeverMissed · now</p>
+          <p>New booking: Dana R., AC repair, Thu 9 AM. Notes: unit is 12 yrs old.</p>
+        </div>
+        <h3>Sends you call summaries</h3>
+        <p>Every call, summarized by text or email: who called, what they needed, what happened.</p>
+      </article>
+
+      <article class="tile reveal">
+        <div class="tile__art art-lines mono" aria-hidden="true">
+          <p><span class="live-dot"></span>Line 1 · booking</p>
+          <p><span class="live-dot"></span>Line 2 · FAQ</p>
+          <p><span class="live-dot"></span>Line 3 · new lead</p>
+          <p class="hold">Hold time 0:00</p>
+        </div>
+        <h3>Takes many calls at once</h3>
+        <p>Monday-morning rush? Ten calls at once? Everyone gets answered. No hold music, ever.</p>
+      </article>
+
+      <article class="tile tile--wide tile--lang reveal">
+        <div class="tile__art art-lang" aria-hidden="true">
+          <span data-lang-cycle>Hello.</span>
+        </div>
+        <div>
+          <h3>Speaks your customers’ language</h3>
+          <p>Switches languages mid-call when a caller does. Supported: {{site.languages}}.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="section-cta">
+      <a class="btn btn--primary btn--lg" href="#book" data-track="cta_book_demo" data-track-location="features">See it with your business</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     07 · HOW IT WORKS
+     ========================================================= -->
+<section class="section section--ink how" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow eyebrow--light">How it works</p>
+      <h2 class="h2" id="how-title">Live in {{site.goLiveDays}} days.<br><span class="muted">We do the heavy lifting.</span></h2>
+    </div>
+    <div class="timeline" data-timeline>
+      <div class="timeline__track" aria-hidden="true"><span class="timeline__fill" data-timeline-fill></span></div>
+      <ol class="timeline__steps">
+        <li class="step" data-step>
+          <span class="step__dot" aria-hidden="true"></span>
+          <p class="step__n mono">01</p>
+          <h3>Discovery call</h3>
+          <p>We learn your business: services, prices, FAQs, how you like calls handled, and when to send them to you.</p>
+          <p class="step__tag mono">30 minutes of your time</p>
+        </li>
+        <li class="step" data-step>
+          <span class="step__dot" aria-hidden="true"></span>
+          <p class="step__n mono">02</p>
+          <h3>We build and train it</h3>
+          <p>Custom voice, script and integrations with your calendar and CRM. You call it, test it, and approve it.</p>
+          <p class="step__tag mono">Done for you</p>
+        </li>
+        <li class="step" data-step>
+          <span class="step__dot" aria-hidden="true"></span>
+          <p class="step__n mono">03</p>
+          <h3>Go live, then get better</h3>
+          <p>Forward your calls and you’re on. Every month we review real calls and tune it so it keeps improving.</p>
+          <p class="step__tag mono">Live in {{site.goLiveDays}} days</p>
+        </li>
+      </ol>
+    </div>
+    <div class="section-cta">
+      <a class="btn btn--primary btn--lg" href="#book" data-track="cta_book_demo" data-track-location="how">Start with a discovery call</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     08 · INDUSTRIES
+     ========================================================= -->
+<section class="section industries" id="industries" aria-labelledby="ind-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Industries we serve</p>
+        <h2 class="h2" id="ind-title">Built for businesses<br>that live on the phone.</h2>
+      </div>
+      <p class="lead">Trained on how your industry actually talks: the urgent calls, the common questions, the details you need before you call back.</p>
+    </div>
+    <div class="tabs" data-tabs>
+      {{blocks.industryTabs}}
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     09 · INTEGRATIONS
+     ========================================================= -->
+<section class="section section--tight integrations" aria-labelledby="int-title">
+  <div class="wrap integrations__head">
+    <h2 class="h3" id="int-title">Plugs into the tools you already use.</h2>
+    <p class="muted-text">Bookings, leads and summaries land where your team already works. <span class="ph" title="Placeholder: confirm the integrations you actually support">[CONFIRM integrations]</span></p>
+  </div>
+  <div class="marquee" data-marquee>
+    <ul class="marquee__row">
+      <li>Google Calendar</li><li>Calendly</li><li>Outlook</li><li>HubSpot</li><li>GoHighLevel</li><li>Salesforce</li><li>Zapier</li><li>Jobber</li><li>ServiceTitan</li><li>Housecall Pro</li><li>Clio</li><li>Dentrix</li>
+    </ul>
+    <ul class="marquee__row" aria-hidden="true">
+      <li>Google Calendar</li><li>Calendly</li><li>Outlook</li><li>HubSpot</li><li>GoHighLevel</li><li>Salesforce</li><li>Zapier</li><li>Jobber</li><li>ServiceTitan</li><li>Housecall Pro</li><li>Clio</li><li>Dentrix</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =========================================================
+     10 · COMPARISON
+     ========================================================= -->
+<section class="section section--warm compare" id="compare" aria-labelledby="compare-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The alternatives</p>
+      <h2 class="h2" id="compare-title">You have options.<br><span class="muted">Here’s how they stack up.</span></h2>
+    </div>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Comparison table, scroll horizontally on small screens">
+      <table class="table">
+        <caption class="sr-only">NeverMissed compared with a human receptionist, an answering service and voicemail</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only">Feature</span></th>
+            <th scope="col" class="hl"><span class="logo logo--sm"><span class="logo__dot" aria-hidden="true"></span>NeverMissed</span></th>
+            <th scope="col">Human receptionist</th>
+            <th scope="col">Answering service</th>
+            <th scope="col">Voicemail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">24/7 availability</th>
+            <td class="hl"><span class="yes">Yes</span></td>
+            <td><span class="no">No</span> Business hours</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="meh">Technically</span> but nobody answers</td>
+          </tr>
+          <tr>
+            <th scope="row">Monthly cost</th>
+            <td class="hl"><strong>Flat fee</strong>, from <span class="ph" title="Placeholder: sample price">$299</span></td>
+            <td>Full salary + benefits</td>
+            <td>Per-minute, adds up fast</td>
+            <td>Free, but costs you leads</td>
+          </tr>
+          <tr>
+            <th scope="row">Books appointments</th>
+            <td class="hl"><span class="yes">Yes</span> Into your calendar</td>
+            <td><span class="yes">Yes</span></td>
+            <td><span class="meh">Rarely</span> Takes a message</td>
+            <td><span class="no">No</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Simultaneous calls</th>
+            <td class="hl"><span class="yes">Yes</span> Many at once</td>
+            <td><span class="no">No</span> One at a time</td>
+            <td><span class="meh">Limited</span></td>
+            <td><span class="no">No</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Sick days and turnover</th>
+            <td class="hl"><span class="yes">Never</span></td>
+            <td><span class="no">Yes</span></td>
+            <td><span class="meh">Varies</span></td>
+            <td>n/a</td>
+          </tr>
+          <tr>
+            <th scope="row">Consistency</th>
+            <td class="hl"><span class="yes">Same great call, every call</span></td>
+            <td><span class="meh">Depends on the day</span></td>
+            <td><span class="meh">Depends on the agent</span></td>
+            <td><span class="no">No</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Setup time</th>
+            <td class="hl"><strong>{{site.goLiveDays}} days</strong>, done for you</td>
+            <td>Weeks to hire and train</td>
+            <td>Days, generic script</td>
+            <td>Minutes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="section-cta">
+      <a class="btn btn--primary btn--lg" href="#book" data-track="cta_book_demo" data-track-location="compare">Book a Free Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     11 · RESULTS (placeholders only, no invented reviews)
+     ========================================================= -->
+<section class="section results" id="results" aria-labelledby="results-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow">Results</p>
+        <h2 class="h2" id="results-title">Real businesses.<br>Real numbers.</h2>
+      </div>
+      <p class="lead"><span class="ph" title="Placeholder: add real case studies with permission">Case studies coming soon. These cards are templates for real client results, quotes and photos.</span></p>
+    </div>
+    <div class="cases">
+      <article class="case reveal">
+        <p class="case__metric"><span class="ph" title="Placeholder: real metric">+X%</span></p>
+        <p class="case__metric-label mono">[Metric, e.g. booked appointments in 60 days]</p>
+        <blockquote class="case__quote"><p><span class="ph" title="Placeholder: real client quote">“Real client quote goes here. One or two sentences about the outcome, in their words.”</span></p></blockquote>
+        <footer class="case__who">
+          <span class="avatar" aria-hidden="true">?</span>
+          <span><strong>[Client name]</strong><br><span class="muted-text">[Role, Business · Industry]</span></span>
+        </footer>
+      </article>
+      <article class="case reveal">
+        <p class="case__metric"><span class="ph" title="Placeholder: real metric">$X</span></p>
+        <p class="case__metric-label mono">[Metric, e.g. revenue recovered per month]</p>
+        <blockquote class="case__quote"><p><span class="ph" title="Placeholder: real client quote">“Real client quote goes here. One or two sentences about the outcome, in their words.”</span></p></blockquote>
+        <footer class="case__who">
+          <span class="avatar" aria-hidden="true">?</span>
+          <span><strong>[Client name]</strong><br><span class="muted-text">[Role, Business · Industry]</span></span>
+        </footer>
+      </article>
+      <article class="case reveal">
+        <p class="case__metric"><span class="ph" title="Placeholder: real metric">X</span></p>
+        <p class="case__metric-label mono">[Metric, e.g. after-hours calls answered last month]</p>
+        <blockquote class="case__quote"><p><span class="ph" title="Placeholder: real client quote">“Real client quote goes here. One or two sentences about the outcome, in their words.”</span></p></blockquote>
+        <footer class="case__who">
+          <span class="avatar" aria-hidden="true">?</span>
+          <span><strong>[Client name]</strong><br><span class="muted-text">[Role, Business · Industry]</span></span>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     12 · PRICING
+     ========================================================= -->
+<section class="section section--warm pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <p class="eyebrow">Pricing</p>
+      <h2 class="h2" id="pricing-title">Less than one missed job a month.</h2>
+      <p class="lead">Simple, flat pricing. <span class="ph" title="Placeholder: confirm contract terms">No contracts. Cancel anytime.</span></p>
+      <div class="billing" role="group" aria-label="Billing period" data-billing>
+        <button type="button" aria-pressed="true" data-billing-opt="monthly">Monthly</button>
+        <button type="button" aria-pressed="false" data-billing-opt="annual">Annual <span class="mono billing__save">2 months free</span></button>
+      </div>
+    </div>
+    <div class="tiers">
+      {{blocks.pricingCards}}
+    </div>
+    <p class="pricing__fine muted-text mono">Prices shown are samples. <span class="ph" title="Placeholder">[EDIT tiers, minutes, setup fees and overage rates in src/config.mjs]</span></p>
+  </div>
+</section>
+
+<!-- =========================================================
+     13 · FAQ
+     ========================================================= -->
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq__grid">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="h2" id="faq-title">Straight answers.</h2>
+      <p class="lead">Still unsure? Call the demo line and ask the AI. Or ask us: <a class="link" href="tel:{{site.phone.tel}}" data-track="cta_call_sales" data-track-location="faq">{{site.phone.display}}</a></p>
+    </div>
+    <div class="faq__list" data-faq>
+      {{blocks.faqItems}}
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     14 · FINAL CTA + BOOKING
+     ========================================================= -->
+<section class="section section--ink final" id="book" aria-labelledby="final-title">
+  <canvas class="final__wave" data-ambient aria-hidden="true"></canvas>
+  <div class="wrap final__grid">
+    <div class="final__head">
+      <p class="eyebrow eyebrow--light"><span class="live-dot" aria-hidden="true"></span>Free 20-minute demo</p>
+      <h2 class="final__title" id="final-title">Never miss<br>another call.</h2>
+    </div>
+    <div class="final__copy">
+      <p class="lead">Tell us about your business. We’ll show you exactly how your AI receptionist would answer your calls, book your jobs and send you every lead.</p>
+      <ul class="final__points">
+        <li><span>Hear it trained on <em>your</em> services</span></li>
+        <li><span>Get a clear quote, no pressure</span></li>
+        <li><span>Keep your existing phone number</span></li>
+      </ul>
+      <p class="final__alt mono">Rather just hear it? <a href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="final">Call {{site.demoPhone.display}}</a></p>
+    </div>
+    {{> booking}}
+  </div>
+</section>
+
+</main>
+
+{{> footer}}
+</body>
+</html>

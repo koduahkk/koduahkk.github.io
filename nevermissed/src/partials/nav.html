@@ -1,0 +1,36 @@
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav" data-nav>
+  <div class="nav__inner wrap">
+    <a class="logo" href="{{root}}" aria-label="NeverMissed home">
+      <span class="logo__dot" aria-hidden="true"></span><span class="logo__word">NeverMissed</span>
+    </a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="{{root}}#how">How It Works</a>
+      <a href="{{root}}#industries">Industries</a>
+      <a href="{{root}}#pricing">Pricing</a>
+      <a href="{{root}}#faq">FAQ</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="nav__call" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="nav">
+        <span class="live-dot" aria-hidden="true"></span>Call the Demo Line
+      </a>
+      <a class="btn btn--primary btn--sm" href="{{page.bookHref}}" data-track="cta_book_demo" data-track-location="nav">Book a Demo</a>
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu hidden>
+  <nav class="menu__links wrap" aria-label="Mobile">
+    <a href="{{root}}#how" data-menu-link><span class="mono">01</span>How It Works</a>
+    <a href="{{root}}#industries" data-menu-link><span class="mono">02</span>Industries</a>
+    <a href="{{root}}#pricing" data-menu-link><span class="mono">03</span>Pricing</a>
+    <a href="{{root}}#faq" data-menu-link><span class="mono">04</span>FAQ</a>
+  </nav>
+  <div class="menu__foot wrap">
+    <a class="btn btn--primary btn--lg btn--block" href="{{page.bookHref}}" data-menu-link data-track="cta_book_demo" data-track-location="mobile_menu">Book a Free Demo</a>
+    <a class="btn btn--ghost-dark btn--lg btn--block" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="mobile_menu">Call {{site.demoPhone.display}}</a>
+  </div>
+</div>

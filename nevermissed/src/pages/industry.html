@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+{{> nav}}
+<main id="main">
+  <section class="hero hero--industry" aria-labelledby="hero-title">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="hero__status mono">
+          <a href="{{root}}#industries">Industries</a><span class="sep" aria-hidden="true">/</span><span>{{ind.name}}</span>
+        </p>
+        <h1 class="hero__title hero__title--md" id="hero-title">{{ind.headline}}</h1>
+        <p class="hero__sub">{{ind.sub}}</p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary btn--lg" href="{{root}}book-demo/" data-track="cta_book_demo" data-track-location="industry_hero" data-track-label="{{ind.slug}}">Book a Free Demo</a>
+          <a class="btn btn--ghost btn--lg" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="industry_hero" data-track-label="{{ind.slug}}">
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>Hear It Live
+          </a>
+        </div>
+      </div>
+      <figure class="ind__snippet ind__snippet--hero">
+        <figcaption class="mono"><span class="live-dot" aria-hidden="true"></span>Live transcript · {{ind.name}}</figcaption>
+        {{ind.snippetHtml}}
+        <p class="snip-booked"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Handled. Summary sent to you.</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--warm" aria-labelledby="uc-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">For {{ind.nameLower}}</p>
+        <h2 class="h2" id="uc-title">What it handles for you.</h2>
+      </div>
+      <ol class="ucs">{{ind.useCasesHtml}}</ol>
+    </div>
+  </section>
+
+  <section class="section" id="demos" aria-labelledby="demo-title">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div>
+          <p class="eyebrow">Hear it for yourself</p>
+          <h2 class="h2" id="demo-title">Hear a real call.</h2>
+        </div>
+        <p class="lead">Natural voice, your details, and a clear next step on every call.</p>
+      </div>
+      {{ind.demoHtml}}
+      <div class="liveline">
+        <div class="liveline__copy">
+          <p class="eyebrow eyebrow--light"><span class="live-dot" aria-hidden="true"></span>Live demo line · open now</p>
+          <p class="liveline__title">Call it. Pretend you’re a customer.</p>
+          <p class="liveline__sub">It picks up on the first ring, any time of day.</p>
+        </div>
+        <a class="liveline__num mono" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="industry_demo" data-track-label="{{ind.slug}}"><span class="liveline__ring" aria-hidden="true"></span>{{site.demoPhone.display}}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink final" aria-labelledby="final-title">
+    <canvas class="final__wave" data-ambient aria-hidden="true"></canvas>
+    <div class="wrap final__center">
+      <p class="eyebrow eyebrow--light"><span class="live-dot" aria-hidden="true"></span>Live in {{site.goLiveDays}} days</p>
+      <h2 class="final__title" id="final-title">Never miss<br>another call.</h2>
+      <p class="lead">See an AI receptionist built for {{ind.nameLower}}, trained on your services, answering your calls.</p>
+      <a class="btn btn--primary btn--lg" href="{{root}}book-demo/" data-track="cta_book_demo" data-track-location="industry_final" data-track-label="{{ind.slug}}">Book Your Free Demo</a>
+      <div class="chips"><span class="mono muted-text">Other industries:</span>{{ind.others}}</div>
+    </div>
+  </section>
+</main>
+{{> footer}}
+</body>
+</html>
