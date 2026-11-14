@@ -108,7 +108,7 @@ ${industries
       <ul class="ind__uses">
         ${ind.useCases.map(([t, d]) => `<li><strong>${esc(t)}</strong><span>${esc(d)}</span></li>`).join('')}
       </ul>
-      <a class="link-arrow" href="industries/${ind.slug}/" data-track="industry_page" data-track-label="${ind.slug}">See NeverMissed for ${esc(ind.inSentence)} <span aria-hidden="true">→</span></a>
+      <a class="btn btn--primary btn--lg" href="industries/${ind.slug}/" data-track="industry_page" data-track-label="${ind.slug}">See NeverMissed for ${esc(ind.inSentence)}</a>
     </div>
     <figure class="ind__snippet">
       <figcaption class="mono"><span class="live-dot" aria-hidden="true"></span>Live transcript · ${esc(ind.name)}</figcaption>

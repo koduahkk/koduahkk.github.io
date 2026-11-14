@@ -819,3 +819,11 @@ html:not(.js) .faq__a { grid-template-rows: 1fr; }
 /* Light card inside a dark section: restore paper-context colors */
 .booking .ok-text { color: var(--green-ink); }
 .booking :focus-visible { outline-color: var(--ink); }
+
+/* Industry panel CTA: long names ("gyms & fitness studios") wrap instead of overflowing on phones */
+.ind__copy .btn { max-width: 100%; white-space: normal; text-align: center; line-height: 1.25; padding-block: 12px; }
+@media (max-width: 559px) { .ind__copy .btn { width: 100%; } }
+
+/* Flip cards: let the middle text column shrink so the timestamp stays on screen */
+.flip__face > div { min-width: 0; }
+@media (max-width: 479px) { .flipstack .flip { margin-left: 0; } }
