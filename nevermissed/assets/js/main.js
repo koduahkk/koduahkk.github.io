@@ -753,6 +753,34 @@
     });
   }
 
+  /* ---------- "Book a Demo" links: show the whole form ------------
+     Same-page links to #book scroll to the form itself (on phones it sits
+     below the copy), leaving it fully visible under the sticky nav. */
+  function initBookLinks() {
+    const section = $('#book');
+    const card = section && $('.booking', section);
+    if (!card) return;
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href="#book"]');
+      if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      const nav = $('[data-nav]');
+      const navH = (nav ? nav.offsetHeight : 64) + 12;
+      const sideBySide = card.getBoundingClientRect().top - section.getBoundingClientRect().top < 200;
+      const target = sideBySide ? section : card;
+      // On wide screens centre the form in the space under the nav when it fits; otherwise align its top.
+      const r = card.getBoundingClientRect();
+      const room = window.innerHeight - navH;
+      let y = target.getBoundingClientRect().top + window.scrollY - navH;
+      if (sideBySide) y = r.top + window.scrollY - navH - Math.max(0, (room - r.height) / 2);
+      window.scrollTo({ top: Math.max(0, y), behavior: RM ? 'auto' : 'smooth' });
+      try { history.replaceState(null, '', '#book'); } catch (err) { /* sandboxed */ }
+      // Move keyboard focus to the form without jumping the page.
+      const form = $('[data-form]:not([hidden])', card) || $('[data-booking-done]', card);
+      if (form) { if (!form.hasAttribute('tabindex')) form.setAttribute('tabindex', '-1'); form.focus({ preventScroll: true }); }
+    });
+  }
+
   /* ---------- Exit-intent / scroll-depth nudge ---------------------
      Shows once per session, never on top of the booking form,
      never as a modal. */
@@ -831,7 +859,7 @@
   const boot = () => {
     [initNav, initMenu, initMobileBar, initClock, initReveal, initCounters, initCallCard, initFlipStack,
       initCalculator, initPlayers, initHours, initCalendar, initLang, initTimeline, initTabs, initBilling, initFaq,
-      initBooking, initNudge, initAmbient].forEach((fn) => {
+      initBooking, initBookLinks, initNudge, initAmbient].forEach((fn) => {
       try { fn(); } catch (err) { console.error('[NeverMissed]', fn.name, err); }
     });
   };
