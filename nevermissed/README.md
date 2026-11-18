@@ -87,7 +87,6 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | Industry sample calls for Medical, Plumbing & Electrical, Gyms & Fitness, Real Estate, Auto | add to `demos`, set `demo:` on the industry |
 | All pricing: tiers, prices, minutes, setup fee, annual discount | `pricing` in `src/config.mjs` |
 | "No contracts. Cancel anytime." | pricing section + last FAQ |
-| Integrations list | marquee in `src/pages/index.html` (section 09) |
 | Comparison "from $299" | section 10 |
 | Case studies (metric, quote, name, business, photo). **Use real ones only.** | section 11 |
 | HIPAA / BAA / data retention, outage failover | `faqs` in `src/config.mjs` |
