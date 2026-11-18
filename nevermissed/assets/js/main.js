@@ -645,7 +645,8 @@
       });
       $$('.tier').forEach((tier) => {
         const note = $('[data-billing-note]', tier);
-        if ($('.price__amount[data-monthly]', tier)) note.textContent = mode === 'annual' ? 'Per month, billed annually' : 'Billed monthly';
+        const amount = $('.price__amount[data-monthly]', tier);
+        if (amount) note.textContent = mode === 'annual' && amount.dataset.annualTotal ? `Per month · ${amount.dataset.annualTotal} billed yearly` : 'Billed monthly';
       });
       track('pricing_toggle', { label: mode });
     }));

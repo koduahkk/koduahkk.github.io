@@ -95,12 +95,14 @@ export const results = [
 ];
 
 /* --- Pricing ---------------------------------------------------------
-   Monthly prices and setup fees are confirmed. To offer annual billing, set
-   `annual` (the per-month price when billed yearly) on each tier: the
-   Monthly/Annual toggle appears automatically. Leave it null to hide it.
+   Monthly prices and setup fees are confirmed.
+   Annual billing = "N months free": the build sets each tier's annual price to
+   monthly × (12 − N) ÷ 12, rounded DOWN so the yearly total never exceeds the
+   promise (e.g. $399 → $332/mo, $3,984/yr). Set `annual` on a tier to override.
+   Set annualMonthsFree to 0 to hide the Monthly/Annual toggle.
    [CONFIRM] included minutes and feature lists. */
 export const pricing = {
-  annualDiscountNote: '2 months free',
+  annualMonthsFree: 2,
   tiers: [
     {
       id: 'starter',

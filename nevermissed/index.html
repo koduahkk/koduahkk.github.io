@@ -897,7 +897,10 @@
       <p class="eyebrow">Pricing</p>
       <h2 class="h2" id="pricing-title">Less than one missed job a month.</h2>
       <p class="lead">Simple, flat pricing. No contracts. Cancel anytime.</p>
-      
+      <div class="billing" role="group" aria-label="Billing period" data-billing>
+        <button type="button" aria-pressed="true" data-billing-opt="monthly">Monthly</button>
+        <button type="button" aria-pressed="false" data-billing-opt="annual">Annual <span class="mono billing__save">2 months free</span></button>
+      </div>
     </div>
     <div class="tiers">
       
@@ -905,7 +908,7 @@
   
   <h3 class="tier__name" id="tier-starter">Starter</h3>
   <p class="tier__blurb">For a single location that wants nights and weekends covered.</p>
-  <p class="price"><span class="price__amount" data-monthly="$399">$399</span><span class="price__per">/mo</span></p>
+  <p class="price"><span class="price__amount" data-monthly="$399" data-annual="$332" data-annual-total="$3,984">$399</span><span class="price__per">/mo</span></p>
   <p class="tier__billing mono" data-billing-note>Billed monthly</p>
   <ul class="tier__meta mono">
     <li>300 minutes / mo</li>
@@ -920,7 +923,7 @@
   <p class="tier__badge mono">Most popular</p>
   <h3 class="tier__name" id="tier-growth">Growth</h3>
   <p class="tier__blurb">For busy offices that live on the phone all day.</p>
-  <p class="price"><span class="price__amount" data-monthly="$699">$699</span><span class="price__per">/mo</span></p>
+  <p class="price"><span class="price__amount" data-monthly="$699" data-annual="$582" data-annual-total="$6,984">$699</span><span class="price__per">/mo</span></p>
   <p class="tier__billing mono" data-billing-note>Billed monthly</p>
   <ul class="tier__meta mono">
     <li>1,000 minutes / mo</li>

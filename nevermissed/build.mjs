@@ -163,12 +163,20 @@ const industryFooterLinks = (root) =>
 const industryOptions = industries.map((i) => `<option value="${i.slug}">${esc(i.name)}</option>`).join('') + '<option value="other">Other</option>';
 
 // Pricing cards with monthly/annual values in data attributes.
+// Annual prices: "N months free", rounded down so the yearly total is never
+// more than (12 − N) months at the monthly price.
+const monthsFree = pricing.annualMonthsFree || 0;
+for (const t of pricing.tiers) {
+  if (t.monthly != null && t.annual == null && monthsFree > 0) t.annual = Math.floor((t.monthly * (12 - monthsFree)) / 12);
+}
+pricing.annualDiscountNote = `${monthsFree} months free`;
+
 const pricingCards = pricing.tiers
   .map((t) => {
     const price =
       t.monthly == null
         ? `<span class="price__amount">Custom</span>`
-        : `<span class="price__amount" data-monthly="${fmtMoney(t.monthly)}"${t.annual ? ` data-annual="${fmtMoney(t.annual)}"` : ''}>${fmtMoney(t.monthly)}</span><span class="price__per">/mo</span>`;
+        : `<span class="price__amount" data-monthly="${fmtMoney(t.monthly)}"${t.annual ? ` data-annual="${fmtMoney(t.annual)}" data-annual-total="${fmtMoney(t.annual * 12)}"` : ''}>${fmtMoney(t.monthly)}</span><span class="price__per">/mo</span>`;
     const cta =
       t.monthly == null
         ? `<a class="btn btn--ghost btn--block" href="#book" data-track="cta_pricing" data-track-label="${t.id}">Talk to us</a>`
