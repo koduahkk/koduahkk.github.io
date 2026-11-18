@@ -30,7 +30,7 @@ export const site = {
   // Set to a Formspree / Basin / your own endpoint to POST the form as JSON.
   formEndpoint: '',
 
-  goLiveDays: ph('X', 'Placeholder: confirm your typical go-live time in days'),
+  goLiveDays: '5',
   clientCount: '200',
   // Logo strip under the hero ("Trusted by 200+ businesses").
   // [CONFIRM] Only list real clients who have agreed to be shown.
