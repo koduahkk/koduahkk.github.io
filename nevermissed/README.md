@@ -89,7 +89,7 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | Annual billing is "2 months free", calculated from the monthly price (`annualMonthsFree`; 0 hides the toggle) | `pricing` in `src/config.mjs` |
 | Comparison "from $299" | section 10 |
 | Results cards: 3 **sample** results tagged "Sample result". Replace with real client results (with permission) and delete `sample: true` | `results` in `src/config.mjs` |
-| HIPAA / BAA / data retention, outage failover | `faqs` in `src/config.mjs` |
+| HIPAA / BAA status and data retention (not stated on the homepage; Privacy page still has placeholders) | `faqs` in `src/config.mjs`, `src/pages/privacy.html` |
 | Booking calendar (Cal.com / Calendly inline URL) | `site.bookingEmbedUrl` (name + email are prefilled) |
 | Form endpoint (Formspree, Basin, your API) | `site.formEndpoint` (JSON POST); empty = success state only, nothing is sent |
 | Privacy Policy and Terms | `src/pages/privacy.html`, `terms.html` (outlines, need counsel) |

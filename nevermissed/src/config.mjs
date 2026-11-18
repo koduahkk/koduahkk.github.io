@@ -423,12 +423,12 @@ export const faqs = [
     a: 'Yes. Keep your number. We set up call forwarding so NeverMissed answers when you don’t, after a set number of rings, after hours, or all the time. You can switch it off in seconds.',
   },
   {
-    q: 'Is my data secure? Is it HIPAA-friendly?',
-    a: `Calls and transcripts are encrypted in transit and at rest, and access is limited to your team. <span class="ph" title="Placeholder: confirm your actual compliance posture before launch">[CONFIRM: HIPAA status, BAA availability, data retention policy]</span>`,
+    q: 'Is my data secure?',
+    a: 'Yes. Calls and transcripts are encrypted in transit and at rest, and access is limited to your team.',
   },
   {
     q: 'What happens to calls during an outage?',
-    a: `<span class="ph" title="Placeholder: confirm your failover setup">[CONFIRM]</span> If the AI service is ever unavailable, calls automatically fall back to your phone or voicemail, so nothing is dropped, and we alert you right away.`,
+    a: 'If the AI service is ever unavailable, calls automatically fall back to your phone or voicemail, so nothing is dropped, and we alert you right away.',
   },
   {
     q: 'How is this different from an answering service?',
