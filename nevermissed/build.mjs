@@ -81,6 +81,21 @@ function demoCard(d, { compact = false } = {}) {
 
 const demoCards = demos.map((d) => demoCard(d)).join('\n');
 
+// Client wordmarks for the hero trust strip (monochrome, one icon each).
+const clientIcons = {
+  scissors: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6 20 18M8.6 16.4 20 6"/>',
+  sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/>',
+  dumbbell: '<path d="M3 10v4M6.5 7.5v9M17.5 7.5v9M21 10v4M6.5 12h11"/>',
+  pole: '<rect x="8.5" y="3" width="7" height="18" rx="3.5"/><path d="M8.6 9.5l6.8-3.5M8.6 14.5l6.8-3.5M8.6 19.5l6.8-3.5"/>',
+  tooth: '<path d="M7.5 4c1.9 0 2.8.9 4.5.9s2.6-.9 4.5-.9c2.6 0 3.7 2.4 3.2 5-.6 3-1.5 4-2 7-.4 2.3-1 4-2.2 4-1.6 0-1.4-5-3.5-5s-1.9 5-3.5 5c-1.2 0-1.8-1.7-2.2-4-.5-3-1.4-4-2-7-.5-2.6.6-5 3.2-5z"/>',
+  flame: '<path d="M12 3c.8 3.2 5 5.3 5 10.2a5 5 0 0 1-10 0c0-2.6 1.4-4.2 2.5-5.2.3 2 1.4 3.1 2.5 3.1-.9-2.9-.2-5.6 0-8.1z"/>',
+};
+const clientLogos = site.clients
+  .map(
+    (c) => `<li class="cl cl--${c.style}"><svg class="cl__icon" viewBox="0 0 24 24" aria-hidden="true">${clientIcons[c.icon]}</svg><span class="cl__word" aria-hidden="true"><span class="cl__main">${esc(c.main)}</span>${c.sub ? `<span class="cl__sub">${esc(c.sub)}</span>` : ''}</span><span class="sr-only">${esc(c.name)}</span></li>`
+  )
+  .join('\n');
+
 function snippetHtml(snippet) {
   return snippet
     .map(([who, text]) => `<p class="snip snip--${who}"><span class="mono">${who === 'ai' ? 'AI' : 'Caller'}</span>${esc(text)}</p>`)
@@ -194,7 +209,7 @@ const ld = (...objs) => objs.map((o) => `<script type="application/ld+json">${JS
 const base = {
   site,
   year: new Date().getFullYear(),
-  blocks: { demoCards, industryTabs, pricingCards, faqItems, industryOptions },
+  blocks: { demoCards, industryTabs, pricingCards, faqItems, industryOptions, clientLogos },
 };
 
 function page({ src, out, depth, title, description, path, extra = {}, schema = ld(orgSchema) }) {

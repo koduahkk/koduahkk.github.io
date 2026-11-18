@@ -82,7 +82,7 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | Demo line number `(555) 010-0199` and sales number `(555) 010-0123` | `src/config.mjs` → `site.demoPhone`, `site.phone` |
 | Email, address, social links, real domain (`site.url`, used for canonical, OG and schema) | `src/config.mjs` → `site` |
 | Go-live time ("Live in **X** days") | `site.goLiveDays` |
-| Client count ("Trusted by **X**+") + 5 client logos | `site.clientCount`; logo boxes in `src/pages/index.html` (trust strip) |
+| Client logo strip (6 businesses under "Trusted by 200+"). **Confirm each is a real client who agreed to be shown**, or swap in ones who are | `site.clients` in `src/config.mjs` (name, icon, wordmark style); count in `site.clientCount` |
 | Supported languages | `site.languages`, plus the cycle list in `assets/js/main.js` (`initLang`) |
 | Problem stats **62%** and **80%** (commonly cited, unsourced here) | `src/pages/index.html` problem section. Verify, cite, or replace. (128 hrs = 168 − 40 is arithmetic.) |
 | Audio recordings for the 4 sample calls (currently scripted, timer-driven) | add files to `assets/audio/`, set `src` + line timings in `demos` |

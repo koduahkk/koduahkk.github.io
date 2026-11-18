@@ -205,6 +205,8 @@ body.menu-open { overflow: hidden; }
 .hero__status .sep { color: var(--gray-400); }
 @media (max-width: 479px) { .hero__status .sep--wrap { display: none; } .hero__status .hero__time { flex-basis: 100%; } }
 .hero__status a { text-decoration: underline; text-underline-offset: .2em; }
+.hero__status .hero__phone { color: var(--ink); text-decoration-color: var(--gray-400); }
+.hero__status .hero__phone:hover { text-decoration-color: var(--green-ink); }
 .hero__title { font: 700 var(--fs-hero)/var(--lh-tight) var(--font-display); letter-spacing: var(--tracking-display); }
 .hero__title .line { display: block; }
 /* Homepage hero: one sentence per line at every width. The longest line
@@ -304,8 +306,45 @@ body.menu-open { overflow: hidden; }
 /* ---- Trust strip ---- */
 .trust { margin-top: clamp(3rem, 2rem + 4vw, 5.5rem); display: grid; gap: var(--s-4); align-items: center; border-top: var(--hair); padding-top: var(--s-5); }
 .trust__label { font-size: var(--fs-mono); color: var(--gray-600); text-transform: uppercase; letter-spacing: .06em; }
-.trust__logos { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
-.logo-ph { height: 44px; display: grid; place-items: center; border: 1px dashed var(--gray-400); border-radius: var(--r-sm); font: 500 .7rem/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--gray-600); }
+.trust__logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; align-items: center; }
+@media (min-width: 560px) { .trust__logos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Wide screens: one row, natural widths, spread evenly */
+@media (min-width: 1280px) {
+  .trust__logos { display: flex; justify-content: space-between; gap: 24px; }
+  .cl { gap: 7px; }
+  .cl--barber .cl__main { font-size: .8rem; }
+  .cl--dental .cl__main, .cl--dental .cl__sub { font-size: .98rem; }
+  .cl--salon .cl__main { font-size: 1.05rem; }
+}
+/* Very small phones: tighten the marks so two fit per row */
+@media (max-width: 359px) {
+  .trust__logos { gap: 16px 8px; }
+  .cl { gap: 5px; }
+  .cl__icon { display: none; }
+  .cl--salon .cl__main { font-size: .95rem; }
+  .cl--detail .cl__main, .cl--hvac .cl__main { font-size: .78rem; letter-spacing: .1em; }
+  .cl--gym .cl__main { font-size: 1rem; }
+  .cl--barber .cl__main { font-size: .72rem; }
+  .cl--dental .cl__main, .cl--dental .cl__sub { font-size: .88rem; }
+}
+
+/* Client wordmarks: one monochrome icon + a type treatment per business */
+.cl { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; color: var(--gray-600); transition: color var(--t-fast); white-space: nowrap; }
+.cl:hover { color: var(--ink); }
+.cl__icon { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.cl__word { display: grid; line-height: 1; }
+.cl__sub { font-size: .52rem; letter-spacing: .22em; text-transform: uppercase; margin-top: 3px; }
+.cl--salon .cl__main { font: 500 1.15rem/1 var(--font-display); letter-spacing: .01em; }
+.cl--detail .cl__main { font: 600 .9rem/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; }
+.cl--detail .cl__sub { font-family: var(--font-body); letter-spacing: .34em; }
+.cl--gym .cl__main { font: 700 1.2rem/1 var(--font-display); letter-spacing: -0.03em; text-transform: uppercase; transform: skewX(-9deg); }
+.cl--gym .cl__icon { stroke-width: 2.4; }
+.cl--barber .cl__main { font: 500 .88rem/1 var(--font-mono); letter-spacing: -0.01em; }
+.cl--dental .cl__word { display: flex; align-items: baseline; gap: 3px; }
+.cl--dental .cl__main { font: 600 1.05rem/1 var(--font-body); letter-spacing: -0.02em; }
+.cl--dental .cl__sub { font: 400 1.05rem/1 var(--font-body); letter-spacing: -0.02em; text-transform: none; margin: 0; }
+.cl--hvac .cl__main { font: 600 .9rem/1 var(--font-display); letter-spacing: .24em; text-transform: uppercase; }
+.cl--hvac .cl__sub { font-family: var(--font-mono); letter-spacing: .12em; }
 @media (min-width: 900px) { .trust { grid-template-columns: 220px 1fr; } }
 
 /* =========================================================

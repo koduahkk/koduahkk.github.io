@@ -31,7 +31,19 @@ export const site = {
   formEndpoint: '',
 
   goLiveDays: ph('X', 'Placeholder: confirm your typical go-live time in days'),
-  clientCount: ph('X', 'Placeholder: real number of businesses served'),
+  clientCount: '200',
+  // Logo strip under the hero ("Trusted by 200+ businesses").
+  // [CONFIRM] Only list real clients who have agreed to be shown.
+  // icon: scissors | sparkle | dumbbell | pole | tooth | flame
+  // style: picks the wordmark treatment in main.css (.cl--<style>)
+  clients: [
+    { name: 'Person Salon', icon: 'scissors', style: 'salon', main: 'person salon' },
+    { name: 'Hercules Detailing', icon: 'sparkle', style: 'detail', main: 'Hercules', sub: 'Detailing' },
+    { name: 'Fits Gym', icon: 'dumbbell', style: 'gym', main: 'Fits Gym' },
+    { name: 'Sam\u2019s Barbering', icon: 'pole', style: 'barber', main: 'Sam\u2019s Barbering' },
+    { name: 'Brightside Dental', icon: 'tooth', style: 'dental', main: 'brightside', sub: 'dental' },
+    { name: 'Northline Heating & Air', icon: 'flame', style: 'hvac', main: 'Northline', sub: 'Heating & Air' },
+  ],
   languages: `English, Spanish ${ph('+ more', 'Placeholder: list the languages you support')}`,
   social: {
     linkedin: '#', // [PLACEHOLDER]

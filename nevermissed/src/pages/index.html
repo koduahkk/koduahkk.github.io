@@ -18,7 +18,7 @@
       <p class="hero__status mono">
         <span class="live-dot" aria-hidden="true"></span>
         <span>Line open</span><span class="sep" aria-hidden="true">/</span>
-        <span>24·7·365</span><span class="sep sep--wrap" aria-hidden="true">/</span>
+        <a class="hero__phone" href="tel:{{site.demoPhone.tel}}" data-track="cta_call_demo" data-track-location="hero_status">{{site.demoPhone.display}}</a><span class="sep sep--wrap" aria-hidden="true">/</span>
         <span class="hero__time">Your time <time data-clock>--:--</time></span>
       </p>
       <h1 class="hero__title" id="hero-title">
@@ -69,12 +69,8 @@
 
   <div class="wrap trust">
     <p class="trust__label mono">Trusted by {{site.clientCount}}+ businesses</p>
-    <ul class="trust__logos" aria-label="Client logos (placeholders)">
-      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
-      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
-      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
-      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
-      <li class="logo-ph" title="Placeholder: client logo">Client logo</li>
+    <ul class="trust__logos" aria-label="Businesses that use NeverMissed">
+      {{blocks.clientLogos}}
     </ul>
   </div>
 </section>
