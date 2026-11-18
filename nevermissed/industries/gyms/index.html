@@ -32,17 +32,24 @@
 <link rel="stylesheet" href="../../assets/css/main.css">
 <script>
   document.documentElement.classList.add('js');
-  // A refresh always starts at the top of the page (links to #sections still jump there).
+  // Every page load (including a refresh, also inside embedded previews) starts
+  // at the top. Exception: a link to a #section on a fresh visit still jumps there.
+  // Re-applied briefly after load to beat any restored scroll position, and
+  // abandoned as soon as the visitor scrolls on their own.
   (function () {
     try {
-      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-      if (!nav || nav.type !== 'reload') return;
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-      var top = function () { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      var isReload = nav && nav.type === 'reload';
+      if (location.hash && location.hash.length > 1 && !isReload) return;
+      var userMoved = false;
+      var stop = function () { userMoved = true; };
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (t) { window.addEventListener(t, stop, { passive: true, once: true }); });
+      var top = function () { if (!userMoved && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
       top();
       document.addEventListener('DOMContentLoaded', top);
-      window.addEventListener('load', function () { top(); setTimeout(top, 0); });
-    } catch (e) { /* older browsers: keep default behaviour */ }
+      window.addEventListener('load', function () { [0, 100, 300, 700, 1200].forEach(function (ms) { setTimeout(top, ms); }); });
+    } catch (e) { /* very old browsers: keep the default behaviour */ }
   })();
 </script>
 <script src="../../assets/js/main.js" defer></script>
