@@ -84,7 +84,6 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | Go-live time ("Live in **X** days") | `site.goLiveDays` |
 | Client logo strip (6 businesses under "Trusted by 200+"). **Confirm each is a real client who agreed to be shown**, or swap in ones who are | `site.clients` in `src/config.mjs` (name, icon, wordmark style); count in `site.clientCount` |
 | Supported languages | `site.languages`, plus the cycle list in `assets/js/main.js` (`initLang`) |
-| Problem stats **62%** and **80%** (commonly cited, unsourced here) | `src/pages/index.html` problem section. Verify, cite, or replace. (128 hrs = 168 − 40 is arithmetic.) |
 | Audio recordings for the 4 sample calls (currently scripted, timer-driven) | add files to `assets/audio/`, set `src` + line timings in `demos` |
 | Industry sample calls for Medical, Plumbing & Electrical, Gyms & Fitness, Real Estate, Auto | add to `demos`, set `demo:` on the industry |
 | All pricing: tiers, prices, minutes, setup fee, annual discount | `pricing` in `src/config.mjs` |
