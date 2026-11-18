@@ -758,7 +758,10 @@
      never as a modal. */
   function initNudge() {
     const el = $('[data-nudge]');
-    if (!el || store.get('nm_nudged') || store.get('nm_booked')) return;
+    // Shows at most once per page load. It stays away for the rest of the
+    // session only once the visitor has dealt with it (closed it, pressed Esc,
+    // tapped Call) or booked a demo; ignoring it lets it return next visit.
+    if (!el || store.get('nm_nudge_done') || store.get('nm_booked')) return;
     const book = $('#book');
     const t0 = Date.now();
     let shown = false;
@@ -767,12 +770,13 @@
       if (book) { const r = book.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) return; }
       if (document.body.classList.contains('menu-open')) return;
       shown = true;
-      store.set('nm_nudged', '1');
       el.hidden = false;
       track('nudge_shown', { label: why });
     };
-    const hide = () => { el.hidden = true; };
+    const done = () => store.set('nm_nudge_done', '1');
+    const hide = () => { el.hidden = true; done(); };
     $('[data-nudge-close]', el).addEventListener('click', hide);
+    $('a', el).addEventListener('click', done);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !el.hidden) hide(); });
     document.addEventListener('mouseout', (e) => { if (!e.relatedTarget && e.clientY <= 0) show('exit_intent'); });
     onScroll(() => {
