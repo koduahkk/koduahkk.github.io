@@ -674,12 +674,15 @@ input[type=range]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px var(--
    ========================================================= */
 .cases { display: grid; gap: 12px; }
 @media (min-width: 900px) { .cases { grid-template-columns: repeat(3, 1fr); } }
-.case { display: flex; flex-direction: column; gap: 14px; padding: clamp(1.25rem, 1rem + 1vw, 2rem); border: 1px dashed var(--gray-400); border-radius: var(--r-lg); }
+.case { display: flex; flex-direction: column; gap: 14px; padding: clamp(1.25rem, 1rem + 1vw, 2rem); border: var(--hair-strong); border-radius: var(--r-lg); background: #FBF9F5; }
+.case__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 4px; }
+.case__sample { font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-600); padding: 5px 8px; border: 1px dashed var(--gray-400); border-radius: var(--r-pill); cursor: help; }
 .case__metric { font: 500 clamp(3rem, 2rem + 3vw, 4.5rem)/1 var(--font-mono); letter-spacing: -0.05em; color: var(--green-ink); }
 .case__metric-label { font-size: .72rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: .05em; }
-.case__quote { font-size: 1.05rem; line-height: 1.5; padding-top: 14px; border-top: var(--hair); color: var(--gray-600); }
+.case__quote { font-size: 1.05rem; line-height: 1.5; padding-top: 14px; border-top: var(--hair); color: var(--ink); }
 .case__who { display: flex; gap: 12px; align-items: center; margin-top: auto; font-size: var(--fs-sm); }
-.avatar { width: 44px; height: 44px; border-radius: 50%; border: 1px dashed var(--gray-400); display: grid; place-items: center; font-family: var(--font-mono); color: var(--gray-600); flex: none; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--green); display: grid; place-items: center; font: 500 .8rem/1 var(--font-mono); flex: none; }
+.avatar--photo { object-fit: cover; background: var(--gray-200); }
 
 /* =========================================================
    PRICING

@@ -519,7 +519,7 @@
 </section>
 
 <!-- =========================================================
-     11 · RESULTS (placeholders only, no invented reviews)
+     11 · RESULTS — cards come from `results` in src/config.mjs
      ========================================================= -->
 <section class="section results" id="results" aria-labelledby="results-title">
   <div class="wrap">
@@ -528,36 +528,10 @@
         <p class="eyebrow">Results</p>
         <h2 class="h2" id="results-title">Real businesses.<br>Real numbers.</h2>
       </div>
-      <p class="lead"><span class="ph" title="Placeholder: add real case studies with permission">Case studies coming soon. These cards are templates for real client results, quotes and photos.</span></p>
+      <p class="lead">{{blocks.resultsLead}}</p>
     </div>
     <div class="cases">
-      <article class="case reveal">
-        <p class="case__metric"><span class="ph" title="Placeholder: real metric">+X%</span></p>
-        <p class="case__metric-label mono">[Metric, e.g. booked appointments in 60 days]</p>
-        <blockquote class="case__quote"><p><span class="ph" title="Placeholder: real client quote">“Real client quote goes here. One or two sentences about the outcome, in their words.”</span></p></blockquote>
-        <footer class="case__who">
-          <span class="avatar" aria-hidden="true">?</span>
-          <span><strong>[Client name]</strong><br><span class="muted-text">[Role, Business · Industry]</span></span>
-        </footer>
-      </article>
-      <article class="case reveal">
-        <p class="case__metric"><span class="ph" title="Placeholder: real metric">$X</span></p>
-        <p class="case__metric-label mono">[Metric, e.g. revenue recovered per month]</p>
-        <blockquote class="case__quote"><p><span class="ph" title="Placeholder: real client quote">“Real client quote goes here. One or two sentences about the outcome, in their words.”</span></p></blockquote>
-        <footer class="case__who">
-          <span class="avatar" aria-hidden="true">?</span>
-          <span><strong>[Client name]</strong><br><span class="muted-text">[Role, Business · Industry]</span></span>
-        </footer>
-      </article>
-      <article class="case reveal">
-        <p class="case__metric"><span class="ph" title="Placeholder: real metric">X</span></p>
-        <p class="case__metric-label mono">[Metric, e.g. after-hours calls answered last month]</p>
-        <blockquote class="case__quote"><p><span class="ph" title="Placeholder: real client quote">“Real client quote goes here. One or two sentences about the outcome, in their words.”</span></p></blockquote>
-        <footer class="case__who">
-          <span class="avatar" aria-hidden="true">?</span>
-          <span><strong>[Client name]</strong><br><span class="muted-text">[Role, Business · Industry]</span></span>
-        </footer>
-      </article>
+      {{blocks.resultCards}}
     </div>
   </div>
 </section>

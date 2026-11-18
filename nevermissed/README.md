@@ -88,7 +88,7 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | All pricing: tiers, prices, minutes, setup fee, annual discount | `pricing` in `src/config.mjs` |
 | "No contracts. Cancel anytime." | pricing section + last FAQ |
 | Comparison "from $299" | section 10 |
-| Case studies (metric, quote, name, business, photo). **Use real ones only.** | section 11 |
+| Results cards: 3 **sample** results tagged "Sample result". Replace with real client results (with permission) and delete `sample: true` | `results` in `src/config.mjs` |
 | HIPAA / BAA / data retention, outage failover | `faqs` in `src/config.mjs` |
 | Booking calendar (Cal.com / Calendly inline URL) | `site.bookingEmbedUrl` (name + email are prefilled) |
 | Form endpoint (Formspree, Basin, your API) | `site.formEndpoint` (JSON POST); empty = success state only, nothing is sent |

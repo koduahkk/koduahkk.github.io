@@ -52,6 +52,48 @@ export const site = {
   },
 };
 
+/* --- Results / case studies (homepage "Results" section) -------------
+   HOW TO ADD A REAL RESULT: replace an entry with the client's real numbers
+   and words (with their permission) and delete `sample: true`.
+   Entries marked `sample: true` show a visible "Sample result" tag so they
+   are never presented as a real customer's outcome. Up to 3 cards fit a row.
+     metric  the big number           metricLabel  what it measures
+     quote   1–2 sentences, their words
+     who     name or role (e.g. "Dana Ruiz, Owner" or "Owner")
+     business, industry, initials (avatar; or set photo: 'assets/img/clients/x.jpg') */
+export const results = [
+  {
+    sample: true,
+    metric: '+31%',
+    metricLabel: 'more appointments booked in the first 60 days',
+    quote: 'We used to lose bookings every time we were mid-color. Now every call gets answered, and last-minute cancellations get filled before we even notice.',
+    who: 'Owner',
+    business: 'Person Salon',
+    industry: 'Salons & Spas',
+    initials: 'PS',
+  },
+  {
+    sample: true,
+    metric: '$8,400',
+    metricLabel: 'in jobs booked from after-hours calls, month one',
+    quote: 'Most customers call after work, when we\u2019re out detailing. Those calls used to hit voicemail. Now they\u2019re booked before we open the next morning.',
+    who: 'Owner',
+    business: 'Hercules Detailing',
+    industry: 'Auto',
+    initials: 'HD',
+  },
+  {
+    sample: true,
+    metric: '142',
+    metricLabel: 'trial classes booked after hours in 90 days',
+    quote: 'People decide to join at 10 PM. Now someone answers, books the trial and texts the details, and our front desk finally gets to focus on members.',
+    who: 'General Manager',
+    business: 'Fits Gym',
+    industry: 'Gyms & Fitness',
+    initials: 'FG',
+  },
+];
+
 /* --- Pricing [PLACEHOLDER: every number here is a sample, edit freely] --- */
 export const pricing = {
   annualDiscountNote: '2 months free',

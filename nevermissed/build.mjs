@@ -14,7 +14,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { site, pricing, demos, industries, faqs } from './src/config.mjs';
+import { site, pricing, demos, industries, faqs, results } from './src/config.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const read = (p) => readFileSync(join(ROOT, p), 'utf8');
@@ -134,6 +134,29 @@ ${industries
   )
   .join('')}`;
 
+// Results cards. `sample: true` entries carry a visible "Sample result" tag.
+const resultCards = results
+  .map(
+    (r) => `
+<article class="case reveal${r.sample ? ' case--sample' : ''}">
+  <header class="case__top">
+    <span class="tag">${esc(r.industry)}</span>
+    ${r.sample ? '<span class="case__sample mono" title="Sample content for layout. Replace with a real client result in src/config.mjs">Sample result</span>' : ''}
+  </header>
+  <p class="case__metric">${esc(r.metric)}</p>
+  <p class="case__metric-label mono">${esc(r.metricLabel)}</p>
+  <blockquote class="case__quote"><p>\u201c${esc(r.quote)}\u201d</p></blockquote>
+  <footer class="case__who">
+    ${r.photo ? `<img class="avatar avatar--photo" src="${esc(r.photo)}" alt="" width="44" height="44" loading="lazy">` : `<span class="avatar" aria-hidden="true">${esc(r.initials || '')}</span>`}
+    <span><strong>${esc(r.business)}</strong><br><span class="muted-text">${esc(r.who)}</span></span>
+  </footer>
+</article>`
+  )
+  .join('');
+const resultsLead = results.some((r) => r.sample)
+  ? 'What answering every call looks like for businesses like yours. Cards tagged \u201cSample result\u201d show the layout until real client results are added.'
+  : 'What answering every call looks like for businesses like yours.';
+
 const industryFooterLinks = (root) =>
   industries.map((i) => `<li><a href="${root}industries/${i.slug}/">${esc(i.name)}</a></li>`).join('');
 
@@ -209,7 +232,7 @@ const ld = (...objs) => objs.map((o) => `<script type="application/ld+json">${JS
 const base = {
   site,
   year: new Date().getFullYear(),
-  blocks: { demoCards, industryTabs, pricingCards, faqItems, industryOptions, clientLogos },
+  blocks: { demoCards, industryTabs, pricingCards, faqItems, industryOptions, clientLogos, resultCards, resultsLead },
 };
 
 function page({ src, out, depth, title, description, path, extra = {}, schema = ld(orgSchema) }) {
