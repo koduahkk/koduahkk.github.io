@@ -30,7 +30,21 @@
 
 <link rel="stylesheet" href="../assets/css/tokens.css">
 <link rel="stylesheet" href="../assets/css/main.css">
-<script>document.documentElement.classList.add('js');</script>
+<script>
+  document.documentElement.classList.add('js');
+  // A refresh always starts at the top of the page (links to #sections still jump there).
+  (function () {
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      if (!nav || nav.type !== 'reload') return;
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      var top = function () { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+      top();
+      document.addEventListener('DOMContentLoaded', top);
+      window.addEventListener('load', function () { top(); setTimeout(top, 0); });
+    } catch (e) { /* older browsers: keep default behaviour */ }
+  })();
+</script>
 <script src="../assets/js/main.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"NeverMissed","url":"https://koduahkk.github.io/nevermissed/","logo":"https://koduahkk.github.io/nevermissed/assets/img/logo.png","slogan":"Every call answered. Every lead captured. Every hour of the day.","email":"hello@nevermissed.example","telephone":"+15550100123","description":"NeverMissed builds AI receptionists that answer every call 24/7, book and reschedule appointments and capture every lead for service businesses.","contactPoint":[{"@type":"ContactPoint","telephone":"+15550100123","contactType":"sales","availableLanguage":["English"]}]}</script>
 
