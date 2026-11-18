@@ -85,8 +85,8 @@ grep -rn 'class="ph\|\[PLACEHOLDER\|\[CONFIRM\|\[X\]' nevermissed/src
 | Supported languages | `site.languages`, plus the cycle list in `assets/js/main.js` (`initLang`) |
 | Audio recordings for the 4 sample calls (currently scripted, timer-driven) | add files to `assets/audio/`, set `src` + line timings in `demos` |
 | Industry sample calls for Medical, Plumbing & Electrical, Gyms & Fitness, Real Estate, Auto | add to `demos`, set `demo:` on the industry |
-| All pricing: tiers, prices, minutes, setup fee, annual discount | `pricing` in `src/config.mjs` |
-| "No contracts. Cancel anytime." | pricing section + last FAQ |
+| Included minutes and feature lists per tier (prices and setup fees are confirmed) | `pricing` in `src/config.mjs` |
+| Annual billing (optional): set `annual` per tier and the toggle reappears | `pricing` in `src/config.mjs` |
 | Comparison "from $299" | section 10 |
 | Results cards: 3 **sample** results tagged "Sample result". Replace with real client results (with permission) and delete `sample: true` | `results` in `src/config.mjs` |
 | HIPAA / BAA / data retention, outage failover | `faqs` in `src/config.mjs` |

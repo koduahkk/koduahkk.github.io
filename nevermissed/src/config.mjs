@@ -94,7 +94,11 @@ export const results = [
   },
 ];
 
-/* --- Pricing [PLACEHOLDER: every number here is a sample, edit freely] --- */
+/* --- Pricing ---------------------------------------------------------
+   Monthly prices and setup fees are confirmed. To offer annual billing, set
+   `annual` (the per-month price when billed yearly) on each tier: the
+   Monthly/Annual toggle appears automatically. Leave it null to hide it.
+   [CONFIRM] included minutes and feature lists. */
 export const pricing = {
   annualDiscountNote: '2 months free',
   tiers: [
@@ -102,10 +106,10 @@ export const pricing = {
       id: 'starter',
       name: 'Starter',
       blurb: 'For a single location that wants nights and weekends covered.',
-      monthly: 299,
-      annual: 249,
+      monthly: 399,
+      annual: null,
       minutes: '300 minutes / mo',
-      setup: '$[X] one-time setup',
+      setup: '$999 one-time setup',
       features: [
         '24/7 call answering',
         'Booking and rescheduling (1 calendar)',
@@ -119,10 +123,10 @@ export const pricing = {
       name: 'Growth',
       popular: true,
       blurb: 'For busy offices that live on the phone all day.',
-      monthly: 599,
-      annual: 499,
+      monthly: 699,
+      annual: null,
       minutes: '1,000 minutes / mo',
-      setup: '$[X] one-time setup',
+      setup: '$999 one-time setup',
       features: [
         'Everything in Starter',
         'Lead qualification and CRM sync',
@@ -430,6 +434,6 @@ export const faqs = [
   },
   {
     q: 'Do I need to sign a long contract?',
-    a: `<span class="ph" title="Placeholder: confirm your terms">[CONFIRM]</span> No contracts. Pay monthly and cancel anytime.`,
+    a: 'No contracts. Pay monthly and cancel anytime.',
   },
 ];

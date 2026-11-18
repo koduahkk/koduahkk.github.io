@@ -469,7 +469,7 @@
           </tr>
           <tr>
             <th scope="row">Monthly cost</th>
-            <td class="hl"><strong>Flat fee</strong>, from <span class="ph" title="Placeholder: sample price">$299</span></td>
+            <td class="hl"><strong>Flat fee</strong>, from {{blocks.fromPrice}}/mo</td>
             <td>Full salary + benefits</td>
             <td>Per-minute, adds up fast</td>
             <td>Free, but costs you leads</td>
@@ -544,16 +544,13 @@
     <div class="section-head section-head--center">
       <p class="eyebrow">Pricing</p>
       <h2 class="h2" id="pricing-title">Less than one missed job a month.</h2>
-      <p class="lead">Simple, flat pricing. <span class="ph" title="Placeholder: confirm contract terms">No contracts. Cancel anytime.</span></p>
-      <div class="billing" role="group" aria-label="Billing period" data-billing>
-        <button type="button" aria-pressed="true" data-billing-opt="monthly">Monthly</button>
-        <button type="button" aria-pressed="false" data-billing-opt="annual">Annual <span class="mono billing__save">2 months free</span></button>
-      </div>
+      <p class="lead">Simple, flat pricing. No contracts. Cancel anytime.</p>
+      {{blocks.billingToggle}}
     </div>
     <div class="tiers">
       {{blocks.pricingCards}}
     </div>
-    <p class="pricing__fine muted-text mono">Prices shown are samples. <span class="ph" title="Placeholder">[EDIT tiers, minutes, setup fees and overage rates in src/config.mjs]</span></p>
+    <p class="pricing__fine muted-text mono">One-time setup covers your discovery call, custom voice and script, integrations and testing.</p>
   </div>
 </section>
 
