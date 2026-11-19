@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+  <!-- Set the theme before first paint (no flash). Saved choice wins, else the OS setting. -->
+  <script>
+    (function () {
+      try { var m = localStorage.getItem("sa-theme"); } catch (e) {}
+      document.documentElement.dataset.theme = m || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Title, description and canonical are replaced per project by case.js -->
+  <title>Case Study | Sandra Abrafi</title>
+  <meta name="description" content="A data case study by Sandra Abrafi: the problem, the data, the approach, the insight and the impact.">
+  <link rel="canonical" href="https://koduahkk.github.io/sandra/case-study.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Case Study | Sandra Abrafi">
+  <meta property="og:description" content="The problem, the data, the approach, the insight and the impact.">
+  <meta property="og:image" content="https://koduahkk.github.io/sandra/assets/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="page-case">
+  <header id="site-header"></header>
+
+  <main id="main" tabindex="-1">
+    <noscript><div class="container noscript"><p>Please enable JavaScript to read this case study.</p></div></noscript>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
+  <script src="assets/js/case.js" defer></script>
+</body>
+</html>
