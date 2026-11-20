@@ -1,0 +1,12 @@
+{
+  "name": "lumen",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @lumen/desktop tauri dev",
+    "test": "pnpm -r test && cargo test -p lumen-core",
+    "test:e2e": "pnpm --filter @lumen/desktop test:e2e",
+    "typecheck": "pnpm -r typecheck",
+    "lint:config": "node scripts/check-no-content-protection.mjs"
+  }
+}
