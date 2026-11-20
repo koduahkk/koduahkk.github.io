@@ -70,6 +70,16 @@ flowchart LR
   Keys --- IPC
 ```
 
+## Desktop and web share one UI
+
+```mermaid
+flowchart LR
+  UI["React UI<br/>onboarding + panel"] --> Ipc{"ipc.ts<br/>Ipc interface"}
+  Ipc -->|"__TAURI_INTERNALS__ present"| Tauri["ipc.tauri.ts<br/>Rust core via IPC"]
+  Ipc -->|"otherwise"| Web["web/ipc.web.ts<br/>getDisplayMedia, getUserMedia,<br/>localStorage, TS CaptureIndicator"]
+  Web --> Pages["GitHub Pages<br/>koduahkk.github.io/lumen/app/"]
+```
+
 ## Capture indicator invariant
 
 The acceptance criterion "indicator visible 100% of the time capture is

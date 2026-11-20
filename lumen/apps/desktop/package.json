@@ -10,7 +10,9 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test --trace off"
+    "test:e2e": "playwright test --trace off",
+    "build:pages": "tsc -b && vite build --base ./ --outDir ../../app --emptyOutDir",
+    "preview:pages": "vite preview --outDir ../../app --port 4173 --strictPort"
   },
   "dependencies": {
     "@tauri-apps/api": "2.12.5",

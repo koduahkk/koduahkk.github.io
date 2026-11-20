@@ -8,6 +8,41 @@ macOS 13+ and Windows 10/11 (Linux is a stretch goal). Built with Tauri 2: a Rus
 - Decisions and defaults: [DECISIONS.md](DECISIONS.md)
 - Acceptable use draft: [docs/ACCEPTABLE_USE.md](docs/ACCEPTABLE_USE.md)
 
+## Web app
+
+The same interface also runs in the browser, published with the portfolio on
+GitHub Pages at **https://koduahkk.github.io/lumen/app/** once this branch is
+merged into `main`.
+
+- **Screen** uses the browser's share picker (`getDisplayMedia`). The browser
+  asks every time, and shows its own "sharing" bar.
+- **Microphone** uses the normal per-site permission (`getUserMedia`).
+- **Tab or system audio** (Chrome and Edge) is captured when the user ticks "Share audio" in the
+  picker. The one-time "tell others" reminder, with a copyable message, appears
+  the first time audio is shared.
+- **Indicator:** the panel badge plus a `● Recording —` prefix on the tab
+  title, driven by the same rule as desktop: no stream before the indicator is on.
+- **Floating panel:** in Chrome and Edge, the ⧉ button pops the panel into an
+  always-on-top Picture-in-Picture window.
+- **Installable** (manifest included). Consent is kept in `localStorage`.
+- **Current limit:** answering needs the Phase 4 backend (the browser can't
+  hold an API key), so the web preview captures and shows exactly what Lumen
+  would see, and sends nothing anywhere.
+
+Build and check it locally:
+
+```bash
+pnpm --filter @lumen/desktop build:pages
+```
+
+```bash
+cd .. && python3 -m http.server 4173
+```
+
+Then open http://localhost:4173/lumen/app/. The build output in `lumen/app/` is
+committed, because Pages serves this repo as-is with no build step. CI fails if
+it's stale.
+
 ## Prerequisites
 
 - Rust 1.80+ (`rustup`), Node 20+, pnpm 9 (`corepack enable`)
@@ -64,8 +99,11 @@ cargo clippy --workspace --all-targets -- -D warnings
 
 - `pnpm test`: Vitest UI tests and Rust core tests (indicator invariant,
   permission rules, consent persistence).
-- `pnpm test:e2e`: Playwright, keyboard-only first-run onboarding through to
-  the panel badge reacting to an indicator event.
+- `pnpm test:e2e`: Playwright. **desktop-ui** runs a keyboard-only first-run
+  onboarding through to the panel badge reacting to an indicator event.
+  **web** runs the Pages build served at `/lumen/app/`, goes through onboarding,
+  then does real screen and mic capture (Chromium fake devices), checks the
+  indicator, and confirms consent is remembered.
 - `pnpm lint:config`: fails if any window is hidden from screen capture.
 
 Manual QA checklist (on real macOS and Windows machines):

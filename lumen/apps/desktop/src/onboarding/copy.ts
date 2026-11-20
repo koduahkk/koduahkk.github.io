@@ -51,6 +51,10 @@ export function statusText(status: PermissionStatus, platform: Platform): string
     case "grantedNeedsRelaunch":
       return "Allowed — relaunch Lumen to apply";
     case "unsupported":
-      return "Not supported on this version of your operating system";
+      return platform === "web"
+        ? "Not supported in this browser — try Chrome, Edge or Firefox on a computer"
+        : "Not supported on this version of your operating system";
+    case "askEachTime":
+      return "Your browser asks each time you start capturing";
   }
 }

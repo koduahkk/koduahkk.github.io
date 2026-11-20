@@ -46,6 +46,10 @@ jobs:
       - run: pnpm lint:config
       - run: pnpm typecheck
       - run: pnpm --filter @lumen/desktop build:web
+      - name: Web build committed for GitHub Pages is up to date
+        run: |
+          pnpm --filter @lumen/desktop build:pages
+          git diff --exit-code -- app || (echo "::error::lumen/app is stale - run pnpm --filter @lumen/desktop build:pages and commit" && exit 1)
       - run: cargo clippy --workspace --all-targets -- -D warnings
       - run: pnpm test
       - run: pnpm --filter @lumen/desktop exec playwright install --with-deps chromium

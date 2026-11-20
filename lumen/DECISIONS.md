@@ -89,3 +89,24 @@ flow is roomy and the panel stays small.
   against the server time at last sync plus monotonic uptime) is cached in the
   OS keychain.
 - **Bundle identifier:** `app.lumen.desktop` (placeholder until the name is final).
+
+## D12 — Web app on GitHub Pages
+The UI depends on one `Ipc` interface (`src/types.ts`). `src/ipc.ts` picks
+the Tauri backend when `__TAURI_INTERNALS__` is present, and otherwise the
+browser backend in `src/web/`, so the desktop and web apps share every screen.
+- **Hosting:** GitHub Pages at `/lumen/app/`, from this repo's `main` branch.
+  Pages builds this repo with no build step, so the Vite output (relative
+  `base: ./`) is committed to `lumen/app/`, and CI rebuilds it and fails on any
+  difference. Switching Pages to "GitHub Actions" as the source would remove the
+  committed build, but it changes how the whole portfolio deploys, so it's left
+  to the owner.
+- **Permissions on the web:** screen and tab audio can't be pre-granted, so
+  they report `askEachTime`. Onboarding explains that the browser asks each
+  time, and doesn't block on it.
+- **Indicator:** same rule as `lumen-core` (guard first, then ask the browser,
+  roll back on cancel, release when the browser's own "Stop sharing" ends the
+  tracks). It shows in the tab title, the panel badge and the browser's sharing UI.
+- **Always on top:** the Document Picture-in-Picture API (Chrome and Edge 116+). Other
+  browsers get a normal tab.
+- **No answers yet on the web:** answers need the Phase 4 backend, because API keys
+  never go in a client, including the browser. The preview says so and sends no data.

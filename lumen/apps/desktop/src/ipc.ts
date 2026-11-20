@@ -1,33 +1,10 @@
-// The only module that talks to the Rust side. Components import from here so
-// tests can mock one file.
-import { invoke } from "@tauri-apps/api/core";
-import { listen, type UnlistenFn } from "@tauri-apps/api/event";
-import type {
-  ConsentRecord,
-  IndicatorState,
-  Permission,
-  PermissionReport,
-  PermissionStatus,
-  Platform,
-} from "./types";
+// The one module components use to reach the backend, so tests mock one file.
+// The desktop app (Tauri) injects __TAURI_INTERNALS__ before any script runs;
+// anywhere else we are the web app and use browser APIs.
+import { tauriIpc } from "./ipc.tauri";
+import { webIpc } from "./web/ipc.web";
+import type { Ipc } from "./types";
 
-export const INDICATOR_EVENT = "indicator://changed";
+export const isTauri = () => typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
-export const ipc = {
-  platform: () => invoke<Platform>("platform"),
-  permissionReport: () => invoke<PermissionReport[]>("permission_report"),
-  requestPermission: (permission: Permission) =>
-    invoke<PermissionStatus>("request_permission", { permission }),
-  openPermissionSettings: (permission: Permission) =>
-    invoke<void>("open_permission_settings", { permission }),
-  consentState: () => invoke<ConsentRecord>("consent_state"),
-  completeOnboarding: (args: {
-    acceptableUseAck: boolean;
-    disclosureAck: boolean;
-    systemAudioOptIn: boolean;
-  }) => invoke<ConsentRecord>("complete_onboarding", args),
-  indicatorState: () => invoke<IndicatorState>("indicator_state"),
-  onIndicatorChange: (cb: (s: IndicatorState) => void): Promise<UnlistenFn> =>
-    listen<IndicatorState>(INDICATOR_EVENT, (e) => cb(e.payload)),
-  relaunch: () => invoke<void>("relaunch"),
-};
+export const ipc: Ipc = isTauri() ? tauriIpc : webIpc;

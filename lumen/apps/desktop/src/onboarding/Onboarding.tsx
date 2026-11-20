@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ipc } from "../ipc";
-import { captureShortcut } from "../shortcuts";
+import { captureShortcut, indicatorPlace } from "../shortcuts";
 import type { Permission, PermissionReport, Platform } from "../types";
 import { isUsable } from "../types";
 import { PermissionDetails } from "./PermissionStep";
+
+const TERMS_URL =
+  "https://github.com/koduahkk/koduahkk.github.io/blob/main/lumen/docs/ACCEPTABLE_USE.md";
 
 export const STEPS = ["welcome", "screen", "microphone", "systemAudio", "responsibleUse", "ready"] as const;
 type Step = (typeof STEPS)[number];
@@ -133,7 +136,7 @@ export function Onboarding() {
               that stays out of your way.
             </p>
             <ul className="why">
-              <li>You decide when it captures. A red indicator in the menu bar and the panel shows whenever it does.</li>
+              <li>You decide when it captures. A red indicator {indicatorPlace(platform)} shows whenever it does.</li>
               <li>Nothing is captured until you finish setup and turn it on.</li>
               <li>Lumen never hides itself from screen sharing or recording.</li>
             </ul>
@@ -204,7 +207,7 @@ export function Onboarding() {
             </label>
             <p className="never">
               These are part of the{" "}
-              <a href="https://lumen.app/terms" target="_blank" rel="noreferrer">
+              <a href={TERMS_URL} target="_blank" rel="noreferrer">
                 Terms of Service
               </a>
               . Breaking them can end your account.
@@ -215,10 +218,19 @@ export function Onboarding() {
         {step === "ready" && (
           <>
             <p className="lede">
-              Press <kbd>{captureShortcut(platform)}</kbd> to capture your screen and ask about it.
+              {platform === "web" ? (
+                <>Press <strong>Share screen</strong> in the Lumen panel whenever you want it to look.</>
+              ) : (
+                <>
+                  Press <kbd>{captureShortcut(platform)}</kbd> to capture your screen and ask about it.
+                </>
+              )}
             </p>
             <ul className="why">
-              <li>Screen recording: {screenOk ? "on" : "off"}</li>
+              <li>
+                Screen recording:{" "}
+                {platform === "web" ? "your browser will ask when you start" : screenOk ? "on" : "off"}
+              </li>
               <li>Microphone: {micOk ? "on" : "off — you can turn it on later in Settings"}</li>
               <li>System audio: {systemAudioOptIn ? "on (with reminders)" : "off"}</li>
             </ul>

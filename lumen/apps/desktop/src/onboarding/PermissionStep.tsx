@@ -58,6 +58,13 @@ export function PermissionDetails({
         </span>
       </div>
 
+      {platform === "web" && status === "denied" && (
+        <p className="never">
+          To allow it, click the icon to the left of the address bar, set {copy.title.toLowerCase()} to Allow,
+          then reload this page.
+        </p>
+      )}
+
       {!usable && (
         <div className="row">
           {status === "notDetermined" && (
