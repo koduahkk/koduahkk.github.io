@@ -240,11 +240,17 @@
                     body: JSON.stringify(data),
                 });
                 const out = await res.json().catch(() => ({}));
-                if (!res.ok || String(out.success) === 'false') throw new Error(out.message || res.status);
+                if (!res.ok || String(out.success) === 'false') throw new Error(out.message || 'HTTP ' + res.status);
                 form.reset();
                 show('ok', '<span class="dot" aria-hidden="true"></span> Thanks, your message is on its way. I\'ll reply within two working days.');
             } catch (err) {
-                show('err', 'Sorry, the message didn\'t go through. Please email me directly at <a href="mailto:kingsleykoduah3030@gmail.com?subject=Hello%20Kingsley">kingsleykoduah3030@gmail.com</a>.');
+                // Background send refused (e.g. the inbox isn't activated yet) or blocked: fall back to a normal
+                // form submission, so formsubmit.co can show its own page (activation / spam check) and then
+                // return the visitor here via _next. HTMLFormElement.submit() skips this listener.
+                console.warn('Background send failed, falling back to normal submit:', err.message);
+                show('ok', 'Sending…');
+                HTMLFormElement.prototype.submit.call(form);
+                return;
             } finally {
                 btn.disabled = false; btn.innerHTML = label;
             }
