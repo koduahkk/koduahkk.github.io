@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kingsley Koduah | Data Analyst</title>
-    <meta name="description" content="Kingsley Koduah — Data Analyst. I turn messy data into decisions people can actually act on. SQL, Power BI, Excel, Python.">
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="description" content="Kingsley Koduah is a data analyst with 10+ years building Tableau and Power BI dashboards for BNY Mellon, American Express, Sheridan Healthcare and eBay.">
+    <meta name="theme-color" content="#F5F2EC">
 
     <!-- Social sharing -->
     <meta property="og:title" content="Kingsley Koduah | Data Analyst">
     <meta property="og:description" content="I turn messy data into decisions people can actually act on.">
     <meta property="og:image" content="https://koduahkk.github.io/assets/images/og-banner.jpg">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://koduahkk.github.io/">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" type="image/png" href="favicon-32x32.png">
@@ -19,9 +20,41 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Kingsley Koduah",
+        "jobTitle": "Data Analyst",
+        "url": "https://koduahkk.github.io/",
+        "image": "https://koduahkk.github.io/assets/images/kingsley-koduah.jpg",
+        "sameAs": ["https://www.linkedin.com/in/koduahkk", "https://github.com/koduahkk"],
+        "knowsAbout": ["Tableau", "Power BI", "SQL", "Python", "Alteryx", "Excel", "Data visualization"]
+    }
+    </script>
+    <script>
+        // Every load and refresh starts at the top. A fresh visit to a #section link still jumps there.
+        // Re-applied briefly after load (to beat restored scroll positions), and dropped as soon as the visitor scrolls.
+        (function () {
+            try {
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+                var isReload = nav && nav.type === 'reload';
+                if (location.hash.length > 1 && !isReload) return;
+                var moved = false;
+                ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (t) { window.addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+                var top = function () { if (!moved && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+                if (isReload && location.hash) history.replaceState(null, '', location.pathname + location.search);
+                top();
+                document.addEventListener('DOMContentLoaded', top);
+                window.addEventListener('load', function () { [0, 100, 300, 700, 1200].forEach(function (ms) { setTimeout(top, ms); }); });
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body id="top">
 
@@ -53,19 +86,26 @@
 <section class="hero" id="home">
     <div class="container hero-grid">
         <div class="hero-copy">
-            <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Available for new projects</p>
+            <p class="hero-status mono">
+                <span class="pulse" aria-hidden="true"></span>
+                <span>Available for new projects</span><span class="sep" aria-hidden="true">/</span>
+                <span>10+ yrs in BI</span><span class="sep" aria-hidden="true">/</span>
+                <span>Your time <time data-clock>--:--</time></span>
+            </p>
             <p class="hero-hi">Hi, I'm</p>
             <h1 class="hero-name">Kingsley<br><span class="lime">Koduah</span></h1>
-            <p class="hero-tagline">I turn messy data into <em>decisions people can actually act on.</em></p>
+            <p class="hero-tagline">I turn messy data into <em class="mark">decisions people can actually act on.<svg class="scribble" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 16 C 120 6, 260 6, 360 12 S 520 20, 596 8"/></svg></em></p>
             <p class="hero-sub">A data analyst turning operational data into decisions leadership teams can act on.</p>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-lime">See my work <span aria-hidden="true">↓</span></a>
                 <a href="#contact" class="btn btn-ghost">Get in touch</a>
+                <a href="cv.html" class="hero-cv">View CV <span aria-hidden="true">↗</span></a>
             </div>
         </div>
 
         <figure class="hero-photo">
             <img src="assets/images/kingsley-koduah.jpg" alt="Portrait of Kingsley Koduah" width="524" height="524">
+            <img src="assets/images/kingsley-koduah.jpg" alt="" class="hero-photo-color" width="524" height="524" aria-hidden="true">
             <img src="assets/images/kk-logo.jpg" alt="" class="hero-photo-mark" width="56" height="56">
             <figcaption class="hero-photo-tag">
                 <span class="label">Data Analyst</span>
@@ -74,29 +114,47 @@
         </figure>
     </div>
 
-    <div class="container stat-strip">
-        <div class="stat">
-            <span class="stat-label">Focus</span>
-            <span class="stat-value">Data → Decisions</span>
+    <div class="container trust">
+        <p class="trust-label mono">Dashboards built for teams at</p>
+        <ul class="trust-logos">
+            <li>BNY Mellon</li>
+            <li>American Express</li>
+            <li>Sheridan Healthcare</li>
+            <li>eBay</li>
+        </ul>
+    </div>
+</section>
+
+<!-- BY THE NUMBERS -->
+<section class="section section--ink numbers" aria-labelledby="numbers-title">
+    <div class="container">
+        <div class="numbers-head">
+            <p class="section-eyebrow">By the numbers</p>
+            <h2 class="section-title" id="numbers-title">A track record, <span class="lime">not just a toolkit.</span></h2>
+            <p class="lead">Enterprise dashboards for banking, human resource, healthcare, sport and e-commerce teams, from the first requirement to the last refresh.</p>
         </div>
-        <div class="stat">
-            <span class="stat-label">Core stack</span>
-            <span class="stat-value">SQL · Power BI · Excel · Python · Tableau · Alteryx</span>
-        </div>
-        <div class="stat">
-            <span class="stat-label">Status</span>
-            <span class="stat-value"><span class="dot" aria-hidden="true"></span> Open to roles &amp; freelance</span>
+        <dl class="stats">
+            <div class="stat-big">
+                <dt class="mono"><span data-count="10">0</span><span class="lime">+</span></dt>
+                <dd>years building BI and analytics</dd>
+            </div>
+            <div class="stat-big">
+                <dt class="mono"><span data-count="8">0</span><span class="lime">+</span></dt>
+                <dd>years delivering Tableau and Power BI projects end to end</dd>
+            </div>
+            <div class="stat-big">
+                <dt class="mono"><span data-count="6">0</span><span class="lime">+</span></dt>
+                <dd>years turning VP and director questions into KPIs</dd>
+            </div>
+        </dl>
+        <div class="stack-row">
+            <span class="trust-label mono">Core stack</span>
+            <ul class="chips"><li>SQL</li><li>Power BI</li><li>Excel</li><li>Python</li><li>Tableau</li><li>Alteryx</li></ul>
+            <span class="status-inline"><span class="dot" aria-hidden="true"></span> Open to roles &amp; freelance</span>
         </div>
     </div>
 </section>
 
-<!-- TOOLS MARQUEE -->
-<div class="marquee" aria-label="Tools I use">
-    <div class="marquee-track">
-        <span>SQL</span><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Excel</span><span>Python</span><span>Pandas</span><span>Data Modeling</span><span>Data Storytelling</span><span>Tableau</span><span>Alteryx</span>
-        <span aria-hidden="true">SQL</span><span aria-hidden="true">Power BI</span><span aria-hidden="true">DAX</span><span aria-hidden="true">Power Query</span><span aria-hidden="true">Excel</span><span aria-hidden="true">Python</span><span aria-hidden="true">Pandas</span><span aria-hidden="true">Data Modeling</span><span aria-hidden="true">Data Storytelling</span><span aria-hidden="true">Tableau</span><span aria-hidden="true">Alteryx</span>
-    </div>
-</div>
 
 <!-- ABOUT -->
 <section id="about" class="section">
@@ -104,7 +162,6 @@
         <p class="section-eyebrow">About</p>
         <div>
             <h2 class="statement">I build dashboards and analysis that make complex numbers feel <span class="lime">clear</span>, useful, and ready for a decision.</h2>
-            <!--💡UPDATE: Three short paragraphs — what you do, how you think, what you're looking for. -->
             <div class="about-text">
                 <p>I'm a data analyst passionate about helping businesses make sense of their data. I enjoy transforming complex, messy datasets into clear stories and actionable insights.</p>
                 <p>My focus is on building dashboards that get used, automating repetitive tasks to free up teams for more interesting problems, and creating models that help businesses plan for the future.</p>
@@ -114,109 +171,204 @@
     </div>
 </section>
 
+<!-- WHAT I DELIVER -->
+<section class="section deliver" aria-labelledby="deliver-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="section-eyebrow">What I deliver</p>
+            <h2 class="section-title" id="deliver-title">Everything between raw data <span class="lime">and a decision.</span></h2>
+        </div>
+        <div class="tiles">
+            <article class="tile tile--wide">
+                <div class="tile-art art-kpis" aria-hidden="true">
+                    <div class="kpi"><span class="mono">Revenue</span><b>$2.33M</b></div>
+                    <div class="kpi"><span class="mono">{FIXED [Region] : SUM(Sales)}</span><b>LOD</b></div>
+                    <div class="kpi"><span class="mono">Net profit</span><b class="lime">$0.29M</b></div>
+                    <div class="bars"><i style="--h:30%"></i><i style="--h:42%"></i><i style="--h:68%"></i><i style="--h:40%"></i><i style="--h:55%"></i><i style="--h:52%"></i><i style="--h:44%"></i><i style="--h:58%"></i><i style="--h:86%"></i><i style="--h:78%"></i><i style="--h:84%"></i><i style="--h:100%" class="hi"></i></div>
+                    <div class="chart-chips mono"><span>Sankey</span><span>Pareto</span><span>Waterfall</span><span>Donut</span><span class="on">Parameter actions</span></div>
+                </div>
+                <h3>Advanced Tableau, since version&nbsp;7</h3>
+                <p>Parameter actions, complex LOD calculations and custom charts like Sankey, Pareto, waterfall and donut, with dashboards and their SQL tuned until they load fast.</p>
+            </article>
+            <article class="tile">
+                <pre class="tile-art art-sql mono" aria-hidden="true"><span class="k">CREATE MATERIALIZED VIEW</span> mv_sales <span class="k">AS</span>
+<span class="k">SELECT</span> region,
+  <span class="k">SUM</span>(revenue) <span class="k">AS</span> revenue,
+  <span class="k">RANK</span>() <span class="k">OVER</span> (
+    <span class="k">ORDER BY SUM</span>(revenue) <span class="k">DESC</span>
+  ) <span class="k">AS</span> rnk
+<span class="k">FROM</span> fact_sales
+<span class="k">GROUP BY</span> region;<span class="caret"></span></pre>
+                <h3>A SQL developer at heart</h3>
+                <p>A former SQL developer: stored procedures, tables, views, materialized views and user-defined functions, plus query tuning that makes dashboards faster.</p>
+            </article>
+            <article class="tile">
+                <div class="tile-art art-flow mono" aria-hidden="true"><span>Source</span><i></i><span>Alteryx</span><i></i><span>Python</span><i></i><span class="on">Dashboard</span></div>
+                <h3>Automated pipelines</h3>
+                <p>ETL workflows built in Alteryx and integrated with Python, so dashboards refresh themselves instead of being rebuilt by hand.</p>
+            </article>
+            <article class="tile">
+                <div class="tile-art art-rls mono" aria-hidden="true">
+                    <p><span>Row-level security</span><b class="lime">Hybrid</b></p>
+                    <p><span>Region</span><b>East only</b></p>
+                    <p><span>Role</span><b>Analyst</b></p>
+                </div>
+                <h3>Secure by default</h3>
+                <p>Complex row-level security using the hybrid method, so every user sees exactly the data they're entitled to, and nothing more.</p>
+            </article>
+            <article class="tile">
+                <div class="tile-art art-ask" aria-hidden="true">
+                    <p class="q">Which regions missed target?</p>
+                    <p class="a">Two of six. Here's the view, filtered and ready.</p>
+                </div>
+                <h3>Close to the business</h3>
+                <p>Every project starts with the business users, and when there's no business analyst, I step into that role to turn their questions into clear KPIs.</p>
+            </article>
+            <article class="tile tile--full tile--split">
+                <div class="tile-art art-schema mono" aria-hidden="true">
+                    <span class="dim">dim_date</span>
+                    <span class="dim">dim_customer <em>SCD2</em></span>
+                    <span class="fact">fact_sales</span>
+                    <span class="dim">dim_product</span>
+                    <span class="dim">dim_region</span>
+                </div>
+                <div>
+                    <h3>Data models that hold up</h3>
+                    <p>Star and snowflake schemas with Type 2 slowly changing dimensions, so history stays accurate across fact and dimension tables. Connected with relationships, blending, joins and cross-database joins, and extended through Tableau's Python, JavaScript and Metadata APIs.</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects" class="section">
     <div class="container">
-        <div class="section-head">
-            <p class="section-eyebrow">Projects</p>
-            <h2 class="section-title">Dashboards that earn <span class="lime">a second look.</span></h2>
+        <div class="section-head section-head--row">
+            <div>
+                <p class="section-eyebrow">Projects</p>
+                <h2 class="section-title">Dashboards that earn <span class="lime">a second look.</span></h2>
+            </div>
+            <p class="lead">Four case studies, from finance to operations. Pick one to see the questions it answers.</p>
         </div>
 
-        <!--💡UPDATE: Projects 02–04 are placeholders. Each project has 3 dashboard images in assets/images/projects/ and a case study page in projects/. -->
-        <div class="projects">
-
-            <article class="project">
-                <a class="project-media" href="projects/electricity.html" aria-label="Open the US Electricity Overview case study">
-                    <div class="stack">
-                        <img src="assets/images/projects/electricity-1.png" alt="US Electricity Overview dashboard, page 1" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/electricity-2.svg" alt="" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/electricity-3.svg" alt="" loading="lazy" width="1200" height="780">
-                    </div>
-                    <span class="media-arrow" aria-hidden="true">↗</span>
-                </a>
-                <div class="project-body">
-                    <div class="project-meta"><span class="idx">01</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
-                    <h3>US Electricity Overview 2001–2023</h3>
-                    <p>A Power BI report on two decades of US electricity generation — which states produce the most, how fast renewables are growing, and where CO₂ emissions concentrate.</p>
-                    <ul class="tags"><li>Power BI</li><li>DAX</li><li>Power Query</li><li>Data Modeling</li></ul>
-                    <dl class="metrics">
-                        <div><dt>Generated</dt><dd>240M <small>GWh</small></dd></div>
-                        <div><dt>Renewable share</dt><dd class="lime">16%</dd></div>
-                        <div><dt>CO₂</dt><dd>101.6M <small>kt</small></dd></div>
-                    </dl>
-                    <a href="projects/electricity.html" class="project-link">View project <span aria-hidden="true">↗</span></a>
+        <!--💡UPDATE: Retail, Churn and Supply Chain are placeholder projects. Each has 3 dashboard images in assets/images/projects/ and a case study page in projects/. -->
+        <div class="ptabs" data-ptabs>
+            <p class="ptab-hint mono"><span class="dot" aria-hidden="true"></span> 4 case studies · tap a tab to explore</p>
+            <div class="ptab-list" role="tablist" aria-label="Projects">
+                <button class="ptab" role="tab" id="ptab-financial" aria-controls="ppanel-financial" aria-selected="true" tabindex="0"><span class="ptab-n" aria-hidden="true">01</span>Financial Analysis<span class="ptab-bar" aria-hidden="true"></span></button>
+                <button class="ptab" role="tab" id="ptab-retail" aria-controls="ppanel-retail" aria-selected="false" tabindex="-1"><span class="ptab-n" aria-hidden="true">02</span>Retail Sales<span class="ptab-bar" aria-hidden="true"></span></button>
+                <button class="ptab" role="tab" id="ptab-churn" aria-controls="ppanel-churn" aria-selected="false" tabindex="-1"><span class="ptab-n" aria-hidden="true">03</span>Customer Churn<span class="ptab-bar" aria-hidden="true"></span></button>
+                <button class="ptab" role="tab" id="ptab-supply" aria-controls="ppanel-supply" aria-selected="false" tabindex="-1"><span class="ptab-n" aria-hidden="true">04</span>Supply Chain<span class="ptab-bar" aria-hidden="true"></span></button>
+            </div>
+            <div class="ppanel" role="tabpanel" id="ppanel-financial" aria-labelledby="ptab-financial" tabindex="0">
+                <div class="ppanel-copy">
+                    <p class="section-eyebrow">Financial analytics · Tableau</p>
+                    <h3 class="ppanel-head">Follow every dollar to the bottom line.</h3>
+                    <ul class="ppanel-uses">
+                        <li><strong>Profit at a glance</strong><span>Revenue, expenses, gross profit, EBIT and net profit on one screen, so leadership starts every review from the same numbers.</span></li>
+                        <li><strong>Every month against break-even</strong><span>Monthly net profit plotted against the break-even point, so weak months stand out before the quarter closes.</span></li>
+                        <li><strong>Where the margin goes</strong><span>A waterfall that walks $2.33M of revenue down to $0.29M of net profit, one cost line at a time.</span></li>
+                    </ul>
+                    <a href="projects/financial.html" class="btn btn-lime">Read the case study <span aria-hidden="true">→</span></a>
                 </div>
-            </article>
-
-            <article class="project">
-                <a class="project-media" href="projects/retail.html" aria-label="Open the Retail Sales Performance case study">
-                    <div class="stack">
-                        <img src="assets/images/projects/retail-1.svg" alt="Retail Sales Performance dashboard, page 1" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/retail-2.svg" alt="" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/retail-3.svg" alt="" loading="lazy" width="1200" height="780">
+                <a class="ppanel-preview" href="projects/financial.html" aria-label="Open the YellowJacket Financial Analysis case study">
+                    <span class="ppanel-cap mono"><span class="dot" aria-hidden="true"></span> Dashboard preview · YellowJacket Financial Analysis</span>
+                    <div class="ppanel-media">
+                        <div class="stack">
+                            <img src="assets/images/projects/financial-1.png" alt="YellowJacket Financial Analysis dashboard" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/financial-2.png" alt="" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/financial-3.png" alt="" loading="lazy" width="1200" height="780">
+                        </div>
                     </div>
-                    <span class="media-arrow" aria-hidden="true">↗</span>
+                    <dl class="metrics ppanel-metrics">
+                        <div><dt>Revenue</dt><dd class="lime">$2.33M</dd></div>
+                        <div><dt>Gross margin</dt><dd>30%</dd></div>
+                        <div><dt>Net profit</dt><dd>$0.29M</dd></div>
+                    </dl>
                 </a>
-                <div class="project-body">
-                    <div class="project-meta"><span class="idx">02</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
-                    <h3>Retail Sales Performance</h3>
-                    <p>An executive sales report tracking revenue, order volume and margin by region and category — built to show which products carry the business and which just take up shelf space.</p>
-                    <ul class="tags"><li>SQL</li><li>Power BI</li><li>Data Modeling</li></ul>
-                    <dl class="metrics">
+            </div>
+            <div class="ppanel" role="tabpanel" id="ppanel-retail" aria-labelledby="ptab-retail" tabindex="0" hidden>
+                <div class="ppanel-copy">
+                    <p class="section-eyebrow">Retail analytics · SQL · Power BI</p>
+                    <h3 class="ppanel-head">Know which products carry the business.</h3>
+                    <ul class="ppanel-uses">
+                        <li><strong>Revenue, orders and margin together</strong><span>One report by region and category replaces the weekly spreadsheet pack.</span></li>
+                        <li><strong>From region to product in two clicks</strong><span>Three pages share one filter set, so a regional question drills straight down to the product behind it.</span></li>
+                        <li><strong>Shelf space that pays</strong><span>Slow-moving products are flagged next to the lines that actually earn the margin.</span></li>
+                    </ul>
+                    <a href="projects/retail.html" class="btn btn-lime">Read the case study <span aria-hidden="true">→</span></a>
+                </div>
+                <a class="ppanel-preview" href="projects/retail.html" aria-label="Open the Retail Sales Performance case study">
+                    <span class="ppanel-cap mono"><span class="dot" aria-hidden="true"></span> Dashboard preview · Retail Sales Performance</span>
+                    <div class="ppanel-media">
+                        <div class="stack">
+                            <img src="assets/images/projects/retail-1.svg" alt="Retail Sales Performance dashboard" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/retail-2.svg" alt="" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/retail-3.svg" alt="" loading="lazy" width="1200" height="780">
+                        </div>
+                    </div>
+                    <dl class="metrics ppanel-metrics">
                         <div><dt>Revenue</dt><dd class="lime">$4.2M</dd></div>
                         <div><dt>Orders</dt><dd>18.6K</dd></div>
                         <div><dt>Margin</dt><dd>31%</dd></div>
                     </dl>
-                    <a href="projects/retail.html" class="project-link">View project <span aria-hidden="true">↗</span></a>
-                </div>
-            </article>
-
-            <article class="project">
-                <a class="project-media" href="projects/churn.html" aria-label="Open the Customer Churn Analysis case study">
-                    <div class="stack">
-                        <img src="assets/images/projects/churn-1.svg" alt="Customer Churn Analysis dashboard, page 1" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/churn-2.svg" alt="" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/churn-3.svg" alt="" loading="lazy" width="1200" height="780">
-                    </div>
-                    <span class="media-arrow" aria-hidden="true">↗</span>
                 </a>
-                <div class="project-body">
-                    <div class="project-meta"><span class="idx">03</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
-                    <h3>Customer Churn Analysis</h3>
-                    <p>Everyone assumed price drove churn. The data said contract type and support tickets did. A Python + Power BI breakdown of who leaves, when, and what to do about it.</p>
-                    <ul class="tags"><li>Python</li><li>Pandas</li><li>Power BI</li></ul>
-                    <dl class="metrics">
+            </div>
+            <div class="ppanel" role="tabpanel" id="ppanel-churn" aria-labelledby="ptab-churn" tabindex="0" hidden>
+                <div class="ppanel-copy">
+                    <p class="section-eyebrow">Customer analytics · Python · Power BI</p>
+                    <h3 class="ppanel-head">Find out who leaves before they go.</h3>
+                    <ul class="ppanel-uses">
+                        <li><strong>Churn by contract and tenure</strong><span>Shows that month-to-month customers in their first year carry most of the risk.</span></li>
+                        <li><strong>Support tickets as an early warning</strong><span>Repeat tickets predict churn better than price, so the retention team knows who to call first.</span></li>
+                        <li><strong>A weekly at-risk list</strong><span>Simple, explainable rules turn the analysis into a list the team can act on every Monday.</span></li>
+                    </ul>
+                    <a href="projects/churn.html" class="btn btn-lime">Read the case study <span aria-hidden="true">→</span></a>
+                </div>
+                <a class="ppanel-preview" href="projects/churn.html" aria-label="Open the Customer Churn Analysis case study">
+                    <span class="ppanel-cap mono"><span class="dot" aria-hidden="true"></span> Dashboard preview · Customer Churn Analysis</span>
+                    <div class="ppanel-media">
+                        <div class="stack">
+                            <img src="assets/images/projects/churn-1.svg" alt="Customer Churn Analysis dashboard" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/churn-2.svg" alt="" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/churn-3.svg" alt="" loading="lazy" width="1200" height="780">
+                        </div>
+                    </div>
+                    <dl class="metrics ppanel-metrics">
                         <div><dt>Churn rate</dt><dd class="lime">14.3%</dd></div>
                         <div><dt>Customers</dt><dd>7,043</dd></div>
                         <div><dt>At risk</dt><dd>1,120</dd></div>
                     </dl>
-                    <a href="projects/churn.html" class="project-link">View project <span aria-hidden="true">↗</span></a>
-                </div>
-            </article>
-
-            <article class="project">
-                <a class="project-media" href="projects/supply.html" aria-label="Open the Supply Chain &amp; Inventory case study">
-                    <div class="stack">
-                        <img src="assets/images/projects/supply-1.svg" alt="Supply Chain & Inventory dashboard, page 1" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/supply-2.svg" alt="" loading="lazy" width="1200" height="780">
-                        <img src="assets/images/projects/supply-3.svg" alt="" loading="lazy" width="1200" height="780">
-                    </div>
-                    <span class="media-arrow" aria-hidden="true">↗</span>
                 </a>
-                <div class="project-body">
-                    <div class="project-meta"><span class="idx">04</span><span class="rule" aria-hidden="true"></span><span>Case study</span></div>
-                    <h3>Supply Chain &amp; Inventory</h3>
-                    <p>An operations dashboard for on-time delivery, stockouts and supplier lead times — so the team spots the late shipment before the customer does.</p>
-                    <ul class="tags"><li>Excel</li><li>SQL</li><li>Power BI</li></ul>
-                    <dl class="metrics">
+            </div>
+            <div class="ppanel" role="tabpanel" id="ppanel-supply" aria-labelledby="ptab-supply" tabindex="0" hidden>
+                <div class="ppanel-copy">
+                    <p class="section-eyebrow">Operations analytics · Excel · SQL · Power BI</p>
+                    <h3 class="ppanel-head">Spot the late shipment before the customer does.</h3>
+                    <ul class="ppanel-uses">
+                        <li><strong>On-time delivery by supplier</strong><span>Shows which suppliers cause most late deliveries and which ones you can rely on.</span></li>
+                        <li><strong>Stockouts against lead time</strong><span>Ties stockouts to long supplier lead times, not demand spikes, so reorder points get fixed.</span></li>
+                        <li><strong>Rebalance between warehouses</strong><span>Excess stock in one warehouse is matched to shortages in another, every week.</span></li>
+                    </ul>
+                    <a href="projects/supply.html" class="btn btn-lime">Read the case study <span aria-hidden="true">→</span></a>
+                </div>
+                <a class="ppanel-preview" href="projects/supply.html" aria-label="Open the Supply Chain and Inventory case study">
+                    <span class="ppanel-cap mono"><span class="dot" aria-hidden="true"></span> Dashboard preview · Supply Chain &amp; Inventory</span>
+                    <div class="ppanel-media">
+                        <div class="stack">
+                            <img src="assets/images/projects/supply-1.svg" alt="Supply Chain &amp; Inventory dashboard" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/supply-2.svg" alt="" loading="lazy" width="1200" height="780">
+                            <img src="assets/images/projects/supply-3.svg" alt="" loading="lazy" width="1200" height="780">
+                        </div>
+                    </div>
+                    <dl class="metrics ppanel-metrics">
                         <div><dt>On-time</dt><dd class="lime">92.4%</dd></div>
                         <div><dt>Lead time</dt><dd>6.8d</dd></div>
                         <div><dt>SKUs</dt><dd>2,450</dd></div>
                     </dl>
-                    <a href="projects/supply.html" class="project-link">View project <span aria-hidden="true">↗</span></a>
-                </div>
-            </article>
-
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -266,13 +418,13 @@
 </section>
 
 <!-- APPROACH -->
-<section class="section">
+<section class="section section--ink">
     <div class="container">
         <div class="section-head">
             <p class="section-eyebrow">Approach</p>
             <h2 class="section-title">How I <span class="lime">work.</span></h2>
         </div>
-        <ol class="steps">
+        <ol class="steps" data-steps>
             <li>
                 <span class="step-num" aria-hidden="true">01</span>
                 <h3>Find the real question</h3>
@@ -343,11 +495,16 @@
                 <h2 class="section-title">Have a dataset that deserves <span class="lime">a clearer story?</span></h2>
             </div>
 
+            <p class="form-sent" id="form-sent" role="status" hidden><span class="dot" aria-hidden="true"></span> Thanks, your message is on its way. I'll reply within two working days.</p>
+
             <div class="contact-grid">
-                <!-- Messages are delivered by formsubmit.co; the first submission triggers a one-time confirmation email -->
-                <form action="https://formsubmit.co/kingsleykoduah3030@gmail.com" method="POST" class="contact-form">
+                <!-- Messages go to kingsleykoduah3030@gmail.com via formsubmit.co (sent in the background by main.js; plain POST is the no-JS fallback).
+                     The very first message triggers a one-time "Activate form" email to that inbox: click it once to start receiving messages. -->
+                <form action="https://formsubmit.co/kingsleykoduah3030@gmail.com" method="POST" class="contact-form" data-contact-form>
                     <input type="hidden" name="_subject" value="New message from your portfolio">
                     <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://koduahkk.github.io/?sent=1#contact">
                     <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <label>
                         <span>Name</span>
@@ -361,12 +518,13 @@
                         <span>Message</span>
                         <textarea name="message" rows="5" placeholder="Tell me about the data and the decision it needs to support…" required></textarea>
                     </label>
-                    <button type="submit" class="btn btn-lime">Send message <span aria-hidden="true">→</span></button>
+                    <button type="submit" class="btn btn-lime" data-send>Send message <span aria-hidden="true">→</span></button>
+                    <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
                 </form>
 
                 <div class="direct">
                     <p class="label">Direct contact</p>
-                    <a href="mailto:kingsleykoduah3030@gmail.com" class="direct-link"><span>Email</span><span aria-hidden="true">↗</span></a>
+                    <a href="mailto:kingsleykoduah3030@gmail.com?subject=Hello%20Kingsley" class="direct-link"><span>Email</span><span aria-hidden="true">↗</span></a>
                     <a href="https://www.linkedin.com/in/koduahkk" target="_blank" rel="noopener" class="direct-link"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
                     <a href="https://github.com/koduahkk" target="_blank" rel="noopener" class="direct-link"><span>GitHub</span><span aria-hidden="true">↗</span></a>
                     <a href="cv.html" class="direct-link"><span>CV</span><span aria-hidden="true">↗</span></a>
@@ -379,13 +537,38 @@
 
 </main>
 
-<footer class="footer">
-    <div class="container footer-inner">
-        <p>© <span id="year">2026</span> Kingsley Koduah</p>
-        <p class="label">Data tells the story.</p>
-        <a href="#top" class="label">Back to top ↑</a>
+<footer class="footer footer-full">
+    <div class="container">
+        <div class="footer-top">
+            <a href="#top" class="brand" aria-label="Kingsley Koduah — back to top">
+                <img src="assets/images/kk-logo.jpg" alt="" class="brand-mark" width="40" height="40">
+                <span>Kingsley Koduah</span>
+            </a>
+            <nav class="footer-links" aria-label="Elsewhere">
+                <a href="mailto:kingsleykoduah3030@gmail.com?subject=Hello%20Kingsley">Email</a>
+                <a href="https://www.linkedin.com/in/koduahkk" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/koduahkk" target="_blank" rel="noopener">GitHub</a>
+                <a href="cv.html">CV</a>
+            </nav>
+        </div>
+        <div class="footer-inner">
+            <p>© <span id="year">2026</span> Kingsley Koduah</p>
+            <p class="label">Data tells the story.</p>
+            <a href="#top" class="label">Back to top ↑</a>
+        </div>
     </div>
 </footer>
+
+<aside class="nudge" data-nudge hidden aria-label="Quick links for recruiters">
+    <button class="nudge-close" type="button" data-nudge-close aria-label="Close">×</button>
+    <p class="mono nudge-eyebrow"><span class="dot" aria-hidden="true"></span> Open to roles now</p>
+    <p class="nudge-title">Hiring for a data role?</p>
+    <p class="nudge-text">Grab the CV or send a note. I reply within two working days.</p>
+    <div class="nudge-actions">
+        <a href="cv.html" class="btn btn-lime btn-sm">View CV</a>
+        <a href="#contact" class="btn btn-ghost btn-sm" data-nudge-close>Say hello</a>
+    </div>
+</aside>
 
 <script src="assets/js/main.js"></script>
 </body>
