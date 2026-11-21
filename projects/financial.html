@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YellowJacket Financial Analysis | Kingsley Koduah</title>
+    <meta name="description" content="A Tableau dashboard that follows every dollar from revenue to net profit for YellowJacket.">
+    <meta name="theme-color" content="#F5F2EC">
+    <link rel="icon" type="image/png" href="../favicon-32x32.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script>
+        // Every load and refresh starts at the top. A fresh visit to a #section link still jumps there.
+        // Re-applied briefly after load (to beat restored scroll positions), and dropped as soon as the visitor scrolls.
+        (function () {
+            try {
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+                var isReload = nav && nav.type === 'reload';
+                if (location.hash.length > 1 && !isReload) return;
+                var moved = false;
+                ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (t) { window.addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+                var top = function () { if (!moved && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+                if (isReload && location.hash) history.replaceState(null, '', location.pathname + location.search);
+                top();
+                document.addEventListener('DOMContentLoaded', top);
+                window.addEventListener('load', function () { [0, 100, 300, 700, 1200].forEach(function (ms) { setTimeout(top, ms); }); });
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body class="case" id="top">
+
+<header class="cs-bar">
+    <div class="container cs-bar-inner">
+        <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
+        <nav class="cs-switch" aria-label="Case studies">
+            <a href="supply.html#top" class="pill-btn cs-switch-btn" aria-label="Previous project: Supply Chain"><span aria-hidden="true">←</span><span class="cs-switch-name">Supply Chain</span></a>
+            <span class="cs-current mono" aria-current="page"><b>01</b> / 04<span class="cs-switch-name"> · Financial Analysis</span></span>
+            <a href="retail.html#top" class="pill-btn cs-switch-btn" aria-label="Next project: Retail Sales"><span class="cs-switch-name">Retail Sales</span><span aria-hidden="true">→</span></a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="container cs-hero">
+        <p class="section-eyebrow">Financial analytics · Tableau</p>
+        <h1 class="cs-title">YellowJacket Financial Analysis</h1>
+        <ul class="tags"><li>Tableau</li><li>Financial KPIs</li><li>Profitability</li><li>Dashboard Design</li></ul>
+        <div class="cs-media">
+                <div class="stack stack-lg">
+                    <img src="../assets/images/projects/financial-1.png" alt="YellowJacket Financial Analysis dashboard, overview page" width="1200" height="780">
+                    <img src="../assets/images/projects/financial-2.png" alt="" loading="lazy" width="1200" height="780">
+                    <img src="../assets/images/projects/financial-3.png" alt="" loading="lazy" width="1200" height="780">
+                </div>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Overview</p>
+        <p class="cs-lead">A Tableau dashboard that follows every dollar from revenue to net profit. Leadership sees the year's KPIs at a glance, how each month performs against the break-even point, and exactly where margin is lost between the top line and the bottom line. Six pages, from Overview, Revenue, Expenses and Ratios to a detailed Table and a Glossary, let finance and non-finance readers go as deep as they need.</p>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Key metrics</p>
+        <div class="cs-metrics">
+                <div class="cs-metric"><strong>$2.33M</strong><span>Revenue</span></div>
+                <div class="cs-metric"><strong>$0.70M</strong><span>Gross profit</span></div>
+                <div class="cs-metric"><strong>$0.39M</strong><span>EBIT</span></div>
+                <div class="cs-metric"><strong>$0.29M</strong><span>Net profit</span></div>
+                <div class="cs-metric"><strong>30.0%</strong><span>Gross margin</span></div>
+                <div class="cs-metric"><strong>12.6%</strong><span>Net margin</span></div>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Methodology</p>
+        <div class="cs-steps">
+                <div class="cs-step">
+                    <span class="cs-step-num">Step 01</span>
+                    <h3>Data Preparation</h3>
+                    <p>Structured monthly revenue, cost of goods, operating expenses, interest and tax into one consistent financial table, with a single date field driving every view.</p>
+                </div>
+                <div class="cs-step">
+                    <span class="cs-step-num">Step 02</span>
+                    <h3>Analytical Approach</h3>
+                    <p>Calculated fields for gross profit, EBIT, net profit and margins, plus a monthly comparison against break-even, so every KPI traces back to the same logic.</p>
+                </div>
+                <div class="cs-step">
+                    <span class="cs-step-num">Step 03</span>
+                    <h3>Visual Design</h3>
+                    <p>A black, gray and amber palette: KPI tiles up top, monthly net profit against break-even, and a waterfall that walks revenue down to net profit. Side navigation keeps six pages one click apart.</p>
+                </div>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Dashboard views</p>
+        <div class="cs-pages">
+                <a href="../assets/images/projects/financial-1.png" target="_blank" rel="noopener" class="cs-page">
+                    <img src="../assets/images/projects/financial-1.png" alt="Overview page of the YellowJacket Financial Analysis dashboard" loading="lazy" width="1200" height="780">
+                    <span>Overview</span>
+                </a>
+                <a href="../assets/images/projects/financial-2.png" target="_blank" rel="noopener" class="cs-page">
+                    <img src="../assets/images/projects/financial-2.png" alt="KPI tiles and monthly net profit against the break-even point" loading="lazy" width="1200" height="780">
+                    <span>Net profit vs break-even</span>
+                </a>
+                <a href="../assets/images/projects/financial-3.png" target="_blank" rel="noopener" class="cs-page">
+                    <img src="../assets/images/projects/financial-3.png" alt="Waterfall from revenue to net profit" loading="lazy" width="1200" height="780">
+                    <span>Revenue to net profit</span>
+                </a>
+        </div>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Key findings</p>
+        <ol class="cs-findings">
+                <li><span class="cs-n">1</span><p>Cost of goods takes 70% of revenue ($1.63M of $2.33M), leaving a 30% gross margin. It is the single biggest lever on profit.</p></li>
+                <li><span class="cs-n">2</span><p>Operating expenses ($305K) and interest and tax ($102K) take another 17.5% of revenue, so 12.6%, or $292K, reaches net profit.</p></li>
+                <li><span class="cs-n">3</span><p>Profit is back-loaded: September to December were the four strongest months of the year, and December delivered the highest net profit.</p></li>
+                <li><span class="cs-n">4</span><p>January and February were the weakest months, earning only a fraction of what the fourth quarter did.</p></li>
+        </ol>
+    </section>
+
+    <section class="container cs-block">
+        <p class="section-eyebrow">Recommendations</p>
+        <ul class="cs-recs">
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Start with cost of goods: every percentage point saved there adds about $23K to net profit.</p></li>
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Plan cash, stock and staffing around the fourth-quarter peak, and use the slower first quarter for cost and supplier reviews.</p></li>
+                <li><span class="cs-chev" aria-hidden="true">›</span><p>Track net margin monthly against the 12.6% annual figure to catch slipping months before they reach the year-end numbers.</p></li>
+        </ul>
+    </section>
+    <section class="container cs-end">
+        <div>
+            <p class="label">Want the full walkthrough?</p>
+            <a href="../index.html#contact" class="cs-live">Talk me through it <span aria-hidden="true">↗</span></a>
+        </div>
+        <nav class="cs-pager" aria-label="Case studies">
+            <a href="supply.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
+            <a href="retail.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
+        </nav>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <p>© 2026 Kingsley Koduah</p>
+        <p class="label">Data tells the story.</p>
+        <a href="../index.html" class="label">Home ↑</a>
+    </div>
+</footer>
+
+</body>
+</html>

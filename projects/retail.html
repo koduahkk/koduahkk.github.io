@@ -5,30 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retail Sales Performance | Kingsley Koduah</title>
     <meta name="description" content="A three-page sales report for a multi-region retailer. It replaces a weekly spreadsheet pack with one place to see revenue, orders and margin — and drill from region to category to product.">
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="theme-color" content="#F5F2EC">
     <link rel="icon" type="image/png" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" href="../apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
     <script>
-        // Always open a case study at the top, never at a restored scroll position
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'instant' }));
+        // Every load and refresh starts at the top. A fresh visit to a #section link still jumps there.
+        // Re-applied briefly after load (to beat restored scroll positions), and dropped as soon as the visitor scrolls.
+        (function () {
+            try {
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+                var isReload = nav && nav.type === 'reload';
+                if (location.hash.length > 1 && !isReload) return;
+                var moved = false;
+                ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (t) { window.addEventListener(t, function () { moved = true; }, { passive: true, once: true }); });
+                var top = function () { if (!moved && window.scrollY !== 0) window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+                if (isReload && location.hash) history.replaceState(null, '', location.pathname + location.search);
+                top();
+                document.addEventListener('DOMContentLoaded', top);
+                window.addEventListener('load', function () { [0, 100, 300, 700, 1200].forEach(function (ms) { setTimeout(top, ms); }); });
+            } catch (e) {}
+        })();
     </script>
 </head>
-<body class="case">
+<body class="case" id="top">
 
-<header class="cs-bar" id="top">
+<header class="cs-bar">
     <div class="container cs-bar-inner">
         <a href="../index.html#projects" class="pill-btn"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <span class="label">Case study 02</span>
+        <nav class="cs-switch" aria-label="Case studies">
+            <a href="financial.html#top" class="pill-btn cs-switch-btn" aria-label="Previous project: Financial Analysis"><span aria-hidden="true">←</span><span class="cs-switch-name">Financial Analysis</span></a>
+            <span class="cs-current mono" aria-current="page"><b>02</b> / 04<span class="cs-switch-name"> · Retail Sales</span></span>
+            <a href="churn.html#top" class="pill-btn cs-switch-btn" aria-label="Next project: Customer Churn"><span class="cs-switch-name">Customer Churn</span><span aria-hidden="true">→</span></a>
+        </nav>
     </div>
 </header>
 
 <main>
-    <!--💡UPDATE: this case study uses placeholder content — replace the text and the images in assets/images/projects/retail-1/2/3 -->
     <section class="container cs-hero">
         <p class="section-eyebrow">Retail analytics · SQL · Power BI</p>
         <h1 class="cs-title">Retail Sales Performance</h1>
@@ -120,12 +137,11 @@
 
     <section class="container cs-end">
         <div>
-            <p class="label">Live dashboard</p>
-            <!--💡UPDATE: link to the published dashboard -->
-            <a href="#" class="cs-live">Open in Power BI <span aria-hidden="true">↗</span></a>
+            <p class="label">Want the full walkthrough?</p>
+            <a href="../index.html#contact" class="cs-live">Talk me through it <span aria-hidden="true">↗</span></a>
         </div>
         <nav class="cs-pager" aria-label="Case studies">
-            <a href="electricity.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
+            <a href="financial.html#top" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</a>
             <a href="churn.html#top" class="btn btn-lime">Next project <span aria-hidden="true">→</span></a>
         </nav>
     </section>
