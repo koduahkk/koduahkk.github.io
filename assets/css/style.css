@@ -852,3 +852,9 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .form-status.is-err { border: 1px solid #C2321A; background: #FFE3DC; color: #7A1E0F; }
 .form-status a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .contact-form button[disabled] { opacity: .7; cursor: progress; transform: none; }
+
+/* Laptop and desktop widths (incl. 125% display scaling): render at 80% so the layout keeps
+   the compact proportions it was designed at. Large monitors (1800px+) and mobile are unaffected. */
+@media (min-width: 1100px) and (max-width: 1799px) {
+    html { zoom: 0.8; }
+}
