@@ -117,7 +117,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .hero {
     position: relative;
     padding: clamp(40px, 6vw, 88px) 0 0;
-    min-height: calc(100svh - 88px);
+    min-height: calc(var(--screen-h, 100svh) - 88px);
     display: flex; flex-direction: column; justify-content: space-between;
     background:
         radial-gradient(ellipse 60% 50% at 85% 10%, rgba(43, 214, 123, 0.08), transparent 70%),
@@ -807,7 +807,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .stack img { border-color: rgba(14, 14, 12, 0.08); box-shadow: 0 24px 50px -18px rgba(14, 14, 12, .45); }
 
 /* 404 page */
-.not-found { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+.not-found { min-height: var(--screen-h, 100svh); display: flex; flex-direction: column; justify-content: center; gap: 24px; }
 .not-found > p:not(.section-eyebrow) { max-width: 46ch; font-size: 18px; }
 
 /* Dashboards on black: a faint light edge keeps dark dashboards distinct */
@@ -852,9 +852,3 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .form-status.is-err { border: 1px solid #C2321A; background: #FFE3DC; color: #7A1E0F; }
 .form-status a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .contact-form button[disabled] { opacity: .7; cursor: progress; transform: none; }
-
-/* Laptop and desktop widths (incl. 125% display scaling): render at 80% so the layout keeps
-   the compact proportions it was designed at. Large monitors (1800px+) and mobile are unaffected. */
-@media (min-width: 1100px) and (max-width: 1799px) {
-    html { zoom: 0.8; }
-}
