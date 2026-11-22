@@ -98,7 +98,7 @@ export const results = [
    Monthly prices and setup fees are confirmed.
    Annual billing = "N months free": the build sets each tier's annual price to
    monthly × (12 − N) ÷ 12, rounded DOWN so the yearly total never exceeds the
-   promise (e.g. $399 → $332/mo, $3,984/yr). Set `annual` on a tier to override.
+   promise (e.g. $699 → $582/mo, $6,984/yr). Set `annual` on a tier to override.
    Set annualMonthsFree to 0 to hide the Monthly/Annual toggle.
    [CONFIRM] included minutes and feature lists. */
 export const pricing = {
@@ -108,7 +108,7 @@ export const pricing = {
       id: 'starter',
       name: 'Starter',
       blurb: 'For a single location that wants nights and weekends covered.',
-      monthly: 399,
+      monthly: 699,
       annual: null,
       minutes: '300 minutes / mo',
       setup: '$999 one-time setup',
@@ -125,7 +125,7 @@ export const pricing = {
       name: 'Growth',
       popular: true,
       blurb: 'For busy offices that live on the phone all day.',
-      monthly: 699,
+      monthly: 999,
       annual: null,
       minutes: '1,000 minutes / mo',
       setup: '$999 one-time setup',
