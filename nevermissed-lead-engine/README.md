@@ -177,18 +177,23 @@ npm test
 
 ## Deploying to Vercel
 
-1. Create a Supabase project. Copy the pooled and direct connection strings and the anon key.
-2. Import the repository into Vercel and set the **Root Directory** to `nevermissed-lead-engine`. Add the environment variables, leaving `DEMO_MODE` unset.
-3. Run the migrations once:
+Vercel runs `npm run vercel-build`, which applies migrations (`prisma migrate deploy`), loads demo data when `SEED_DEMO_DATA=true` **and** the database has no users yet (redeploys never wipe data), then builds the app.
 
-   ```bash
-   DATABASE_URL=... DIRECT_URL=... npx prisma migrate deploy
-   ```
-
-4. In Supabase Auth, set the Site URL to your domain and add `https://<domain>/auth/callback` as a redirect URL.
-5. Install the Inngest Vercel integration (or set `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`) and sync `https://<domain>/api/inngest`.
-6. Point the provider webhooks at the URLs listed in Settings → Integrations.
-7. Sign in first; you become Admin. Then set the business address, sender identities and demo link/phone, and invite your callers.
+1. **Supabase**: create a project. Under *Connect → ORMs → Prisma*, copy:
+   - `DATABASE_URL`: the **Transaction pooler** URL (port 6543), with `?pgbouncer=true&connection_limit=1` appended.
+   - `DIRECT_URL`: the **Session pooler** URL (port 5432). Don't use the "Direct connection" host: it is IPv6-only and Vercel's build can't reach it.
+2. **Vercel**: import the GitHub repo, set **Root Directory** to `nevermissed-lead-engine`, and add the environment variables:
+   - `DATABASE_URL`, `DIRECT_URL`, `APP_ENCRYPTION_KEY` (from `openssl rand -base64 32`).
+   - For a demo deployment: `DEMO_MODE=true`, `ALLOW_DEMO_IN_PRODUCTION=true`, `SEED_DEMO_DATA=true`. Anyone with the link can sign in as Admin, so use this only with fake data.
+   - `APP_URL` is optional; it defaults to the Vercel production domain.
+3. To deploy a branch other than `main`, set it under *Settings → Git → Production Branch*, then redeploy.
+4. **Going live with real data**:
+   - Remove `DEMO_MODE`, `ALLOW_DEMO_IN_PRODUCTION` and `SEED_DEMO_DATA`.
+   - Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+   - In Supabase Auth, set the Site URL and add `https://<domain>/auth/callback` as a redirect URL.
+   - Clear the demo tables (`npx prisma migrate reset` against that database), then sign in first so you become Admin.
+5. **Background jobs**: install the Inngest Vercel integration (it sets `INNGEST_EVENT_KEY` / `INNGEST_SIGNING_KEY`) and sync `https://<domain>/api/inngest`. Until then, use *Run planner now* and *Send due emails now* in the UI.
+6. Point provider webhooks at the URLs in Settings → Integrations.
 
 ## Project layout
 

@@ -20,7 +20,8 @@
     "jobs:enrich": "tsx --conditions=react-server scripts/run-job.ts enrich",
     "jobs:refresh-places": "tsx --conditions=react-server scripts/run-job.ts refresh-places",
     "jobs:imap": "tsx --conditions=react-server scripts/run-job.ts imap",
-    "jobs:automated-calls": "tsx --conditions=react-server scripts/run-job.ts automated-calls"
+    "jobs:automated-calls": "tsx --conditions=react-server scripts/run-job.ts automated-calls",
+    "vercel-build": "prisma generate && prisma migrate deploy && tsx prisma/seed-if-empty.ts && next build"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
