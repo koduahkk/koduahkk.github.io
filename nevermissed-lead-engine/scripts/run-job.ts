@@ -9,9 +9,11 @@ import { enrichPending } from "@/lib/jobs/enrich";
 import { refreshStalePlaces } from "@/lib/jobs/places";
 import { pollImap } from "@/lib/jobs/imap";
 import { sweepAutomatedCalls } from "@/lib/jobs/automated";
+import { runSourcing } from "@/lib/jobs/sourcing";
 import { prisma } from "@/lib/db";
 
 const jobs: Record<string, () => Promise<unknown>> = {
+  sourcing: () => runSourcing({ trigger: "manual" }),
   planner: () => runDailyPlanner(),
   emails: () => dispatchEmails(),
   enrich: () => enrichPending(25),

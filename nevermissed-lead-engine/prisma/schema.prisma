@@ -187,9 +187,32 @@ model Territory {
   /// Higher priority territories are planned first.
   priority     Int      @default(0)
   active       Boolean  @default(true)
+  /// Map center for daily salon finding, looked up once from city/ZIP.
+  centerLat    Float?
+  centerLng    Float?
+  /// Where the daily finder stopped: { category, tile, pageToken } per territory.
+  sourcingCursor Json?
+  /// Set when every tile for every category has been searched.
+  exhaustedAt  DateTime?
   createdAt    DateTime @default(now())
 
   leads Lead[]
+}
+
+/// One run of the daily "find salons" job (scheduled or manual).
+model SourcingRun {
+  id        String   @id @default(cuid())
+  /// Local date (YYYY-MM-DD, planner time zone).
+  runDate   String
+  found     Int      @default(0)
+  skipped   Int      @default(0)
+  requests  Int      @default(0)
+  /// Human-readable notes: filters applied, territories exhausted, errors.
+  notes     String[] @default([])
+  trigger   String   @default("schedule")
+  createdAt DateTime @default(now())
+
+  @@index([runDate])
 }
 
 // ───────────────────────────── Leads ─────────────────────────────
@@ -482,6 +505,8 @@ model Settings {
   calling   Json
   scoring   Json
   email     Json
+  /// Daily salon finding (Settings → Salon finding). Null until first saved.
+  sourcing  Json?
   updatedAt DateTime @updatedAt
 }
 

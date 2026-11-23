@@ -1,5 +1,4 @@
 "use server";
-import { after } from "next/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
@@ -15,18 +14,8 @@ import { evaluateLead, startOutreach } from "@/lib/jobs/scoring";
 import { getSettings } from "@/lib/settings";
 import { planSalonCalls, loadFrom } from "@/lib/scheduler/slots";
 import { suppress, normalizeEmail } from "@/lib/suppression";
-import { trySend } from "@/inngest";
+import { queueEnrichment } from "@/lib/enqueue";
 import { LEAD_STAGES, type WeeklyHours } from "@/lib/domain";
-
-/** Kick off enrichment for new leads: via Inngest if configured, else after the response. */
-async function queueEnrichment(ids: string[]) {
-  if (!ids.length) return;
-  const sent = await Promise.all(ids.map((id) => trySend("nm/lead.enrich", { leadId: id })));
-  if (sent.every(Boolean)) return;
-  after(async () => {
-    for (const id of ids.slice(0, 25)) await enrichLead(id).catch(() => {});
-  });
-}
 
 const placesSchema = z.object({
   location: z.string().min(2, "Enter a city or ZIP"),

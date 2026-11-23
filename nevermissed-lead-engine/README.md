@@ -69,6 +69,7 @@ API keys can also be pasted into **Settings → Integrations**. They are stored 
 
 | Job | Schedule | Code |
 |---|---|---|
+| Daily salon finding (only once set up and switched on) | 06:00 (`PLANNER_CRON_TZ`) | `src/lib/jobs/sourcing.ts` |
 | Daily call planner | 07:00 (`PLANNER_CRON_TZ`) | `src/lib/jobs/planner.ts` |
 | Email dispatcher (queue, space and send due steps) | every 5 min | `src/lib/jobs/email.ts` |
 | Automated-call sweeper (only when automated mode is on) | every minute | `src/lib/jobs/automated.ts` |
@@ -100,7 +101,31 @@ npm run jobs:planner
 npm run jobs:emails
 ```
 
-Also available: `jobs:enrich`, `jobs:refresh-places`, `jobs:imap` and `jobs:automated-calls`. In the UI, Admins have **Run planner now** (Today's Calls) and **Send due emails now** (Sequences).
+Also available: `jobs:sourcing`, `jobs:enrich`, `jobs:refresh-places`, `jobs:imap` and `jobs:automated-calls`. In the UI, Admins have **Run planner now** (Today's Calls) and **Send due emails now** (Sequences).
+
+## Daily salon finding
+
+Settings → **Salon finding** controls an automatic 6:00 job that adds new salons from Google Places every day, ready for the 7:00 planner.
+
+**Before it can run, you choose:**
+- **Territories:** a city or ZIP, a radius and a priority.
+- **Categories:** hair, nail, barber, beauty, spa, lash/brow.
+- **Filters:** a minimum rating, a minimum number of reviews, and an editable list of chains to skip.
+- **Limits:** how many new salons per day (default 50) and a hard cap on Google searches per day (default 60).
+
+It stays off until territories and categories are set and you switch it on. **Find salons now** runs it once by hand.
+
+**How it searches.** Google returns at most 60 results per query, so each territory is split into small map tiles (default 3 km) and searched from the center outward. Progress is saved after every page, per territory and per category, so each day continues into new ground and a crash never repeats a paid search.
+
+**What it skips:** duplicates (same phone number or place ID), places that are permanently closed, listings with no phone, and anything your filters exclude.
+
+**What it reports:** each run is logged with what it found and skipped, and the dashboard shows "X of 50 found today". When a territory is fully searched, it tells you to add another.
+
+Tests: `tests/sourcing.test.ts` covers tiling, the per-category progress, filters and the setup checks. `tests/sourcing-job.int.test.ts` runs the whole job against a real database with a stand-in for Google; it runs only when `TEST_DATABASE_URL` is set:
+
+```bash
+TEST_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nm_test npm test
+```
 
 ## Business rules
 
@@ -166,7 +191,7 @@ Invite people in Settings → Team. With Supabase Auth, the first person to sign
 npm test
 ```
 
-43 unit tests cover:
+The unit tests cover (salon finding is covered in its own section above):
 
 - **Scoring engine**: every tier, local-time reasons, editable rules.
 - **Time-slot scheduler**: four US zones, closing times of 17:00, 19:00, 20:30 and 21:00, split hours, after-midnight closes, unknown hours, DST, never in the past, the 15-minute capacity cap across 50 salons, existing calendar load.

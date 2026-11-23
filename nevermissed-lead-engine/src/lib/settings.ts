@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { DAYS } from "@/lib/domain";
 import { scoringRulesSchema } from "@/lib/scoring/engine";
 import { DEFAULT_SCHEDULER_CONFIG, peakWindowSchema, weeklyHoursSchema } from "@/lib/scheduler/slots";
+import { sourcingSchema } from "@/lib/sourcing/plan";
 
 const hhmm = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 
@@ -68,11 +69,12 @@ export const settingsSchema = z.object({
   calling: callingSchema,
   scoring: scoringRulesSchema,
   email: emailSchema,
+  sourcing: sourcingSchema,
 });
 export type AppSettings = z.infer<typeof settingsSchema>;
 export type SettingsSection = keyof AppSettings;
 
-export const DEFAULT_SETTINGS: AppSettings = settingsSchema.parse({ general: {}, calling: {}, scoring: {}, email: {} });
+export const DEFAULT_SETTINGS: AppSettings = settingsSchema.parse({ general: {}, calling: {}, scoring: {}, email: {}, sourcing: {} });
 
 /** Load settings, filling in defaults for any missing / invalid keys. */
 export async function getSettings(): Promise<AppSettings> {
@@ -87,6 +89,7 @@ export async function getSettings(): Promise<AppSettings> {
     calling: safe(callingSchema, row.calling, DEFAULT_SETTINGS.calling),
     scoring: safe(scoringRulesSchema, row.scoring, DEFAULT_SETTINGS.scoring),
     email: safe(emailSchema, row.email, DEFAULT_SETTINGS.email),
+    sourcing: safe(sourcingSchema, row.sourcing, DEFAULT_SETTINGS.sourcing),
   };
 }
 

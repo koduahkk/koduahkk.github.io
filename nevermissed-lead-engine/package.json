@@ -15,13 +15,14 @@
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset --force",
     "inngest:dev": "npx inngest-cli@latest dev -u http://localhost:3000/api/inngest",
-    "jobs:planner": "tsx --conditions=react-server scripts/run-job.ts planner",
     "jobs:emails": "tsx --conditions=react-server scripts/run-job.ts emails",
     "jobs:enrich": "tsx --conditions=react-server scripts/run-job.ts enrich",
     "jobs:refresh-places": "tsx --conditions=react-server scripts/run-job.ts refresh-places",
     "jobs:imap": "tsx --conditions=react-server scripts/run-job.ts imap",
     "jobs:automated-calls": "tsx --conditions=react-server scripts/run-job.ts automated-calls",
-    "vercel-build": "prisma generate && prisma migrate deploy && tsx prisma/seed-if-empty.ts && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && tsx prisma/seed-if-empty.ts && next build",
+    "jobs:sourcing": "tsx --conditions=react-server scripts/run-job.ts sourcing",
+    "jobs:planner": "tsx --conditions=react-server scripts/run-job.ts planner"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

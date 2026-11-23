@@ -76,6 +76,30 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
         </CardContent>
       </Card>
 
+      <Card className="mb-4">
+        <CardContent className="flex flex-col gap-3 pt-4 sm:flex-row sm:items-center sm:justify-between sm:pt-5">
+          <div className="min-w-0">
+            <p className="text-sm font-medium">
+              Salon finding{" "}
+              {d.sourcing.enabled ? <span className="font-normal text-muted-foreground">· on, every day at 6:00</span> : <span className="font-normal text-muted-foreground">· off</span>}
+            </p>
+            {d.sourcing.gaps.length ? (
+              <p className="text-sm text-muted-foreground">Not set up yet: {d.sourcing.gaps.join(" ")}</p>
+            ) : (
+              <p className="text-sm">
+                <strong className="tabular-nums">{d.sourcing.foundToday}</strong> of {d.sourcing.target} new salons found today
+                <span className="text-muted-foreground"> · {d.sourcing.searchesToday} searches</span>
+              </p>
+            )}
+            {d.sourcing.exhausted.length ? <p className="text-sm text-amber-700 dark:text-amber-300">Fully searched: {d.sourcing.exhausted.join(", ")}. Add a territory to keep finding new salons.</p> : null}
+            {d.sourcing.lastRun?.notes.length ? <p className="truncate text-xs text-muted-foreground">Last run: {d.sourcing.lastRun.notes[0]}</p> : null}
+          </div>
+          <Link href="/settings?tab=sourcing" className="shrink-0 rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
+            {d.sourcing.gaps.length || !d.sourcing.enabled ? "Set up salon finding" : "Salon finding settings"}
+          </Link>
+        </CardContent>
+      </Card>
+
       <div className="mb-4 grid grid-cols-2 gap-3 lg:grid-cols-5">
         <Stat label="Tested" value={f[1].value} hint={`${d.tiers.dead} dead numbers`} />
         <Stat label="Hot" value={d.tiers.hot} hint={`${pct(d.tiers.hot, d.tiers.scored)}% of scored`} />

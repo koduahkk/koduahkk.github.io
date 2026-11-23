@@ -11,8 +11,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ActionButton } from "@/components/app/action-button";
-import { toggleTerritory, updateMember, removeSuppression, updateSender } from "@/app/actions/settings";
-import { CallingForm, EmailForm, GeneralForm, InviteForm, ScoringForm, SecretForm, SenderForm, SuppressionForm, TerritoryForm } from "./forms";
+import { toggleTerritory, updateMember, removeSuppression, updateSender, runSourcingNow, resetTerritoryProgress } from "@/app/actions/settings";
+import { coverage, isExhausted, loadCursor, gridKey, setupGaps, tilesFor } from "@/lib/sourcing/plan";
+import { Progress } from "@/components/ui/progress";
+import { CallingForm, EmailForm, GeneralForm, InviteForm, ScoringForm, SecretForm, SenderForm, SourcingForm, SuppressionForm, TerritoryEdit, TerritoryForm } from "./forms";
 import { fmtIn } from "@/lib/format";
 
 export const metadata = { title: "Settings" };
@@ -21,14 +23,16 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
   const { tab = "general" } = await searchParams;
   const user = await requireUser();
   const admin = hasRole(user, "ADMIN");
-  const [settings, territories, users, suppressions, senders, secrets] = await Promise.all([
+  const [settings, territories, users, suppressions, senders, secrets, runs] = await Promise.all([
     getSettings(),
     prisma.territory.findMany({ orderBy: [{ priority: "desc" }, { name: "asc" }], include: { _count: { select: { leads: true } } } }),
     prisma.user.findMany({ orderBy: { createdAt: "asc" } }),
     prisma.suppression.findMany({ orderBy: { createdAt: "desc" }, take: 500 }),
     prisma.senderIdentity.findMany({ orderBy: { createdAt: "asc" } }),
     secretStatus(),
+    prisma.sourcingRun.findMany({ orderBy: { createdAt: "desc" }, take: 8 }),
   ]);
+  const sourcingGaps = setupGaps(settings.sourcing, territories.filter((t) => t.active).length);
   const has = (k: string) => !!secrets.find((s) => s.key === k)?.source;
   const twilioReady = has("TWILIO_ACCOUNT_SID") && has("TWILIO_AUTH_TOKEN") && has("TWILIO_CALLER_ID");
 
@@ -44,9 +48,9 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
       </div>
       <Tabs defaultValue={tab}>
         <TabsList>
-          {["general", "calling", "scoring", "email", "integrations", "team", "compliance"].map((t) => (
-            <TabsTrigger key={t} value={t} className="capitalize">
-              {t}
+          {[["general", "General"], ["sourcing", "Salon finding"], ["calling", "Calling"], ["scoring", "Scoring"], ["email", "Email"], ["integrations", "Integrations"], ["team", "Team"], ["compliance", "Compliance"]].map(([t, label]) => (
+            <TabsTrigger key={t} value={t}>
+              {label}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -56,28 +60,87 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
             <CardHeader><CardTitle>General</CardTitle></CardHeader>
             <CardContent><GeneralForm value={settings.general} territories={territories} canEdit={admin} /></CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="sourcing" className="space-y-4">
+          <Card>
+            <CardHeader className="flex-row flex-wrap items-start justify-between gap-3">
+              <div>
+                <CardTitle>Daily salon finding</CardTitle>
+                <CardDescription>
+                  {settings.sourcing.enabled
+                    ? `On. Every day at 6:00 (${settings.general.plannerTimezone}) it adds up to ${settings.sourcing.dailyTarget} new salons from Google Places.`
+                    : "Off. Choose your territories, categories and filters below, then switch it on."}
+                </CardDescription>
+              </div>
+              {admin ? (
+                <ActionButton variant="outline" disabled={sourcingGaps.length > 0} action={runSourcingNow}>
+                  Find salons now
+                </ActionButton>
+              ) : null}
+            </CardHeader>
+            <CardContent>
+              <SourcingForm value={settings.sourcing} canEdit={admin} gaps={sourcingGaps} placesReady={has("GOOGLE_PLACES_API_KEY")} />
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Territories</CardTitle>
-              <CardDescription>Higher priority is planned first.</CardDescription>
+              <CardDescription>Where to search, highest priority first. The call planner also tests the priority territory first. Coverage shows how much of each area has been searched for your chosen categories.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Table>
-                <THead><TR><TH>Name</TH><TH>Area</TH><TH>Priority</TH><TH>Leads</TH><TH>Status</TH><TH /></TR></THead>
-                <TBody>
-                  {territories.map((t) => (
-                    <TR key={t.id}>
-                      <TD className="font-medium">{t.name}</TD>
-                      <TD>{[t.city, t.state, t.zip].filter(Boolean).join(", ")}{t.radiusMeters ? ` · ${t.radiusMeters / 1000} km` : ""}</TD>
-                      <TD>{t.priority}</TD>
-                      <TD>{t._count.leads}</TD>
-                      <TD>{t.active ? <Badge variant="success">Active</Badge> : <Badge variant="secondary">Paused</Badge>}</TD>
-                      <TD className="text-right">{admin ? <ActionButton variant="ghost" size="sm" action={toggleTerritory.bind(null, t.id, !t.active)}>{t.active ? "Pause" : "Activate"}</ActionButton> : null}</TD>
-                    </TR>
-                  ))}
-                </TBody>
-              </Table>
+              {territories.length === 0 ? <p className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">No territories yet. Add a city or ZIP below.</p> : null}
+              {territories.length ? (
+                <Table>
+                  <THead><TR><TH>Territory</TH><TH>Radius · priority</TH><TH className="w-48">Coverage</TH><TH>Leads</TH><TH>Status</TH><TH /></TR></THead>
+                  <TBody>
+                    {territories.map((t) => {
+                      const radiusKm = (t.radiusMeters ?? 15000) / 1000;
+                      const center = t.centerLat != null && t.centerLng != null ? { lat: t.centerLat, lng: t.centerLng } : null;
+                      const tiles = center ? tilesFor(center, radiusKm, settings.sourcing.tileKm).length : 0;
+                      const cur = center ? loadCursor(t.sourcingCursor, gridKey(center, radiusKm, settings.sourcing.tileKm)) : null;
+                      const cov = center ? coverage(cur, settings.sourcing.categories, tiles) : 0;
+                      const done = isExhausted(cur, settings.sourcing.categories);
+                      return (
+                        <TR key={t.id}>
+                          <TD><p className="font-medium">{t.name}</p><p className="text-xs text-muted-foreground">{[t.city, t.state, t.zip].filter(Boolean).join(", ")}</p></TD>
+                          <TD>{admin ? <TerritoryEdit id={t.id} radiusKm={radiusKm} priority={t.priority} /> : `${radiusKm} km · ${t.priority}`}</TD>
+                          <TD>
+                            <Progress value={cov * 100} label={`${t.name} search coverage`} />
+                            <p className="mt-1 text-xs text-muted-foreground">{center ? (done ? "Fully searched" : `${Math.round(cov * 100)}% of ${tiles} map tiles`) : "Not searched yet"}</p>
+                          </TD>
+                          <TD>{t._count.leads}</TD>
+                          <TD>{!t.active ? <Badge variant="secondary">Paused</Badge> : done ? <Badge variant="warning">Fully searched</Badge> : <Badge variant="success">Active</Badge>}</TD>
+                          <TD className="space-x-1 whitespace-nowrap text-right">
+                            {admin ? <ActionButton variant="ghost" size="sm" action={toggleTerritory.bind(null, t.id, !t.active)}>{t.active ? "Pause" : "Activate"}</ActionButton> : null}
+                            {admin && cur && Object.keys(cur.cats).length ? <ActionButton variant="ghost" size="sm" confirm="Start searching this territory from the center again? Salons you already have are skipped, but the searches still count toward your daily budget." action={resetTerritoryProgress.bind(null, t.id)}>Restart search</ActionButton> : null}
+                          </TD>
+                        </TR>
+                      );
+                    })}
+                  </TBody>
+                </Table>
+              ) : null}
               {admin ? <TerritoryForm /> : null}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle>Recent runs</CardTitle></CardHeader>
+            <CardContent>
+              {runs.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No runs yet.</p>
+              ) : (
+                <ul className="divide-y">
+                  {runs.map((r) => (
+                    <li key={r.id} className="py-2.5 text-sm">
+                      <p><span className="font-medium">{fmtIn(r.createdAt, user.timezone, "ccc LLL d, h:mma")}</span> · {r.found} new salon{r.found === 1 ? "" : "s"} · {r.requests} search{r.requests === 1 ? "" : "es"} <span className="text-muted-foreground">({r.trigger === "manual" ? "run by hand" : "scheduled"})</span></p>
+                      {r.notes.map((n, i) => <p key={i} className="text-xs text-muted-foreground">{n}</p>)}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

@@ -103,7 +103,7 @@ function haversineMeters(a: { lat: number; lng: number }, b: { lat: number; lng:
 }
 
 /** Resolve a city or ZIP to a center point using Places Text Search itself (no Geocoding API needed). */
-async function locate(location: string) {
+export async function locate(location: string) {
   const r = await call<{ places?: GPlace[] }>("/places:searchText", {
     method: "POST",
     fieldMask: "places.location,places.formattedAddress",
@@ -153,4 +153,38 @@ export async function searchSalons(opts: { location: string; radiusMeters: numbe
 export async function getPlace(placeId: string): Promise<NormalizedPlace> {
   const p = await call<GPlace>(`/places/${encodeURIComponent(placeId)}`, { method: "GET", fieldMask: FIELDS.join(",") });
   return normalize(p);
+}
+
+/**
+ * One search inside one map tile (used by the daily salon finder).
+ * `locationRestriction` keeps results strictly inside the rectangle, so
+ * neighbouring tiles return different salons. One call = one page (≤ 20).
+ */
+export async function searchTile(opts: {
+  tile: { low: { lat: number; lng: number }; high: { lat: number; lng: number } };
+  category: string;
+  pageToken?: string | null;
+}): Promise<{ places: NormalizedPlace[]; nextPageToken: string | null }> {
+  const cat = SALON_CATEGORIES.find((c) => c.value === opts.category) ?? SALON_CATEGORIES[0];
+  const body: Record<string, unknown> = {
+    textQuery: cat.query,
+    pageSize: 20,
+    locationRestriction: {
+      rectangle: {
+        low: { latitude: opts.tile.low.lat, longitude: opts.tile.low.lng },
+        high: { latitude: opts.tile.high.lat, longitude: opts.tile.high.lng },
+      },
+    },
+  };
+  if (cat.placesType) {
+    body.includedType = cat.placesType;
+    body.strictTypeFiltering = true;
+  }
+  if (opts.pageToken) body.pageToken = opts.pageToken;
+  const r = await call<{ places?: GPlace[]; nextPageToken?: string }>("/places:searchText", {
+    method: "POST",
+    fieldMask: FIELDS.map((f) => "places." + f).join(",") + ",nextPageToken",
+    body: JSON.stringify(body),
+  });
+  return { places: (r.places ?? []).map(normalize), nextPageToken: r.nextPageToken ?? null };
 }

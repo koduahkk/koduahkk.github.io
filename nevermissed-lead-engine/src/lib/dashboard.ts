@@ -7,6 +7,7 @@ import { DateTime } from "luxon";
 import { prisma } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 import { isMissed } from "@/lib/scoring/engine";
+import { setupGaps } from "@/lib/sourcing/plan";
 
 export type Range = "today" | "7d" | "30d" | "all";
 const LATER = ["DEMO_BOOKED", "TRIAL", "CUSTOMER"];
@@ -125,6 +126,22 @@ export async function dashboardData(range: Range, zone: string) {
   const dayStart = DateTime.now().setZone(settings.general.plannerTimezone).startOf("day").toJSDate();
   const testedToday = await prisma.callAttempt.findMany({ where: { status: "COMPLETED", executedAt: { gte: dayStart } }, distinct: ["leadId"], select: { leadId: true } });
   const callsToday = await prisma.callAttempt.groupBy({ by: ["status"], where: { scheduledAt: { gte: dayStart, lt: new Date(dayStart.getTime() + 86400_000) } }, _count: true });
+  const runDate = DateTime.now().setZone(settings.general.plannerTimezone).toISODate()!;
+  const [todayRuns, lastRun, activeTerritories, exhausted] = await Promise.all([
+    prisma.sourcingRun.aggregate({ where: { runDate }, _sum: { found: true, requests: true } }),
+    prisma.sourcingRun.findFirst({ orderBy: { createdAt: "desc" } }),
+    prisma.territory.count({ where: { active: true } }),
+    prisma.territory.findMany({ where: { active: true, exhaustedAt: { not: null } }, select: { name: true } }),
+  ]);
+  const sourcing = {
+    enabled: settings.sourcing.enabled,
+    target: settings.sourcing.dailyTarget,
+    foundToday: todayRuns._sum.found ?? 0,
+    searchesToday: todayRuns._sum.requests ?? 0,
+    gaps: setupGaps(settings.sourcing, activeTerritories),
+    lastRun,
+    exhausted: exhausted.map((t) => t.name),
+  };
   const [openTasks, unreadReplies] = await Promise.all([prisma.task.count({ where: { status: "OPEN" } }), prisma.emailEvent.count({ where: { type: "REPLIED", handled: false } })]);
 
   return {
@@ -143,5 +160,6 @@ export async function dashboardData(range: Range, zone: string) {
     },
     openTasks,
     unreadReplies,
+    sourcing,
   };
 }

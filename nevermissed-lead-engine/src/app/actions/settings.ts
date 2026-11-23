@@ -1,6 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { assertRole } from "@/lib/auth/session";
 import { run } from "@/lib/action";
@@ -15,6 +16,12 @@ export async function saveSection(section: SettingsSection, value: unknown) {
     if (section === "calling" && (value as { automatedEnabled?: boolean }).automatedEnabled) {
       // Turning automated mode on is a compliance-relevant change — always audit it.
       await audit(u.id, "settings.automated_calling_enabled");
+    }
+    if (section === "sourcing" && (value as { enabled?: boolean }).enabled) {
+      const { sourcingSchema, setupGaps } = await import("@/lib/sourcing/plan");
+      const gaps = setupGaps(sourcingSchema.parse(value), await prisma.territory.count({ where: { active: true } }));
+      if (gaps.length) throw new Error(`Before switching on daily salon finding: ${gaps.join(" ")}`);
+      await audit(u.id, "settings.sourcing_enabled");
     }
     await saveSettingsSection(section, value);
     await audit(u.id, "settings.update", { type: "Settings", id: section });
@@ -127,5 +134,41 @@ export async function updateSender(id: string, data: { dailyLimit?: number; acti
     await prisma.senderIdentity.update({ where: { id }, data });
     revalidatePath("/settings");
     return { message: "Sender updated" };
+  });
+}
+
+export async function runSourcingNow() {
+  return run(async () => {
+    const u = await assertRole("ADMIN");
+    const { runSourcing } = await import("@/lib/jobs/sourcing");
+    const { queueEnrichment } = await import("@/lib/enqueue");
+    const r = await runSourcing({ trigger: "manual", actorId: u.id });
+    if (!r.ran) throw new Error(r.message);
+    if (!r.found && /stopped the run|couldn't find/.test(r.message)) throw new Error(r.message);
+    await queueEnrichment(r.createdIds);
+    revalidatePath("/settings");
+    revalidatePath("/leads");
+    revalidatePath("/dashboard");
+    return { message: r.message };
+  });
+}
+
+export async function resetTerritoryProgress(id: string) {
+  return run(async () => {
+    const u = await assertRole("ADMIN");
+    await prisma.territory.update({ where: { id }, data: { sourcingCursor: Prisma.DbNull, exhaustedAt: null } });
+    await audit(u.id, "territory.reset_search", { type: "Territory", id });
+    revalidatePath("/settings");
+    return { message: "Search progress reset. The next run starts from the center again (salons you already have are skipped)." };
+  });
+}
+
+export async function updateTerritory(id: string, input: { radiusKm?: number; priority?: number }) {
+  return run(async () => {
+    await assertRole("ADMIN");
+    const d = z.object({ radiusKm: z.coerce.number().min(1).max(50).optional(), priority: z.coerce.number().int().optional() }).parse(input);
+    await prisma.territory.update({ where: { id }, data: { ...(d.radiusKm ? { radiusMeters: Math.round(d.radiusKm * 1000) } : {}), ...(d.priority != null ? { priority: d.priority } : {}) } });
+    revalidatePath("/settings");
+    return { message: "Territory updated" };
   });
 }

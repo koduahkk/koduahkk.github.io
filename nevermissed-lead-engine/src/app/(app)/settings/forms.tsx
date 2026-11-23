@@ -11,9 +11,9 @@ import { Input, Select, Textarea } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toastResult } from "@/components/app/action-button";
-import { saveSection, saveSecret, addTerritory, inviteMember, addSuppression, addSender } from "@/app/actions/settings";
+import { saveSection, saveSecret, addTerritory, inviteMember, addSuppression, addSender, updateTerritory } from "@/app/actions/settings";
 import type { AppSettings } from "@/lib/settings";
-import { CALL_OUTCOMES, DAYS, OUTCOME_META, type CallOutcome, type Day } from "@/lib/domain";
+import { CALL_OUTCOMES, DAYS, OUTCOME_META, SALON_CATEGORIES, type CallOutcome, type Day } from "@/lib/domain";
 import { scoreLead } from "@/lib/scoring/engine";
 import { cn } from "@/lib/utils";
 
@@ -450,5 +450,108 @@ export function SenderForm({ defaultLimit }: { defaultLimit: number }) {
       <Field label="Daily limit"><Input type="number" value={v.dailyLimit} onChange={(e) => setV({ ...v, dailyLimit: num(e.target.value) })} /></Field>
       <Button disabled={pending}><Plus /> Add</Button>
     </form>
+  );
+}
+
+// ─────────────────────────────── Salon finding ───────────────────────────────
+
+export function SourcingForm({ value, canEdit, gaps, placesReady }: { value: AppSettings["sourcing"]; canEdit: boolean; gaps: string[]; placesReady: boolean }) {
+  const [v, setV] = useState(value);
+  const [chains, setChains] = useState(value.chainNames.join("\n"));
+  const { pending, save } = useSave();
+  const set = <K extends keyof typeof v>(k: K, x: (typeof v)[K]) => setV({ ...v, [k]: x });
+  const catGaps = v.categories.length ? [] : ["Choose at least one salon category."];
+  const blocking = [...gaps.filter((g) => !g.includes("category")), ...catGaps];
+  const optNum = (s: string) => (s.trim() === "" ? null : Number(s));
+  const payload = () => ({ ...v, chainNames: chains.split("\n").map((c) => c.trim()).filter((c) => c.length >= 2) });
+
+  return (
+    <div className="space-y-6">
+      <section className="space-y-2">
+        <h3 className="font-medium">1. What to look for</h3>
+        <p className="text-sm text-muted-foreground">Each category is searched separately across every territory.</p>
+        <div className="grid gap-2 sm:grid-cols-3">
+          {SALON_CATEGORIES.map((c) => (
+            <label key={c.value} className="flex items-center gap-2 rounded-md border p-3 text-sm">
+              <input
+                type="checkbox"
+                className="h-4 w-4"
+                checked={v.categories.includes(c.value)}
+                disabled={!canEdit}
+                onChange={() => set("categories", v.categories.includes(c.value) ? v.categories.filter((x) => x !== c.value) : [...v.categories, c.value])}
+              />
+              {c.label}
+            </label>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <h3 className="font-medium">2. Filters</h3>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Field label="Minimum Google rating" hint="Leave empty for no minimum.">
+            <Input type="number" step="0.1" min={0} max={5} value={v.minRating ?? ""} disabled={!canEdit} onChange={(e) => set("minRating", optNum(e.target.value))} placeholder="e.g. 4.0" />
+          </Field>
+          <Field label="Minimum number of reviews" hint="Leave empty for no minimum.">
+            <Input type="number" min={0} value={v.minReviews ?? ""} disabled={!canEdit} onChange={(e) => set("minReviews", optNum(e.target.value))} placeholder="e.g. 20" />
+          </Field>
+        </div>
+        <Toggle label="Skip big chains" hint="Chains usually route calls to a corporate line, so the test proves nothing." checked={v.excludeChains} onChange={(x) => set("excludeChains", x)} disabled={!canEdit} />
+        {v.excludeChains ? (
+          <Field label="Chain names to skip (one per line)" hint="Matched as whole words in the salon's name, ignoring case.">
+            <Textarea rows={6} value={chains} disabled={!canEdit} onChange={(e) => setChains(e.target.value)} />
+          </Field>
+        ) : null}
+      </section>
+
+      <section className="space-y-3">
+        <h3 className="font-medium">3. How many</h3>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Field label="New salons per day">
+            <Input type="number" min={1} max={500} value={v.dailyTarget} disabled={!canEdit} onChange={(e) => set("dailyTarget", num(e.target.value))} />
+          </Field>
+          <Field label="Max Google searches per day" hint="A hard cap on cost. One search returns up to 20 places.">
+            <Input type="number" min={1} max={1000} value={v.maxRequestsPerDay} disabled={!canEdit} onChange={(e) => set("maxRequestsPerDay", num(e.target.value))} />
+          </Field>
+          <Field label="Search tile size (km)" hint="Smaller tiles find more salons in dense cities. Changing it restarts search progress.">
+            <Input type="number" step="0.5" min={0.5} max={10} value={v.tileKm} disabled={!canEdit} onChange={(e) => set("tileKm", Number(e.target.value) || 3)} />
+          </Field>
+        </div>
+      </section>
+
+      <section className="space-y-3">
+        <h3 className="font-medium">4. Switch it on</h3>
+        {blocking.length ? (
+          <div className="rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100">
+            <p className="font-medium">Before it can run:</p>
+            <ul className="ml-5 list-disc">{blocking.map((g) => <li key={g}>{g}</li>)}</ul>
+          </div>
+        ) : null}
+        {!placesReady ? <p className="text-sm text-amber-700 dark:text-amber-300">Add a Google Places API key in Integrations, or the run will stop at its first search.</p> : null}
+        <Toggle
+          label="Find new salons every morning at 6:00"
+          hint="Runs before the 7:00 call planner, so today's 50 are ready to plan."
+          checked={v.enabled}
+          disabled={!canEdit || (blocking.length > 0 && !v.enabled)}
+          onChange={(x) => set("enabled", x)}
+        />
+      </section>
+
+      {canEdit ? <SaveBar pending={pending} onClick={() => save(() => saveSection("sourcing", payload()))} /> : null}
+    </div>
+  );
+}
+
+export function TerritoryEdit({ id, radiusKm, priority }: { id: string; radiusKm: number; priority: number }) {
+  const [v, setV] = useState({ radiusKm: String(radiusKm), priority: String(priority) });
+  const { pending, save } = useSave();
+  const dirty = v.radiusKm !== String(radiusKm) || v.priority !== String(priority);
+  return (
+    <div className="flex items-center gap-1">
+      <Input aria-label="Radius in km" type="number" min={1} max={50} className="h-8 w-16" value={v.radiusKm} onChange={(e) => setV({ ...v, radiusKm: e.target.value })} />
+      <span className="text-xs text-muted-foreground">km</span>
+      <Input aria-label="Priority" type="number" className="ml-2 h-8 w-16" value={v.priority} onChange={(e) => setV({ ...v, priority: e.target.value })} />
+      {dirty ? <Button size="sm" variant="outline" className="h-8" disabled={pending} onClick={() => save(() => updateTerritory(id, { radiusKm: Number(v.radiusKm), priority: Number(v.priority) }))}>Save</Button> : null}
+    </div>
   );
 }

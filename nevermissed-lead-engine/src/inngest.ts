@@ -10,10 +10,21 @@ import { enrichLead, enrichPending } from "@/lib/jobs/enrich";
 import { refreshStalePlaces } from "@/lib/jobs/places";
 import { sweepAutomatedCalls } from "@/lib/jobs/automated";
 import { pollImap } from "@/lib/jobs/imap";
+import { runSourcing } from "@/lib/jobs/sourcing";
 
 export const inngest = new Inngest({ id: "nevermissed-lead-engine" });
 
 const TZ = process.env.PLANNER_CRON_TZ || "America/New_York";
+
+/** 6:00: find new salons, then queue their website scans. Runs only once set up and switched on. */
+export const dailySourcing = inngest.createFunction(
+  { id: "daily-salon-finding", triggers: [{ cron: `TZ=${TZ} 0 6 * * *` }], concurrency: { limit: 1 } },
+  async ({ step }) => {
+    const r = await step.run("find-salons", () => runSourcing({ trigger: "schedule" }));
+    if (r.createdIds.length) await step.sendEvent("enrich-new-salons", r.createdIds.map((leadId) => ({ name: "nm/lead.enrich", data: { leadId } })));
+    return { message: r.message, found: r.found, requests: r.requests };
+  },
+);
 
 export const dailyPlanner = inngest.createFunction(
   { id: "daily-call-planner", triggers: [{ cron: `TZ=${TZ} 0 7 * * *` }] },
@@ -50,7 +61,7 @@ export const imapPoller = inngest.createFunction(
   async ({ step }) => step.run("poll", () => pollImap()),
 );
 
-export const functions = [dailyPlanner, automatedCallSweeper, emailDispatcher, enrichOne, enrichBackfill, placesRefresh, imapPoller];
+export const functions = [dailySourcing, dailyPlanner, automatedCallSweeper, emailDispatcher, enrichOne, enrichBackfill, placesRefresh, imapPoller];
 
 /** Fire-and-forget event; returns false when Inngest isn't reachable so callers can fall back. */
 export async function trySend(name: string, data: Record<string, unknown>) {

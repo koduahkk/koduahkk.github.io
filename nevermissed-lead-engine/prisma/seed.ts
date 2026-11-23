@@ -92,6 +92,7 @@ async function wipe() {
   await prisma.senderIdentity.deleteMany();
   await prisma.suppression.deleteMany();
   await prisma.auditLog.deleteMany();
+  await prisma.sourcingRun.deleteMany();
   await prisma.user.deleteMany();
   await prisma.settings.deleteMany();
 }
