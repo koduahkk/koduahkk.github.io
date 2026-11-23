@@ -217,8 +217,9 @@ Vercel runs `npm run vercel-build`, which applies migrations (`prisma migrate de
    - Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
    - In Supabase Auth, set the Site URL and add `https://<domain>/auth/callback` as a redirect URL.
    - Clear the demo tables (`npx prisma migrate reset` against that database), then sign in first so you become Admin.
-5. **Background jobs**: install the Inngest Vercel integration (it sets `INNGEST_EVENT_KEY` / `INNGEST_SIGNING_KEY`) and sync `https://<domain>/api/inngest`. Until then, use *Run planner now* and *Send due emails now* in the UI.
-6. Point provider webhooks at the URLs in Settings → Integrations.
+5. **Daily morning routine (built in)**: `vercel.json` schedules Vercel Cron to call `/api/cron/morning`, which finds new salons and then plans the day's calls. Set `CRON_SECRET` (any long random string) in Vercel so only Vercel can trigger it. The schedule `0 11 * * *` is in UTC: 6:00 New York in winter, 7:00 in summer. On the free Hobby plan Vercel may start it any time within that hour. Change it in `vercel.json` for other time zones.
+6. **Optional, the other background jobs**: install the Inngest Vercel integration (it sets `INNGEST_EVENT_KEY` / `INNGEST_SIGNING_KEY`) and sync `https://<domain>/api/inngest`. Until then, use *Run planner now* and *Send due emails now* in the UI.
+7. Point provider webhooks at the URLs in Settings → Integrations.
 
 ## Project layout
 
