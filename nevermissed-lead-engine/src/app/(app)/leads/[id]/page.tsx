@@ -132,7 +132,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
                   {e.status === "ACTIVE" ? (e.nextSendAt ? ` · step ${e.nextStep} ${fmtIn(e.nextSendAt, user.timezone)}` : ` · step ${e.nextStep} queued`) : e.stopReason ? ` · ${e.stopReason}` : ""}
                 </p>
               ))}
-              {!activeEnrollment && lead.primaryEmail && emailSup?.allowed && caller ? <EnrollForm id={lead.id} sequences={sequences} /> : null}
+              {lead.enrollments.length === 0 && lead.primaryEmail && emailSup?.allowed && caller ? <EnrollForm id={lead.id} sequences={sequences} /> : null}
               {lead.emails.length === 0 ? <p className="text-sm text-muted-foreground">No emails yet.</p> : null}
               {lead.emails.map((m) => (
                 <details key={m.id} className="rounded-md border p-3">
