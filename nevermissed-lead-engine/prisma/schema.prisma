@@ -1,0 +1,508 @@
+// NeverMissed Lead Engine — database schema.
+// All timestamps are stored in UTC (Postgres `timestamptz`). Local times are
+// derived at render time from each salon's IANA time zone.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ───────────────────────────── Enums ─────────────────────────────
+
+enum Role {
+  ADMIN
+  CALLER
+  VIEWER
+}
+
+enum LeadStage {
+  NEW
+  TESTING
+  HOT
+  WARM
+  COLD
+  EMAILED
+  REPLIED
+  DEMO_BOOKED
+  TRIAL
+  CUSTOMER
+  LOST
+}
+
+enum ScoreTier {
+  HOT
+  WARM
+  COLD
+  DEAD
+}
+
+enum LeadSource {
+  GOOGLE_PLACES
+  CSV
+  MANUAL
+  SEED
+}
+
+enum EnrichmentStatus {
+  PENDING
+  DONE
+  FAILED
+  SKIPPED
+}
+
+enum ContactKind {
+  EMAIL
+  PHONE
+  INSTAGRAM
+  FACEBOOK
+  PERSON
+}
+
+enum CallType {
+  A // In-hours call at a peak busy time
+  B // After-hours call, 30–90 min after closing
+}
+
+enum CallOutcome {
+  ANSWERED_HUMAN
+  ANSWERED_AI_OR_SERVICE
+  VOICEMAIL_WITH_BOOKING_INFO
+  VOICEMAIL_BASIC
+  VOICEMAIL_FULL
+  NO_ANSWER_NO_VOICEMAIL
+  BUSY
+  DISCONNECTED_OR_WRONG_NUMBER
+}
+
+enum CallMode {
+  HUMAN
+  AUTOMATED
+}
+
+enum CallStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  SKIPPED
+  CANCELLED
+  FAILED
+}
+
+enum LineType {
+  LANDLINE
+  MOBILE
+  VOIP
+  TOLL_FREE
+  UNKNOWN
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  STOPPED_REPLY
+  STOPPED_BOUNCE
+  STOPPED_UNSUBSCRIBE
+  STOPPED_MANUAL
+}
+
+enum EmailStatus {
+  QUEUED
+  SENT
+  BOUNCED
+  FAILED
+  CANCELLED
+}
+
+enum EmailEventType {
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  REPLIED
+  BOUNCED
+  UNSUBSCRIBED
+  COMPLAINED
+}
+
+enum TaskType {
+  INSTAGRAM_DM
+  WALK_IN
+  CALL
+  EMAIL
+  FOLLOW_UP
+  OTHER
+}
+
+enum TaskStatus {
+  OPEN
+  DONE
+  CANCELLED
+}
+
+enum SuppressionKind {
+  PHONE
+  EMAIL
+}
+
+enum SuppressionReason {
+  DO_NOT_CALL
+  UNSUBSCRIBE
+  BOUNCE
+  COMPLAINT
+  MANUAL
+}
+
+// ───────────────────────────── People ─────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  /// Supabase auth user id (auth.users.id). Null until the invited user signs in.
+  authId    String?  @unique
+  email     String   @unique
+  name      String?
+  role      Role     @default(CALLER)
+  /// The user's own IANA time zone, used for "Today's Calls".
+  timezone  String   @default("America/New_York")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  calls     CallAttempt[]
+  tasks     Task[]
+  auditLogs AuditLog[]
+}
+
+model Territory {
+  id           String   @id @default(cuid())
+  name         String
+  city         String?
+  state        String?
+  zip          String?
+  radiusMeters Int?
+  /// Higher priority territories are planned first.
+  priority     Int      @default(0)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  leads Lead[]
+}
+
+// ───────────────────────────── Leads ─────────────────────────────
+
+model Lead {
+  id                String           @id @default(cuid())
+  /// Google place_id — the only Places field we store permanently.
+  placeId           String?          @unique
+  name              String
+  /// Phone as received; `phoneE164` is the normalized dedup key.
+  phone             String?
+  phoneE164         String?          @unique
+  address           String?
+  city              String?
+  state             String?
+  zip               String?
+  country           String?          @default("US")
+  lat               Float?
+  lng               Float?
+  /// IANA zone derived from lat/lng (or territory / state fallback).
+  timezone          String?
+  website           String?
+  googleRating      Float?
+  reviewCount       Int?
+  category          String?
+  /// Normalized weekly hours: { mon: [{open:"09:00", close:"19:00"}], ... }
+  openingHours      Json?
+  hoursKnown        Boolean          @default(false)
+  /// When the cached (non place_id) Places fields were last refreshed.
+  placesRefreshedAt DateTime?
+  source            LeadSource       @default(MANUAL)
+  stage             LeadStage        @default(NEW)
+  stageOverridden   Boolean          @default(false)
+  lostReason        String?
+  currentTier       ScoreTier?
+  scoreReason       String?
+  ownerFirstName    String?
+  /// Denormalized from LeadContact for fast filtering.
+  primaryEmail      String?
+  instagram         String?
+  facebook          String?
+  bookingPlatform   String?
+  enrichmentStatus  EnrichmentStatus @default(PENDING)
+  enrichedAt        DateTime?
+  lineType          LineType?
+  lineTypeCheckedAt DateTime?
+  notes             String?
+  /// Local date (YYYY-MM-DD, planner time zone) the lead was put into testing.
+  plannedFor        String?
+  territoryId       String?
+  territory         Territory?       @relation(fields: [territoryId], references: [id])
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  contacts    LeadContact[]
+  calls       CallAttempt[]
+  scores      LeadScore[]
+  enrollments SequenceEnrollment[]
+  emails      EmailMessage[]
+  events      EmailEvent[]
+  tasks       Task[]
+
+  @@index([stage])
+  @@index([currentTier])
+  @@index([city])
+  @@index([bookingPlatform])
+  @@index([territoryId, stage])
+}
+
+model LeadContact {
+  id        String      @id @default(cuid())
+  leadId    String
+  lead      Lead        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  kind      ContactKind
+  value     String
+  label     String?
+  firstName String?
+  isPrimary Boolean     @default(false)
+  /// e.g. "website", "csv", "manual", "google"
+  source    String?
+  createdAt DateTime    @default(now())
+
+  @@unique([leadId, kind, value])
+}
+
+// ───────────────────────────── Calls ─────────────────────────────
+
+model CallAttempt {
+  id               String       @id @default(cuid())
+  leadId           String
+  lead             Lead         @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type             CallType
+  /// Human-readable window, e.g. "Sat peak 10:00–13:00" or "After close +30–90m".
+  windowLabel      String?
+  scheduledAt      DateTime
+  executedAt       DateTime?
+  durationSec      Int?
+  outcome          CallOutcome?
+  mode             CallMode     @default(HUMAN)
+  status           CallStatus   @default(SCHEDULED)
+  /// True when the slot was generated from default hours (salon hours unknown).
+  hoursAssumed     Boolean      @default(false)
+  recordingUrl     String?
+  twilioCallSid    String?      @unique
+  answeredBy       String?
+  /// Automated classifications that a human should double-check.
+  needsReview      Boolean      @default(false)
+  routedReason     String?
+  notes            String?
+  callerId         String?
+  caller           User?        @relation(fields: [callerId], references: [id])
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@unique([leadId, type])
+  @@index([scheduledAt, status])
+}
+
+model LeadScore {
+  id           String    @id @default(cuid())
+  leadId       String
+  lead         Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  tier         ScoreTier
+  reason       String
+  /// Structured proof: [{ type, day, time, outcome, label }]
+  evidence     Json
+  rulesVersion Int       @default(1)
+  computedAt   DateTime  @default(now())
+
+  @@index([leadId, computedAt])
+}
+
+// ───────────────────────────── Email ─────────────────────────────
+
+model Sequence {
+  id             String      @id @default(cuid())
+  name           String
+  description    String?
+  active         Boolean     @default(true)
+  stopOnReply    Boolean     @default(true)
+  /// Tiers auto-enrolled into this sequence after scoring.
+  autoEnrollTiers ScoreTier[] @default([])
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  steps       SequenceStep[]
+  enrollments SequenceEnrollment[]
+}
+
+model SequenceStep {
+  id          String   @id @default(cuid())
+  sequenceId  String
+  sequence    Sequence @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  order       Int
+  /// Days after enrollment (Day 0, 3, 7, 14...).
+  dayOffset   Int
+  /// Stable key used for per-template analytics.
+  templateKey String
+  name        String
+  subject     String
+  body        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  emails EmailMessage[]
+
+  @@unique([sequenceId, order])
+}
+
+model SequenceEnrollment {
+  id          String           @id @default(cuid())
+  leadId      String
+  lead        Lead             @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  sequenceId  String
+  sequence    Sequence         @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  status      EnrollmentStatus @default(ACTIVE)
+  /// Order of the next step to send.
+  nextStep    Int              @default(1)
+  nextSendAt  DateTime?
+  enrolledAt  DateTime         @default(now())
+  stoppedAt   DateTime?
+  stopReason  String?
+
+  emails EmailMessage[]
+
+  @@unique([leadId, sequenceId])
+  @@index([status, nextSendAt])
+}
+
+model SenderIdentity {
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  replyTo    String?
+  dailyLimit Int      @default(40)
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  emails EmailMessage[]
+}
+
+model EmailMessage {
+  id                String        @id @default(cuid())
+  leadId            String
+  lead              Lead          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  enrollmentId      String?
+  enrollment        SequenceEnrollment? @relation(fields: [enrollmentId], references: [id], onDelete: SetNull)
+  stepId            String?
+  step              SequenceStep? @relation(fields: [stepId], references: [id], onDelete: SetNull)
+  templateKey       String?
+  senderId          String?
+  sender            SenderIdentity? @relation(fields: [senderId], references: [id], onDelete: SetNull)
+  toEmail           String
+  subject           String
+  bodyText          String
+  bodyHtml          String
+  status            EmailStatus   @default(QUEUED)
+  scheduledAt       DateTime
+  sentAt            DateTime?
+  provider          String?
+  providerMessageId String?       @unique
+  /// Opaque token used in unsubscribe / tracking / reply-to addresses.
+  token             String        @unique
+  openedAt          DateTime?
+  clickedAt         DateTime?
+  repliedAt         DateTime?
+  bouncedAt         DateTime?
+  error             String?
+  createdAt         DateTime      @default(now())
+
+  events EmailEvent[]
+
+  @@index([status, scheduledAt])
+  @@index([senderId, sentAt])
+}
+
+model EmailEvent {
+  id         String         @id @default(cuid())
+  messageId  String?
+  message    EmailMessage?  @relation(fields: [messageId], references: [id], onDelete: SetNull)
+  leadId     String?
+  lead       Lead?          @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type       EmailEventType
+  /// For replies: { from, subject, text }. For bounces: provider payload excerpt.
+  payload    Json?
+  handled    Boolean        @default(false)
+  occurredAt DateTime       @default(now())
+
+  @@index([type, occurredAt])
+}
+
+// ───────────────────────────── Work ─────────────────────────────
+
+model Task {
+  id          String     @id @default(cuid())
+  leadId      String?
+  lead        Lead?      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  type        TaskType
+  title       String
+  body        String?
+  status      TaskStatus @default(OPEN)
+  dueAt       DateTime?
+  assigneeId  String?
+  assignee    User?      @relation(fields: [assigneeId], references: [id])
+  completedAt DateTime?
+  createdAt   DateTime   @default(now())
+
+  @@index([status, dueAt])
+}
+
+model Suppression {
+  id        String            @id @default(cuid())
+  kind      SuppressionKind
+  /// Normalized: E.164 for phones, lower-cased for emails.
+  value     String
+  reason    SuppressionReason
+  note      String?
+  createdAt DateTime          @default(now())
+
+  @@unique([kind, value])
+}
+
+// ───────────────────────────── System ─────────────────────────────
+
+/// Singleton row (id = 1). Structured config lives in typed JSON columns that
+/// are validated with zod in src/lib/settings.ts.
+model Settings {
+  id        Int      @id @default(1)
+  general   Json
+  calling   Json
+  scoring   Json
+  email     Json
+  updatedAt DateTime @updatedAt
+}
+
+/// Optional API-key overrides entered in Settings. Values are AES-256-GCM
+/// encrypted with APP_ENCRYPTION_KEY; environment variables take precedence.
+model IntegrationSecret {
+  key       String   @id
+  cipher    String
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     String
+  entityType String?
+  entityId   String?
+  meta       Json?
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
