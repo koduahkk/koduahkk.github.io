@@ -11,10 +11,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TBody, TD, TH, THead, TR } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { ActionButton } from "@/components/app/action-button";
-import { toggleTerritory, updateMember, removeSuppression, updateSender, runSourcingNow, resetTerritoryProgress } from "@/app/actions/settings";
-import { coverage, isExhausted, loadCursor, gridKey, setupGaps, tilesFor } from "@/lib/sourcing/plan";
+import { toggleTerritory, deleteTerritory, updateMember, removeSuppression, updateSender, runSourcingNow, resetTerritoryProgress } from "@/app/actions/settings";
+import { areasFor, citiesIn, STATES, STATE_NAMES, territoryLabel } from "@/lib/sourcing/cities";
+import { DateTime } from "luxon";
+import { coverage, isExhausted, loadAreaCursor, gridKey, setupGaps, tilesFor } from "@/lib/sourcing/plan";
 import { Progress } from "@/components/ui/progress";
-import { CallingForm, EmailForm, GeneralForm, InviteForm, ScoringForm, SecretForm, SenderForm, SourcingForm, SuppressionForm, TerritoryEdit, TerritoryForm } from "./forms";
+import { CallingForm, EmailForm, GeneralForm, InviteForm, ScoringForm, SecretForm, SenderForm, SourcingForm, SuppressionForm, TerritoryForm } from "./forms";
 import { fmtIn } from "@/lib/format";
 
 export const metadata = { title: "Settings" };
@@ -87,34 +89,47 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
           <Card>
             <CardHeader>
               <CardTitle>Territories</CardTitle>
-              <CardDescription>Where to search, highest priority first. The call planner also tests the priority territory first. Coverage shows how much of each area has been searched for your chosen categories.</CardDescription>
+              <CardDescription>Where to search: a state, with either any city (picked at random each day) or only the cities you choose. Coverage shows how much has been searched for your chosen categories.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {territories.length === 0 ? <p className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">No territories yet. Add a city or ZIP below.</p> : null}
+              {territories.length === 0 ? <p className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">No territories yet. Add a state below.</p> : null}
               {territories.length ? (
                 <Table>
-                  <THead><TR><TH>Territory</TH><TH>Radius · priority</TH><TH className="w-48">Coverage</TH><TH>Leads</TH><TH>Status</TH><TH /></TR></THead>
+                  <THead><TR><TH>Territory</TH><TH className="w-56">Coverage</TH><TH>Leads</TH><TH>Status</TH><TH /></TR></THead>
                   <TBody>
                     {territories.map((t) => {
-                      const radiusKm = (t.radiusMeters ?? 15000) / 1000;
-                      const center = t.centerLat != null && t.centerLng != null ? { lat: t.centerLat, lng: t.centerLng } : null;
-                      const tiles = center ? tilesFor(center, radiusKm, settings.sourcing.tileKm).length : 0;
-                      const cur = center ? loadCursor(t.sourcingCursor, gridKey(center, radiusKm, settings.sourcing.tileKm)) : null;
-                      const cov = center ? coverage(cur, settings.sourcing.categories, tiles) : 0;
-                      const done = isExhausted(cur, settings.sourcing.categories);
+                      const today = DateTime.now().setZone(settings.general.plannerTimezone).toISODate()!;
+                      const areas = areasFor(t, today);
+                      const cats = settings.sourcing.categories;
+                      const per = areas.map((a) => {
+                        const tiles = tilesFor(a.center, a.radiusKm, settings.sourcing.tileKm).length;
+                        const cur = loadAreaCursor(t.sourcingCursor, a.key, gridKey(a.center, a.radiusKm, settings.sourcing.tileKm));
+                        return { started: Object.keys(cur.cats).length > 0, done: isExhausted(cur, cats), cov: coverage(cur, cats, tiles), tiles };
+                      });
+                      const anyCity = !t.city;
+                      const started = per.filter((x) => x.started).length;
+                      const doneCount = per.filter((x) => x.done).length;
+                      const cov = anyCity ? (per.length ? per.reduce((a, x) => a + x.cov, 0) / per.length : 0) : per[0]?.cov ?? 0;
+                      const done = per.length > 0 && doneCount === per.length;
+                      const unknown = !areas.length;
                       return (
                         <TR key={t.id}>
-                          <TD><p className="font-medium">{t.name}</p><p className="text-xs text-muted-foreground">{[t.city, t.state, t.zip].filter(Boolean).join(", ")}</p></TD>
-                          <TD>{admin ? <TerritoryEdit id={t.id} radiusKm={radiusKm} priority={t.priority} /> : `${radiusKm} km · ${t.priority}`}</TD>
                           <TD>
-                            <Progress value={cov * 100} label={`${t.name} search coverage`} />
-                            <p className="mt-1 text-xs text-muted-foreground">{center ? (done ? "Fully searched" : `${Math.round(cov * 100)}% of ${tiles} map tiles`) : "Not searched yet"}</p>
+                            <p className="font-medium">{territoryLabel(t)}</p>
+                            <p className="text-xs text-muted-foreground">{unknown ? "City not in the list. Remove and add it again." : anyCity ? `${citiesIn(t.state ?? "").length} cities, picked at random each day` : `${per[0]?.tiles ?? 0} map tiles`}</p>
+                          </TD>
+                          <TD>
+                            <Progress value={cov * 100} label={`${territoryLabel(t)} search coverage`} />
+                            <p className="mt-1 text-xs text-muted-foreground">
+                              {done ? "Fully searched" : anyCity ? (started ? `${started} cities started, ${doneCount} finished` : "Not searched yet") : per[0]?.started ? `${Math.round(cov * 100)}% searched` : "Not searched yet"}
+                            </p>
                           </TD>
                           <TD>{t._count.leads}</TD>
                           <TD>{!t.active ? <Badge variant="secondary">Paused</Badge> : done ? <Badge variant="warning">Fully searched</Badge> : <Badge variant="success">Active</Badge>}</TD>
                           <TD className="space-x-1 whitespace-nowrap text-right">
                             {admin ? <ActionButton variant="ghost" size="sm" action={toggleTerritory.bind(null, t.id, !t.active)}>{t.active ? "Pause" : "Activate"}</ActionButton> : null}
-                            {admin && cur && Object.keys(cur.cats).length ? <ActionButton variant="ghost" size="sm" confirm="Start searching this territory from the center again? Salons you already have are skipped, but the searches still count toward your daily budget." action={resetTerritoryProgress.bind(null, t.id)}>Restart search</ActionButton> : null}
+                            {admin && started ? <ActionButton variant="ghost" size="sm" confirm="Start searching this territory from scratch? Salons you already have are skipped, but the searches still count toward your daily budget." action={resetTerritoryProgress.bind(null, t.id)}>Restart search</ActionButton> : null}
+                            {admin ? <ActionButton variant="ghost" size="sm" className="text-destructive" confirm={`Remove ${territoryLabel(t)}? Its salons stay in your leads.`} action={deleteTerritory.bind(null, t.id)}>Remove</ActionButton> : null}
                           </TD>
                         </TR>
                       );
@@ -122,7 +137,8 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
                   </TBody>
                 </Table>
               ) : null}
-              {admin ? <TerritoryForm /> : null}
+              {admin ? <TerritoryForm states={STATES.map((code) => ({ code, name: STATE_NAMES[code] }))} /> : null}
+              <p className="text-xs text-muted-foreground">City list: <a className="underline" href="https://www.geonames.org" target="_blank" rel="noreferrer">GeoNames</a>, CC BY 4.0.</p>
             </CardContent>
           </Card>
 

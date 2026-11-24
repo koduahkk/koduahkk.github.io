@@ -14,7 +14,6 @@ if (url) process.env.DATABASE_URL = url;
 let calls = 0;
 function fakeApi(): PlacesApi {
   return {
-    geocode: async () => ({ lat: 33.749, lng: -84.388 }),
     search: async ({ tile, category, pageToken }) => {
       calls++;
       const page = pageToken ? 2 : 1;
@@ -62,7 +61,7 @@ describe.skipIf(!url)("daily salon finding (integration)", () => {
     let r = await runSourcing({ now: day1, api: fakeApi() });
     expect(r.ran).toBe(false);
     expect(r.message).toMatch(/territory/);
-    await prisma.territory.create({ data: { name: "Atlanta", city: "Atlanta", state: "GA", radiusMeters: 10000 } });
+    await prisma.territory.create({ data: { name: "Atlanta, GA", city: "Atlanta", state: "GA" } });
     await saveSettingsSection("sourcing", { categories: ["hair_salon"] });
     r = await runSourcing({ now: day1, api: fakeApi() });
     expect(r).toMatchObject({ ran: false, message: expect.stringMatching(/switched off/) });
@@ -73,7 +72,7 @@ describe.skipIf(!url)("daily salon finding (integration)", () => {
   });
 
   it("finds exactly the daily target, applies filters, and continues where it stopped the next day", async () => {
-    await prisma.territory.create({ data: { name: "Atlanta", city: "Atlanta", state: "GA", radiusMeters: 15000 } });
+    await prisma.territory.create({ data: { name: "Atlanta, GA", city: "Atlanta", state: "GA" } });
     await saveSettingsSection("sourcing", { enabled: true, dailyTarget: 50, categories: ["hair_salon", "nail_salon"], maxRequestsPerDay: 60 });
 
     const r1 = await runSourcing({ now: day1, api: fakeApi() });
@@ -102,7 +101,7 @@ describe.skipIf(!url)("daily salon finding (integration)", () => {
   });
 
   it("stops at the daily search budget", async () => {
-    await prisma.territory.create({ data: { name: "Atlanta", city: "Atlanta", state: "GA", radiusMeters: 15000, centerLat: 33.749, centerLng: -84.388 } });
+    await prisma.territory.create({ data: { name: "Atlanta, GA", city: "Atlanta", state: "GA" } });
     await saveSettingsSection("sourcing", { enabled: true, dailyTarget: 50, categories: ["hair_salon"], maxRequestsPerDay: 2 });
     const r = await runSourcing({ now: day1, api: fakeApi() });
     expect(r.requests).toBe(2);
@@ -113,7 +112,8 @@ describe.skipIf(!url)("daily salon finding (integration)", () => {
   });
 
   it("marks a territory fully searched and says so", async () => {
-    await prisma.territory.create({ data: { name: "Tiny town", city: "Tiny", state: "GA", radiusMeters: 1000, centerLat: 33.749, centerLng: -84.388 } });
+    // A 1 km radius gives a single 3 km tile.
+    await prisma.territory.create({ data: { name: "Dalton, GA", city: "Dalton", state: "GA", radiusMeters: 1000 } });
     await saveSettingsSection("sourcing", { enabled: true, dailyTarget: 50, categories: ["hair_salon"], maxRequestsPerDay: 60 });
     const r = await runSourcing({ now: day1, api: fakeApi() });
     expect(r.requests).toBe(2); // one tile, two pages
@@ -121,5 +121,30 @@ describe.skipIf(!url)("daily salon finding (integration)", () => {
     expect(t.exhaustedAt).not.toBeNull();
     const run = await prisma.sourcingRun.findFirstOrThrow();
     expect(run.notes.join(" ")).toMatch(/fully searched/);
+  });
+
+  it("with 'any city', works through the state's cities in a random daily order and keeps each city's progress", async () => {
+    const t = await prisma.territory.create({ data: { name: "Georgia: any city", state: "GA" } });
+    await saveSettingsSection("sourcing", { enabled: true, dailyTarget: 30, categories: ["hair_salon"], maxRequestsPerDay: 60, tileKm: 10 });
+    const r1 = await runSourcing({ now: day1, api: fakeApi() });
+    expect(r1.found).toBe(30);
+    const p1 = (await prisma.territory.findUniqueOrThrow({ where: { id: t.id } })).sourcingCursor as { areas: Record<string, unknown> };
+    const cities1 = Object.keys(p1.areas);
+    expect(cities1.length).toBeGreaterThanOrEqual(1);
+    const r2 = await runSourcing({ now: day2, api: fakeApi() });
+    expect(r2.found).toBe(30);
+    const p2 = (await prisma.territory.findUniqueOrThrow({ where: { id: t.id } })).sourcingCursor as { areas: Record<string, unknown> };
+    // Day 1's cities are still remembered, and day 2 started somewhere else.
+    for (const c of cities1) expect(p2.areas[c]).toBeTruthy();
+    expect(Object.keys(p2.areas).length).toBeGreaterThan(cities1.length);
+    expect(await prisma.lead.count({ where: { territoryId: t.id } })).toBe(60);
+  });
+
+  it("reports a territory whose city isn't in the list", async () => {
+    await prisma.territory.create({ data: { name: "Nowhere, GA", city: "Nowhereville", state: "GA" } });
+    await saveSettingsSection("sourcing", { enabled: true, categories: ["hair_salon"] });
+    const r = await runSourcing({ now: day1, api: fakeApi() });
+    expect(r.found).toBe(0);
+    expect(r.message).toMatch(/no matching city/);
   });
 });

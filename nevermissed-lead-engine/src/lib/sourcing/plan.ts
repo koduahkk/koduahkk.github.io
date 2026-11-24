@@ -122,7 +122,22 @@ export function passesFilters(p: Candidate, f: Pick<SourcingSettings, "minRating
 /** What still has to be set before the daily job is allowed to run. Empty = ready. */
 export function setupGaps(s: SourcingSettings, activeTerritories: number): string[] {
   const gaps: string[] = [];
-  if (!activeTerritories) gaps.push("Add at least one territory (a city or ZIP with a radius).");
+  if (!activeTerritories) gaps.push("Add at least one territory (a state, with any city or specific cities).");
   if (!s.categories.length) gaps.push("Choose at least one salon category.");
   return gaps;
+}
+
+/** Stored progress for a territory: one cursor per city ("area"). */
+export type TerritoryProgress = { areas: Record<string, TerritoryCursor> };
+
+/** The cursor for one city, accepting the older single-area format. */
+export function loadAreaCursor(stored: unknown, areaKey: string, grid: string): TerritoryCursor {
+  const s = stored as { areas?: Record<string, unknown>; grid?: string } | null;
+  const raw = s?.areas?.[areaKey] ?? (s?.grid ? s : null);
+  return loadCursor(raw, grid);
+}
+
+export function loadProgress(stored: unknown): TerritoryProgress {
+  const s = stored as { areas?: Record<string, TerritoryCursor> } | null;
+  return { areas: s?.areas && typeof s.areas === "object" ? { ...s.areas } : {} };
 }

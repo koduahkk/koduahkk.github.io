@@ -41,16 +41,60 @@ export async function saveSecret(key: string, value: string) {
   });
 }
 
-const territorySchema = z.object({ name: z.string().min(1), city: z.string().optional(), state: z.string().max(2).optional(), zip: z.string().optional(), radiusKm: z.coerce.number().min(1).max(50).optional(), priority: z.coerce.number().int().default(0) });
+const territorySchema = z.object({
+  state: z.string().length(2),
+  /** "any" = rotate through every city in the state; "cities" = only the listed ones. */
+  mode: z.enum(["any", "cities"]),
+  cities: z.array(z.string().min(1)).max(200).default([]),
+});
 
-export async function addTerritory(input: z.input<typeof territorySchema>) {
+/** City names for one state (largest first), for the territory picker. */
+export async function getCities(state: string) {
+  await assertRole("VIEWER");
+  const { citiesIn } = await import("@/lib/sourcing/cities");
+  return citiesIn(state).map((c) => ({ name: c.name, population: c.population }));
+}
+
+export async function addTerritories(input: z.input<typeof territorySchema>) {
   return run(async () => {
     const u = await assertRole("ADMIN");
     const t = territorySchema.parse(input);
-    const row = await prisma.territory.create({ data: { name: t.name, city: t.city || null, state: t.state?.toUpperCase() || null, zip: t.zip || null, radiusMeters: t.radiusKm ? t.radiusKm * 1000 : null, priority: t.priority } });
-    await audit(u.id, "territory.create", { type: "Territory", id: row.id });
+    const { STATE_NAMES, findCity, territoryLabel } = await import("@/lib/sourcing/cities");
+    const state = t.state.toUpperCase();
+    if (!STATE_NAMES[state]) throw new Error("Choose a state.");
+    const existing = await prisma.territory.findMany({ where: { state } });
+    const has = (city: string | null) => existing.some((e) => (e.city ?? null) === city);
+    let rows: { city: string | null }[];
+    let already: string[] = [];
+    if (t.mode === "any") {
+      if (has(null)) throw new Error(`${STATE_NAMES[state]} (any city) is already a territory.`);
+      rows = [{ city: null }];
+    } else {
+      if (!t.cities.length) throw new Error("Pick at least one city, or choose Any city.");
+      const unknown = t.cities.filter((c) => !findCity(state, c));
+      if (unknown.length) throw new Error(`Not in the ${STATE_NAMES[state]} city list: ${unknown.join(", ")}`);
+      const all = t.cities.map((c) => findCity(state, c)!.name);
+      rows = all.filter((c) => !has(c)).map((city) => ({ city }));
+      already = all.filter((c) => has(c));
+      if (!rows.length) throw new Error("Those cities are already territories.");
+    }
+    await prisma.territory.createMany({ data: rows.map((r) => ({ state, city: r.city, name: territoryLabel({ state, city: r.city }) })) });
+    await audit(u.id, "territory.create", undefined, { state, cities: rows.map((r) => r.city ?? "any") });
     revalidatePath("/settings");
-    return { message: `Territory "${t.name}" added` };
+    const added = rows.length === 1 ? `Added ${territoryLabel({ state, city: rows[0].city })}` : `Added ${rows.length} cities in ${STATE_NAMES[state]}`;
+    return { message: already.length ? `${added}. Already a territory: ${already.join(", ")}.` : added };
+  });
+}
+
+export async function deleteTerritory(id: string) {
+  return run(async () => {
+    const u = await assertRole("ADMIN");
+    // Leads keep their data; they just lose the territory link.
+    await prisma.lead.updateMany({ where: { territoryId: id }, data: { territoryId: null } });
+    await prisma.territory.delete({ where: { id } });
+    await audit(u.id, "territory.delete", { type: "Territory", id });
+    revalidatePath("/settings");
+    return { message: "Territory removed. Its salons stay in your leads." };
   });
 }
 
@@ -144,7 +188,7 @@ export async function runSourcingNow() {
     const { queueEnrichment } = await import("@/lib/enqueue");
     const r = await runSourcing({ trigger: "manual", actorId: u.id });
     if (!r.ran) throw new Error(r.message);
-    if (!r.found && /stopped the run|couldn't find/.test(r.message)) throw new Error(r.message);
+    if (!r.found && /stopped the run|no matching city/.test(r.message)) throw new Error(r.message);
     await queueEnrichment(r.createdIds);
     revalidatePath("/settings");
     revalidatePath("/leads");
@@ -160,15 +204,5 @@ export async function resetTerritoryProgress(id: string) {
     await audit(u.id, "territory.reset_search", { type: "Territory", id });
     revalidatePath("/settings");
     return { message: "Search progress reset. The next run starts from the center again (salons you already have are skipped)." };
-  });
-}
-
-export async function updateTerritory(id: string, input: { radiusKm?: number; priority?: number }) {
-  return run(async () => {
-    await assertRole("ADMIN");
-    const d = z.object({ radiusKm: z.coerce.number().min(1).max(50).optional(), priority: z.coerce.number().int().optional() }).parse(input);
-    await prisma.territory.update({ where: { id }, data: { ...(d.radiusKm ? { radiusMeters: Math.round(d.radiusKm * 1000) } : {}), ...(d.priority != null ? { priority: d.priority } : {}) } });
-    revalidatePath("/settings");
-    return { message: "Territory updated" };
   });
 }

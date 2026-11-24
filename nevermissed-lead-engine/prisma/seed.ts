@@ -115,7 +115,7 @@ async function main() {
 
   const territories = Object.fromEntries(
     await Promise.all(
-      (["Atlanta", "Austin", "Denver"] as City[]).map(async (c, i) => [c, await prisma.territory.create({ data: { name: `${c} metro`, city: c, state: CITY[c].state, radiusMeters: 25000, priority: 10 - i * 3 } })] as const),
+      (["Atlanta", "Austin", "Denver"] as City[]).map(async (c, i) => [c, await prisma.territory.create({ data: { name: `${c}, ${CITY[c].state}`, city: c, state: CITY[c].state, priority: 10 - i * 3 } })] as const),
     ),
   );
   await prisma.settings.create({ data: { id: 1, ...settings, general: { ...settings.general, priorityTerritoryId: territories.Atlanta.id } } });

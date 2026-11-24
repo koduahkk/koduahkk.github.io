@@ -108,7 +108,7 @@ Also available: `jobs:sourcing`, `jobs:enrich`, `jobs:refresh-places`, `jobs:ima
 Settings → **Salon finding** controls an automatic 6:00 job that adds new salons from Google Places every day, ready for the 7:00 planner.
 
 **Before it can run, you choose:**
-- **Territories:** a city or ZIP, a radius and a priority.
+- **Territories:** a state, with any city (random each day) or specific cities.
 - **Categories:** hair, nail, barber, beauty, spa, lash/brow.
 - **Filters:** a minimum rating, a minimum number of reviews, and an editable list of chains to skip.
 - **Limits:** how many new salons per day (default 50) and a hard cap on Google searches per day (default 60).
@@ -116,6 +116,12 @@ Settings → **Salon finding** controls an automatic 6:00 job that adds new salo
 It stays off until territories and categories are set and you switch it on. **Find salons now** runs it once by hand.
 
 **How it searches.** Google returns at most 60 results per query, so each territory is split into small map tiles (default 3 km) and searched from the center outward. Progress is saved after every page, per territory and per category, so each day continues into new ground and a crash never repeats a paid search.
+
+**Territories** are a state, with either **any city** or **specific cities**:
+- **Any city:** each day it works through the state's cities in a new random order, remembering how far it got in each.
+- **Specific cities:** only the cities you pick.
+
+The city list (every US city of 15,000+ people, at least 15 per state, with coordinates) is bundled in `src/lib/sourcing/us-cities.json`, so picking a city costs no Google searches. Each city's search radius is sized from its population: 5 km for a small town, up to 25 km for a big metro. City data: [GeoNames](https://www.geonames.org), CC BY 4.0, via the `all-the-cities` package.
 
 **What it skips:** duplicates (same phone number or place ID), places that are permanently closed, listings with no phone, and anything your filters exclude.
 

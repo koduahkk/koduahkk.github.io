@@ -14,15 +14,15 @@ import { getSettings } from "@/lib/settings";
 import { getSecret } from "@/lib/secrets";
 import { audit } from "@/lib/audit";
 import { ingestLead } from "@/lib/leads/ingest";
-import { locate, searchTile, type NormalizedPlace } from "@/lib/places/google";
-import { advanceTile, gridKey, isExhausted, loadCursor, passesFilters, setupGaps, tilesFor, type LatLng, type Tile } from "@/lib/sourcing/plan";
+import { searchTile, type NormalizedPlace } from "@/lib/places/google";
+import { areasFor, territoryLabel } from "@/lib/sourcing/cities";
+import { advanceTile, gridKey, isExhausted, loadAreaCursor, loadProgress, passesFilters, setupGaps, tilesFor, type Tile } from "@/lib/sourcing/plan";
 
 /** Google calls, injectable so the job can be tested without the network. */
 export type PlacesApi = {
-  geocode: (q: string) => Promise<LatLng>;
   search: (o: { tile: Tile; category: string; pageToken?: string | null }) => Promise<{ places: NormalizedPlace[]; nextPageToken: string | null }>;
 };
-const google: PlacesApi = { geocode: locate, search: searchTile };
+const google: PlacesApi = { search: searchTile };
 
 export type SourcingResult = {
   ran: boolean;
@@ -76,83 +76,83 @@ export async function runSourcing(opts: { now?: Date; trigger?: "schedule" | "ma
 
   for (const t of territories) {
     if (need <= 0 || budget <= 0 || halted) break;
-
-    // 1. Map center, looked up once and cached on the territory.
-    let center: LatLng | null = t.centerLat != null && t.centerLng != null ? { lat: t.centerLat, lng: t.centerLng } : null;
-    if (!center) {
-      const q = t.zip || [t.city, t.state].filter(Boolean).join(", ") || t.name;
-      try {
-        center = await api.geocode(q);
-        budget--;
-        requests++;
-        await prisma.territory.update({ where: { id: t.id }, data: { centerLat: center.lat, centerLng: center.lng } });
-      } catch (e) {
-        notes.push(`${t.name}: couldn't find "${q}" on the map (${e instanceof Error ? e.message : e}).`);
-        continue;
-      }
+    const areas = areasFor(t, runDate);
+    if (!areas.length) {
+      notes.push(`${territoryLabel(t)}: no matching city found. Edit or remove this territory.`);
+      continue;
     }
+    const progress = loadProgress(t.sourcingCursor);
+    let allDone = true;
 
-    // 2. Tiles + where we stopped last time.
-    const radiusKm = (t.radiusMeters ?? 15000) / 1000;
-    const tiles = tilesFor(center, radiusKm, s.tileKm);
-    const cursor = loadCursor(t.sourcingCursor, gridKey(center, radiusKm, s.tileKm));
+    for (const area of areas) {
+      const tiles = tilesFor(area.center, area.radiusKm, s.tileKm);
+      const cursor = loadAreaCursor(t.sourcingCursor, area.key, gridKey(area.center, area.radiusKm, s.tileKm));
+      if (isExhausted(cursor, s.categories)) continue;
+      if (need <= 0 || budget <= 0 || halted) {
+        allDone = false;
+        break;
+      }
 
-    // 3. Walk categories → tiles → pages.
-    for (const cat of s.categories) {
-      let c = cursor.cats[cat] ?? { tile: 0, pageToken: null };
-      while (!c.done && need > 0 && budget > 0) {
-        let res: Awaited<ReturnType<PlacesApi["search"]>>;
-        try {
-          res = await api.search({ tile: tiles[c.tile], category: cat, pageToken: c.pageToken });
-        } catch (e) {
-          const msg = e instanceof Error ? e.message : String(e);
-          if (c.pageToken && /400|INVALID_ARGUMENT|page_?token/i.test(msg)) {
-            c = { tile: c.tile, pageToken: null }; // expired page token: redo the tile, duplicates are skipped
-            continue;
-          }
-          notes.push(`Google Places stopped the run: ${msg}`);
-          halted = true;
-          break;
-        }
-        budget--;
-        requests++;
-
-        let stoppedMidPage = false;
-        for (const p of res.places) {
-          if (need <= 0) {
-            stoppedMidPage = true; // keep the cursor here so tomorrow sees the rest of this page
+      // Walk categories → tiles → pages inside this city.
+      for (const cat of s.categories) {
+        let c = cursor.cats[cat] ?? { tile: 0, pageToken: null };
+        while (!c.done && need > 0 && budget > 0) {
+          let res: Awaited<ReturnType<PlacesApi["search"]>>;
+          try {
+            res = await api.search({ tile: tiles[c.tile], category: cat, pageToken: c.pageToken });
+          } catch (e) {
+            const msg = e instanceof Error ? e.message : String(e);
+            if (c.pageToken && /400|INVALID_ARGUMENT|page_?token/i.test(msg)) {
+              c = { tile: c.tile, pageToken: null }; // expired page token: redo the tile, duplicates are skipped
+              continue;
+            }
+            notes.push(`Google Places stopped the run: ${msg}`);
+            halted = true;
             break;
           }
-          const f = passesFilters(p, s);
-          if (!f.ok) {
-            skipped[f.reason] = (skipped[f.reason] ?? 0) + 1;
-            continue;
+          budget--;
+          requests++;
+
+          let stoppedMidPage = false;
+          for (const p of res.places) {
+            if (need <= 0) {
+              stoppedMidPage = true; // keep the cursor here so the rest of this page is seen next time
+              break;
+            }
+            const f = passesFilters(p, s);
+            if (!f.ok) {
+              skipped[f.reason] = (skipped[f.reason] ?? 0) + 1;
+              continue;
+            }
+            const r = await ingestLead({ ...p, category: cat, territoryId: t.id }, "GOOGLE_PLACES");
+            if (r.status === "created" && r.id) {
+              createdIds.push(r.id);
+              need--;
+            } else {
+              const k = r.status === "invalid" ? "invalid" : "duplicate";
+              skipped[k] = (skipped[k] ?? 0) + 1;
+            }
           }
-          const r = await ingestLead({ ...p, category: cat, territoryId: t.id }, "GOOGLE_PLACES");
-          if (r.status === "created" && r.id) {
-            createdIds.push(r.id);
-            need--;
-          } else {
-            const k = r.status === "invalid" ? "invalid" : "duplicate";
-            skipped[k] = (skipped[k] ?? 0) + 1;
-          }
+          if (!stoppedMidPage) c = advanceTile(c, tiles.length, res.nextPageToken);
+          cursor.cats[cat] = c;
+          progress.areas[area.key] = cursor;
+          // Save after every page so a crash never repeats paid searches.
+          await prisma.territory.update({ where: { id: t.id }, data: { sourcingCursor: progress as unknown as Prisma.InputJsonValue } });
+          if (stoppedMidPage) break;
         }
-        if (!stoppedMidPage) c = advanceTile(c, tiles.length, res.nextPageToken);
         cursor.cats[cat] = c;
-        // Save progress after every page so a crash never repeats paid searches.
-        await prisma.territory.update({ where: { id: t.id }, data: { sourcingCursor: cursor as unknown as Prisma.InputJsonValue } });
-        if (stoppedMidPage) break;
+        if (halted || need <= 0 || budget <= 0) break;
       }
-      cursor.cats[cat] = c;
-      if (halted || need <= 0 || budget <= 0) break;
+      progress.areas[area.key] = cursor;
+      if (!isExhausted(cursor, s.categories)) allDone = false;
+      else notes.push(`${area.city}, ${t.state}: fully searched.`);
     }
 
-    const done = isExhausted(cursor, s.categories);
     await prisma.territory.update({
       where: { id: t.id },
-      data: { sourcingCursor: cursor as unknown as Prisma.InputJsonValue, exhaustedAt: done ? t.exhaustedAt ?? now : null },
+      data: { sourcingCursor: progress as unknown as Prisma.InputJsonValue, exhaustedAt: allDone ? t.exhaustedAt ?? now : null },
     });
-    if (done && !t.exhaustedAt) notes.push(`${t.name} is fully searched for the chosen categories. Add another territory or a wider radius to keep finding new salons.`);
+    if (allDone && !t.exhaustedAt) notes.push(`${territoryLabel(t)} is fully searched for the chosen categories. Add another city or state to keep finding new salons.`);
   }
 
   const found = createdIds.length;
@@ -165,7 +165,7 @@ export async function runSourcing(opts: { now?: Date; trigger?: "schedule" | "ma
   await audit(opts.actorId, "sourcing.run", undefined, { runDate, found, requests, trigger });
 
   const total = (sofar._sum.found ?? 0) + found;
-  const problem = notes.find((n) => /stopped the run|couldn't find/.test(n));
+  const problem = notes.find((n) => /stopped the run|no matching city/.test(n));
   return {
     ran: true,
     message: (problem && !found ? `${problem} ` : "") + `Found ${found} new salon${found === 1 ? "" : "s"} (${total} of ${s.dailyTarget} today) using ${requests} search${requests === 1 ? "" : "es"}.`,

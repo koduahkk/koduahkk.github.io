@@ -11,7 +11,7 @@ import { Input, Select, Textarea } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toastResult } from "@/components/app/action-button";
-import { saveSection, saveSecret, addTerritory, inviteMember, addSuppression, addSender, updateTerritory } from "@/app/actions/settings";
+import { saveSection, saveSecret, addTerritories, getCities, inviteMember, addSuppression, addSender } from "@/app/actions/settings";
 import type { AppSettings } from "@/lib/settings";
 import { CALL_OUTCOMES, DAYS, OUTCOME_META, SALON_CATEGORIES, type CallOutcome, type Day } from "@/lib/domain";
 import { scoreLead } from "@/lib/scoring/engine";
@@ -382,24 +382,82 @@ export function SecretForm({ k, label, source, canEdit }: { k: string; label: st
   );
 }
 
-export function TerritoryForm() {
-  const [v, setV] = useState({ name: "", city: "", state: "", zip: "", radiusKm: "15", priority: "0" });
+export function TerritoryForm({ states }: { states: { code: string; name: string }[] }) {
+  const [state, setState] = useState("");
+  const [mode, setMode] = useState<"any" | "cities">("any");
+  const [cities, setCities] = useState<{ name: string; population: number }[]>([]);
+  const [picked, setPicked] = useState<string[]>([]);
+  const [q, setQ] = useState("");
+  const [loading, setLoading] = useState(false);
   const { pending, save } = useSave();
+
+  async function chooseState(code: string) {
+    setState(code);
+    setPicked([]);
+    setQ("");
+    setCities([]);
+    if (!code) return;
+    setLoading(true);
+    try {
+      setCities(await getCities(code));
+    } finally {
+      setLoading(false);
+    }
+  }
+  const shown = cities.filter((c) => c.name.toLowerCase().includes(q.trim().toLowerCase()));
+  const toggle = (n: string) => setPicked((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
+  const canAdd = !!state && (mode === "any" || picked.length > 0);
+
   return (
     <form
-      className="grid gap-2 sm:grid-cols-[2fr_1.5fr_0.7fr_1fr_0.8fr_0.8fr_auto] sm:items-end"
+      className="space-y-3 rounded-md border p-4"
       onSubmit={(e) => {
         e.preventDefault();
-        save(() => addTerritory(v), () => setV({ name: "", city: "", state: "", zip: "", radiusKm: "15", priority: "0" }));
+        save(() => addTerritories({ state, mode, cities: picked }), () => { setPicked([]); setQ(""); });
       }}
     >
-      <Field label="Name"><Input required value={v.name} onChange={(e) => setV({ ...v, name: e.target.value })} placeholder="Atlanta metro" /></Field>
-      <Field label="City"><Input value={v.city} onChange={(e) => setV({ ...v, city: e.target.value })} /></Field>
-      <Field label="State"><Input maxLength={2} value={v.state} onChange={(e) => setV({ ...v, state: e.target.value })} /></Field>
-      <Field label="ZIP"><Input value={v.zip} onChange={(e) => setV({ ...v, zip: e.target.value })} /></Field>
-      <Field label="Radius km"><Input type="number" value={v.radiusKm} onChange={(e) => setV({ ...v, radiusKm: e.target.value })} /></Field>
-      <Field label="Priority"><Input type="number" value={v.priority} onChange={(e) => setV({ ...v, priority: e.target.value })} /></Field>
-      <Button disabled={pending}><Plus /> Add</Button>
+      <p className="text-sm font-medium">Add a territory</p>
+      <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:items-start">
+        <Field label="State">
+          <Select value={state} onChange={(e) => chooseState(e.target.value)} aria-label="State">
+            <option value="">Choose a state</option>
+            {states.map((s) => <option key={s.code} value={s.code}>{s.name}</option>)}
+          </Select>
+        </Field>
+        <div className="space-y-2">
+          <Label>Cities</Label>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <label className="flex items-center gap-2"><input type="radio" name="tmode" checked={mode === "any"} onChange={() => setMode("any")} /> Any city (random each day)</label>
+            <label className="flex items-center gap-2"><input type="radio" name="tmode" checked={mode === "cities"} onChange={() => setMode("cities")} /> Only these cities</label>
+          </div>
+          {mode === "any" ? (
+            <p className="text-xs text-muted-foreground">{state ? `Each day it picks cities in ${states.find((s) => s.code === state)?.name} at random${cities.length ? ` from ${cities.length} cities` : ""}, and remembers how far it got in each.` : "Choose a state first."}</p>
+          ) : !state ? (
+            <p className="text-xs text-muted-foreground">Choose a state first.</p>
+          ) : (
+            <div className="space-y-2">
+              <Input placeholder="Search cities" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search cities" />
+              <div className="max-h-56 overflow-y-auto rounded-md border p-2">
+                {loading ? <p className="p-2 text-sm text-muted-foreground">Loading cities…</p> : null}
+                {!loading && !shown.length ? <p className="p-2 text-sm text-muted-foreground">No city matches “{q}”.</p> : null}
+                <div className="grid gap-1 sm:grid-cols-2">
+                  {shown.map((c) => (
+                    <label key={c.name} className="flex items-center gap-2 rounded px-2 py-1 text-sm hover:bg-muted">
+                      <input type="checkbox" checked={picked.includes(c.name)} onChange={() => toggle(c.name)} />
+                      <span className="flex-1">{c.name}</span>
+                      <span className="text-xs tabular-nums text-muted-foreground">{c.population.toLocaleString()}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              {picked.length ? <p className="text-xs text-muted-foreground">{picked.length} selected: {picked.slice(0, 6).join(", ")}{picked.length > 6 ? "…" : ""}</p> : null}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="flex justify-end">
+        <Button disabled={pending || !canAdd}><Plus /> {mode === "cities" && picked.length > 1 ? `Add ${picked.length} cities` : "Add territory"}</Button>
+      </div>
     </form>
   );
 }
@@ -538,20 +596,6 @@ export function SourcingForm({ value, canEdit, gaps, placesReady }: { value: App
       </section>
 
       {canEdit ? <SaveBar pending={pending} onClick={() => save(() => saveSection("sourcing", payload()))} /> : null}
-    </div>
-  );
-}
-
-export function TerritoryEdit({ id, radiusKm, priority }: { id: string; radiusKm: number; priority: number }) {
-  const [v, setV] = useState({ radiusKm: String(radiusKm), priority: String(priority) });
-  const { pending, save } = useSave();
-  const dirty = v.radiusKm !== String(radiusKm) || v.priority !== String(priority);
-  return (
-    <div className="flex items-center gap-1">
-      <Input aria-label="Radius in km" type="number" min={1} max={50} className="h-8 w-16" value={v.radiusKm} onChange={(e) => setV({ ...v, radiusKm: e.target.value })} />
-      <span className="text-xs text-muted-foreground">km</span>
-      <Input aria-label="Priority" type="number" className="ml-2 h-8 w-16" value={v.priority} onChange={(e) => setV({ ...v, priority: e.target.value })} />
-      {dirty ? <Button size="sm" variant="outline" className="h-8" disabled={pending} onClick={() => save(() => updateTerritory(id, { radiusKm: Number(v.radiusKm), priority: Number(v.priority) }))}>Save</Button> : null}
     </div>
   );
 }
