@@ -9,7 +9,7 @@ import { after } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { runSourcing } from "@/lib/jobs/sourcing";
 import { runDailyPlanner } from "@/lib/jobs/planner";
-import { enrichLead } from "@/lib/jobs/enrich";
+import { enrichLead, enrichPending } from "@/lib/jobs/enrich";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -33,6 +33,12 @@ export async function GET(req: Request) {
   if (ids.length) {
     after(async () => {
       for (let i = 0; i < ids.length; i += 4) await Promise.all(ids.slice(i, i + 4).map((id) => enrichLead(id).catch(() => null)));
+      // Catch up on any salon whose website hasn't been scanned yet (e.g. from yesterday).
+      await enrichPending(60).catch(() => null);
+    });
+  } else {
+    after(async () => {
+      await enrichPending(60).catch(() => null);
     });
   }
   return NextResponse.json({ sourcing: { ran: sourcing.ran, found: sourcing.found, message: sourcing.message }, planner: { message: planner.message } });

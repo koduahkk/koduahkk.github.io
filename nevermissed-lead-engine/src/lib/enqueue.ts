@@ -8,8 +8,9 @@ export async function queueEnrichment(ids: string[]) {
   if (!ids.length) return;
   const sent = await Promise.all(ids.map((id) => trySend("nm/lead.enrich", { leadId: id })));
   if (sent.every(Boolean)) return;
-  // Anything not picked up here is caught by the hourly enrichment backfill.
+  // Scan every new salon's website after responding, 4 at a time. Anything left
+  // over (e.g. a timeout) is picked up by the daily catch-up in the morning job.
   after(async () => {
-    for (const id of ids.slice(0, 25)) await enrichLead(id).catch(() => {});
+    for (let i = 0; i < ids.length; i += 4) await Promise.all(ids.slice(i, i + 4).map((id) => enrichLead(id).catch(() => null)));
   });
 }
